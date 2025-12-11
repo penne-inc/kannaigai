@@ -69,9 +69,9 @@ html,body {
             #00afec 80%,
             #008767 100%
         );
-    background-size: 200% 200%;
+    background-size: 400% 400%;
     background-blend-mode: overlay;
-    animation: marbleAnimation 5s ease infinite;
+    animation: marbleAnimation 20s ease infinite;
     -webkit-mask-image: url('image/title.png');
     mask-image: url('image/title.png');
     -webkit-mask-size: contain;
