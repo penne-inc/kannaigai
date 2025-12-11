@@ -42,16 +42,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Opening Animation -->
+    <div class="opening-overlay" id="openingOverlay">
+        <img src="image/title.png" alt="関内外OPEN!17" class="opening-logo" id="openingLogo">
+    </div>
+
     <div class="wrapper">
         <main>
             <header>
-                <img src="image/title.svg" alt="関内外OPEN!17" class="title-logo">
+                <img src="image/title.svg" alt="関内外OPEN!17" class="title-logo" id="mainLogo">
                 <h1 class="visually-hidden">関内外OPEN!17</h1>
             </header>
 
             <section id="home" class="hero" aria-labelledby="home-heading">
                 <h2 id="home-heading" class="visually-hidden">イベント概要</h2>
-                <p>
+                <p class="hero-text">
                     まちにクリエイターがいると、なにが生まれるのか。<br>
                     関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。<br>
                     17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトを実施。<br>
@@ -90,5 +95,63 @@
             <p>&copy; 2025 kannaigai. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openingOverlay = document.getElementById('openingOverlay');
+            const openingLogo = document.getElementById('openingLogo');
+            const mainLogo = document.getElementById('mainLogo');
+            const heroText = document.querySelector('.hero-text');
+            const wrapper = document.querySelector('.wrapper');
+
+            // 初期状態: メインコンテンツを非表示
+            wrapper.style.opacity = '0';
+
+            // 初期位置を取得（画面中央）
+            const openingLogoRect = openingLogo.getBoundingClientRect();
+            const startTop = openingLogoRect.top;
+            const startLeft = openingLogoRect.left;
+            const startWidth = openingLogoRect.width;
+
+            // fixedポジションに変更して初期位置を設定
+            openingLogo.style.position = 'fixed';
+            openingLogo.style.top = startTop + 'px';
+            openingLogo.style.left = startLeft + 'px';
+            openingLogo.style.width = startWidth + 'px';
+            openingLogo.style.transition = 'all 2s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            // (1) 画面中央に表示（1秒間静止）
+            setTimeout(() => {
+                // 目標位置を取得
+                const mainLogoRect = mainLogo.getBoundingClientRect();
+
+                // (2) title.pngがtitle.svgの位置にゆっくり移動（2秒かけて）
+                // ブラウザに再描画させてからトランジションを開始
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        openingLogo.style.top = mainLogoRect.top + 'px';
+                        openingLogo.style.left = mainLogoRect.left + 'px';
+                        openingLogo.style.width = mainLogoRect.width + 'px';
+                    });
+                });
+
+                // 移動完了後、オーバーレイをフェードアウト
+                setTimeout(() => {
+                    openingOverlay.style.opacity = '0';
+                }, 2200);
+
+                // オーバーレイを削除し、メインコンテンツを表示
+                setTimeout(() => {
+                    openingOverlay.style.display = 'none';
+                    wrapper.style.opacity = '1';
+
+                    // 少し間を置いてテキストをフェードイン
+                    setTimeout(() => {
+                        heroText.style.opacity = '1';
+                    }, 500);
+                }, 2800);
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
