@@ -44,13 +44,18 @@
 <body>
     <!-- Opening Animation -->
     <div class="opening-overlay" id="openingOverlay">
-        <img src="image/title.png" alt="関内外OPEN!17" class="opening-logo" id="openingLogo">
+        <div class="opening-logo-wrapper">
+            <div class="marble-overlay"></div>
+            <img src="image/title.png" alt="関内外OPEN!17" class="opening-logo" id="openingLogo">
+        </div>
     </div>
 
     <div class="wrapper">
         <main>
             <header>
-                <img src="image/title.svg" alt="関内外OPEN!17" class="title-logo" id="mainLogo">
+                <div class="logo-wrapper">
+                    <img src="image/title.svg" alt="関内外OPEN!17" class="title-logo" id="mainLogo">
+                </div>
                 <h1 class="visually-hidden">関内外OPEN!17</h1>
             </header>
 
@@ -104,37 +109,44 @@
             const fadeInSections = document.querySelectorAll('.fade-in-section');
 
             // 初期位置を取得（画面中央）
-            const openingLogoRect = openingLogo.getBoundingClientRect();
+            const openingLogoWrapper = document.querySelector('.opening-logo-wrapper');
+            const openingLogoRect = openingLogoWrapper.getBoundingClientRect();
             const startTop = openingLogoRect.top;
             const startLeft = openingLogoRect.left;
             const startWidth = openingLogoRect.width;
 
             // fixedポジションに変更して初期位置を設定
-            openingLogo.style.position = 'fixed';
-            openingLogo.style.top = startTop + 'px';
-            openingLogo.style.left = startLeft + 'px';
-            openingLogo.style.width = startWidth + 'px';
-            openingLogo.style.transition = 'all 2s cubic-bezier(0.4, 0, 0.2, 1)';
+            openingLogoWrapper.style.position = 'fixed';
+            openingLogoWrapper.style.top = startTop + 'px';
+            openingLogoWrapper.style.left = startLeft + 'px';
+            openingLogoWrapper.style.width = startWidth + 'px';
+            openingLogoWrapper.style.transition = 'all 2s cubic-bezier(0.4, 0, 0.2, 1)';
 
             // (1) 画面中央に表示（1秒間静止）
             setTimeout(() => {
-                // 目標位置を取得
-                const mainLogoRect = mainLogo.getBoundingClientRect();
+                // 目標位置を取得（ラッパー要素の位置）
+                const logoWrapper = document.querySelector('.logo-wrapper');
+                const mainLogoRect = logoWrapper.getBoundingClientRect();
 
                 // (2) title.pngがtitle.svgの位置にゆっくり移動（2秒かけて）
                 // ブラウザに再描画させてからトランジションを開始
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        openingLogo.style.top = mainLogoRect.top + 'px';
-                        openingLogo.style.left = mainLogoRect.left + 'px';
-                        openingLogo.style.width = mainLogoRect.width + 'px';
+                        openingLogoWrapper.style.top = mainLogoRect.top + 'px';
+                        openingLogoWrapper.style.left = mainLogoRect.left + 'px';
+                        openingLogoWrapper.style.width = mainLogoRect.width + 'px';
                     });
                 });
 
-                // (3) 移動完了時、overlayを非表示
+                // (3) 移動完了後、オーバーレイをフェードアウト
                 setTimeout(() => {
-                    // overlayを非表示（headerのロゴは既に表示されている）
-                    openingOverlay.style.display = 'none';
+                    // overlayをフェードアウト
+                    openingOverlay.style.opacity = '0';
+
+                    // フェードアウト完了後に削除
+                    setTimeout(() => {
+                        openingOverlay.style.display = 'none';
+                    }, 600); // transition時間と同じ
 
                     // (4) メインコンテンツを順次フェードイン
                     fadeInSections.forEach((section, index) => {
