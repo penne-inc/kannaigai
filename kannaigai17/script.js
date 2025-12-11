@@ -1,55 +1,91 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const openingOverlay = document.getElementById('openingOverlay');
-    const openingLogo = document.getElementById('openingLogo');
-    const mainLogo = document.getElementById('mainLogo');
-    const fadeInSections = document.querySelectorAll('.fade-in-section');
+// アニメーションタイミング定数
+const TIMING = {
+    INITIAL_PAUSE: 1000,      // 画面中央での静止時間
+    LOGO_MOVEMENT: 2000,      // ロゴ移動にかかる時間
+    OVERLAY_FADE: 600,        // オーバーレイフェードアウト時間
+    SECTION_INTERVAL: 300     // セクション間のフェードイン間隔
+};
 
-    // 初期位置を取得（画面中央）
-    const openingLogoWrapper = document.querySelector('.opening-logo-wrapper');
-    const openingLogoRect = openingLogoWrapper.getBoundingClientRect();
-    const startTop = openingLogoRect.top;
-    const startLeft = openingLogoRect.left;
-    const startWidth = openingLogoRect.width;
+// CSS transitionのeasing関数
+const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
-    // fixedポジションに変更して初期位置を設定
-    openingLogoWrapper.style.position = 'fixed';
-    openingLogoWrapper.style.top = startTop + 'px';
-    openingLogoWrapper.style.left = startLeft + 'px';
-    openingLogoWrapper.style.width = startWidth + 'px';
-    openingLogoWrapper.style.transition = 'all 2s cubic-bezier(0.4, 0, 0.2, 1)';
+/**
+ * 要素の位置とサイズをfixedポジションで固定
+ */
+function fixElementPosition(element, rect) {
+    element.style.position = 'fixed';
+    element.style.top = rect.top + 'px';
+    element.style.left = rect.left + 'px';
+    element.style.width = rect.width + 'px';
+    element.style.transition = `all ${TIMING.LOGO_MOVEMENT}ms ${EASING}`;
+}
 
-    // (1) 画面中央に表示（1秒間静止）
-    setTimeout(() => {
-        // 目標位置を取得（ラッパー要素の位置）
-        const logoWrapper = document.querySelector('.logo-wrapper');
-        const mainLogoRect = logoWrapper.getBoundingClientRect();
-
-        // (2) title.pngがtitle.svgの位置にゆっくり移動（2秒かけて）
-        // ブラウザに再描画させてからトランジションを開始
+/**
+ * ロゴをターゲット位置に移動
+ * ブラウザの再描画を挟んでスムーズなトランジションを実現
+ */
+function moveLogoToTarget(element, targetRect) {
+    requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                openingLogoWrapper.style.top = mainLogoRect.top + 'px';
-                openingLogoWrapper.style.left = mainLogoRect.left + 'px';
-                openingLogoWrapper.style.width = mainLogoRect.width + 'px';
-            });
+            element.style.top = targetRect.top + 'px';
+            element.style.left = targetRect.left + 'px';
+            element.style.width = targetRect.width + 'px';
         });
+    });
+}
 
-        // (3) 移動完了後、オーバーレイをフェードアウト
+/**
+ * オーバーレイをフェードアウトして削除
+ */
+function fadeOutOverlay(overlay) {
+    overlay.style.opacity = '0';
+
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, TIMING.OVERLAY_FADE);
+}
+
+/**
+ * コンテンツセクションを順次フェードイン
+ */
+function fadeInSections(sections) {
+    sections.forEach((section, index) => {
         setTimeout(() => {
-            // overlayをフェードアウト
-            openingOverlay.style.opacity = '0';
+            section.classList.add('visible');
+        }, index * TIMING.SECTION_INTERVAL);
+    });
+}
 
-            // フェードアウト完了後に削除
-            setTimeout(() => {
-                openingOverlay.style.display = 'none';
-            }, 600); // transition時間と同じ
+/**
+ * オープニングアニメーションのメイン処理
+ */
+function runOpeningAnimation() {
+    // DOM要素の取得
+    const openingOverlay = document.getElementById('openingOverlay');
+    const openingLogoWrapper = document.querySelector('.opening-logo-wrapper');
+    const logoWrapper = document.querySelector('.logo-wrapper');
+    const sections = document.querySelectorAll('.fade-in-section');
 
-            // (4) メインコンテンツを順次フェードイン
-            fadeInSections.forEach((section, index) => {
-                setTimeout(() => {
-                    section.classList.add('visible');
-                }, index * 300); // 各セクションを300ms間隔でフェードイン
-            });
-        }, 2000);
-    }, 1000);
-});
+    // 初期位置を取得して固定
+    const startRect = openingLogoWrapper.getBoundingClientRect();
+    fixElementPosition(openingLogoWrapper, startRect);
+
+    // アニメーションシーケンス開始
+    setTimeout(() => {
+        // ターゲット位置を取得
+        const targetRect = logoWrapper.getBoundingClientRect();
+
+        // ロゴを移動
+        moveLogoToTarget(openingLogoWrapper, targetRect);
+
+        // 移動完了後の処理
+        setTimeout(() => {
+            fadeOutOverlay(openingOverlay);
+            fadeInSections(sections);
+        }, TIMING.LOGO_MOVEMENT);
+
+    }, TIMING.INITIAL_PAUSE);
+}
+
+// DOMの読み込み完了後にアニメーション開始
+document.addEventListener('DOMContentLoaded', runOpeningAnimation);
