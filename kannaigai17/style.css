@@ -11,12 +11,21 @@ html,body {
     color: #000;
     font-weight: bold;
     font-feature-settings: "palt";
+    height: 100%;
 }
-
-main {
+.wrapper {
     max-width: 800px;
+    height: 100%;
+    display: grid;
+    align-items: center;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 6rem 2rem;
+
+    @media screen and (max-width: 800px) {
+        padding: 4rem 2rem;
+    }
+}
+main {
     display: grid;
     gap: 3rem;
     @media screen and (max-width: 800px) {
@@ -25,7 +34,6 @@ main {
 }
 
 section {
-    margin-bottom: 3rem;
 }
 
 .hero {
@@ -40,7 +48,6 @@ section {
 }
 
 .hero > img {
-    font-size: 2.5rem;
     margin-bottom: 2rem;
 }
 
@@ -114,10 +121,33 @@ h2 {
     }
 }
 
+.credit-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: .75rem 1rem;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+        gap: .5rem 0;
+    }
+}
+
+.credit-item {
+    font-size: 0.9rem;
+    @media screen and (max-width: 800px) {
+        font-size: 0.75rem;
+    }
+}
+
+.credit-label {
+    font-weight: bold;
+}
+
 footer {
     text-align: center;
     padding: 2rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     @media screen and (max-width: 800px) {
         font-size: .75rem;
     }
