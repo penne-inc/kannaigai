@@ -71,6 +71,7 @@ section {
     max-width: 100%;
     height: auto;
     width: 800px;
+    transition: opacity 0.3s ease;
 }
 
 .hero > img {
@@ -87,9 +88,16 @@ section {
     }
 }
 
-.hero-text {
+/* Fade-in animation for sections */
+.fade-in-section {
     opacity: 0;
-    transition: opacity 1s ease;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
