@@ -44,32 +44,39 @@
 <body>
     <div class="wrapper">
         <main>
-            <img src="image/title.png" alt="関内外OPEN!17" class="title-logo">
-            <section id="home" class="hero">
+            <header>
+                <img src="image/title.png" alt="関内外OPEN!17" class="title-logo">
+                <h1 class="visually-hidden">関内外OPEN!17</h1>
+            </header>
+
+            <section id="home" class="hero" aria-labelledby="home-heading">
+                <h2 id="home-heading" class="visually-hidden">イベント概要</h2>
                 <p>
                     まちにクリエイターがいると、なにが生まれるのか。<br>
                     関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。<br>
                     17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトを実施。<br>
-                    2026年2月に、それぞれの現場で再発見した“横浜の多面的な魅力”を、展示とトークセッションを通して紹介します。
+                    2026年2月に、それぞれの現場で再発見した"横浜の多面的な魅力"を、展示とトークセッションを通して紹介します。
                 </p>
             </section>
 
-            <section id="about" class="container">
-                <div class="box">
+            <section id="about" class="container" aria-labelledby="about-heading">
+                <h2 id="about-heading" class="visually-hidden">開催情報</h2>
+                <dl class="box">
                     <div class="info-item">
-                        <p class="info-label">日時</p>
-                        <p class="info-text">2026年2月23日(月)13:00〜17:00</p>
+                        <dt class="info-label">日時</dt>
+                        <dd class="info-text">2026年2月23日(月)13:00〜17:00</dd>
                     </div>
                     <div class="info-item">
-                        <p class="info-label">場所</p>
-                        <p class="info-text">象の鼻テラス</p>
+                        <dt class="info-label">場所</dt>
+                        <dd class="info-text">象の鼻テラス</dd>
                     </div>
-                </div>
+                </dl>
                 <p class="info-note">※詳細は近日公開予定</p>
 
             </section>
 
-            <section id="credit">
+            <section id="credit" aria-labelledby="credit-heading">
+                <h2 id="credit-heading" class="visually-hidden">クレジット</h2>
                 <div class="credit-content">
                     <p class="credit-item"><span class="credit-label">主催：</span>関内外OPEN!17事務局（関内外クリエイターズ／アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））</p>
                     <p class="credit-item"><span class="credit-label">共催：</span>横浜市 にぎわいスポーツ文化局</p>
@@ -79,7 +86,7 @@
             </section>
         </main>
 
-        <footer>
+        <footer role="contentinfo">
             <p>&copy; 2025 kannaigai. All rights reserved.</p>
         </footer>
     </div>
