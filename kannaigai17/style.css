@@ -82,6 +82,7 @@ html,body {
 
 .wrapper {
     background: url("image/noise.png") repeat;
+    background-size: 512px 512px;
     height: auto;
 }
 
