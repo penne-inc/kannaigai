@@ -9,7 +9,7 @@ html,body {
     font-size: 14px;
     line-height: 1.6;
     color: #000;
-    font-weight: bold;
+    font-weight: 600;
     font-feature-settings: "palt";
     overflow-x: hidden;
     height: 100%;
@@ -235,9 +235,12 @@ dt, dd {
     flex-direction: column;
     align-items: center;
     padding: 2rem 4rem;
-    background: #e6e6e6;
     max-width: fit-content;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
     margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1); /* 影 */
 
     @media screen and (max-width: 428px) {
         padding: 1rem 2rem;
@@ -303,7 +306,7 @@ dt, dd {
 }
 
 .credit-label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 footer {
