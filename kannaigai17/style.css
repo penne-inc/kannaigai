@@ -478,17 +478,25 @@ dt, dd {
 .share-button {
     width: 48px;
     height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    display: -webkit-inline-flex;
     display: inline-flex;
+    -webkit-align-items: center;
     align-items: center;
+    -webkit-justify-content: center;
     justify-content: center;
     border-radius: 50%;
     transition: opacity 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     flex-shrink: 0;
+    -webkit-flex-shrink: 0;
 
     @media screen and (max-width: 428px) {
         width: 40px;
         height: 40px;
+        min-width: 40px;
+        min-height: 40px;
     }
 }
 
@@ -500,12 +508,17 @@ dt, dd {
 .share-button svg {
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     display: block;
     flex-shrink: 0;
+    -webkit-flex-shrink: 0;
 
     @media screen and (max-width: 428px) {
         width: 20px;
         height: 20px;
+        min-width: 20px;
+        min-height: 20px;
     }
 }
 
@@ -513,16 +526,8 @@ dt, dd {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-.share-button-instagram svg {
-    fill: #fff;
-}
-
 .share-button-facebook {
     background: #1877f2;
-}
-
-.share-button-facebook svg {
-    fill: #fff;
 }
 
 footer {
