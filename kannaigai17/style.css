@@ -335,30 +335,37 @@ dt, dd {
 .archive-list {
     list-style: none;
     display: grid;
-    gap: 1rem;
-}
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 
-.archive-item {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 1rem;
-}
-
-.archive-item:last-child {
-    border-bottom: none;
+    @media screen and (max-width: 428px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 
 .archive-item a {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: .5rem;
     text-decoration: none;
     color: inherit;
+    background: white;
+    padding: 1rem 2rem;
     transition: opacity 0.3s ease;
+    position: relative;
 }
 
 .archive-item a:hover {
     opacity: 0.6;
+}
+
+.archive-item a::after {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSIxMSIgdmlld0JveD0iMCAwIDcgMTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wLjI0NDA3OCAxMC4zMTA2Qy0wLjA4MTM1OTIgOS45ODUxNyAtMC4wODEzNTkyIDkuNDU3NTQgMC4yNDQwNzggOS4xMzIxTDQuMDk5MjcgNS4yNzY5MUwwLjI0NDA3OCAxLjQyMTcyQy0wLjA4MTM1OTEgMS4wOTYyOCAtMC4wODEzNTkxIDAuNTY4NjQ2IDAuMjQ0MDc4IDAuMjQzMjExQzAuNTY5NTE1IC0wLjA4MjIyNzEgMS4wOTcxNSAtMC4wODIyMjcxIDEuNDIyNTkgMC4yNDMyMTFMNS44NjcwMyA0LjY4NzY1QzYuMTkyNDcgNS4wMTMwOSA2LjE5MjQ3IDUuNTQwNzMgNS44NjcwMyA1Ljg2NjE3TDEuNDIyNTkgMTAuMzEwNkMxLjA5NzE1IDEwLjYzNiAwLjU2OTUxNSAxMC42MzYgMC4yNDQwNzggMTAuMzEwNloiIGZpbGw9IiMzMzMzMzMiLz48L3N2Zz4=");
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
 }
 
 .archive-item:not(:has(a)) {
@@ -368,6 +375,23 @@ dt, dd {
     opacity: 0.5;
 }
 
+.archive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.archive-image img {
+    width: 100%;
+    max-width: 48px;
+    display: block;
+    margin-left: auto;
+}
+
+.archive-text {
+    display: grid;
+    align-content: center;
+}
 .archive-title {
     font-size: 1.2rem;
 
@@ -377,7 +401,7 @@ dt, dd {
 }
 
 .archive-date {
-    font-size: 1rem;
+    font-size: 0.85rem;
     white-space: nowrap;
 
     @media screen and (max-width: 428px) {
