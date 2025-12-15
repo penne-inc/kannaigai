@@ -505,7 +505,7 @@ dt, dd {
     transform: scale(1.1);
 }
 
-.share-button svg {
+.share-button img {
     width: 24px;
     height: 24px;
     min-width: 24px;
