@@ -87,5 +87,35 @@ function runOpeningAnimation() {
     }, TIMING.INITIAL_PAUSE);
 }
 
+/**
+ * アーカイブリストの展開/折りたたみ機能
+ */
+function initArchiveToggle() {
+    const toggleButton = document.getElementById('archiveToggle');
+    const archiveList = document.querySelector('.archive-list');
+    const toggleText = document.querySelector('.archive-toggle-text');
+
+    if (!toggleButton || !archiveList) return;
+
+    toggleButton.addEventListener('click', () => {
+        const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+            // 折りたたむ
+            archiveList.classList.remove('expanded');
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleText.textContent = 'もっと見る';
+        } else {
+            // 展開する
+            archiveList.classList.add('expanded');
+            toggleButton.setAttribute('aria-expanded', 'true');
+            toggleText.textContent = '閉じる';
+        }
+    });
+}
+
 // DOMの読み込み完了後にアニメーション開始
-document.addEventListener('DOMContentLoaded', runOpeningAnimation);
+document.addEventListener('DOMContentLoaded', () => {
+    runOpeningAnimation();
+    initArchiveToggle();
+});
