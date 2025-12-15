@@ -317,6 +317,74 @@ dt, dd {
     font-weight: 600;
 }
 
+#archive {
+    margin-top: 3rem;
+}
+
+#archive h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    @media screen and (max-width: 428px) {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.archive-list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+}
+
+.archive-item {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+}
+
+.archive-item:last-child {
+    border-bottom: none;
+}
+
+
+.archive-item a {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+}
+
+.archive-item a:hover {
+    opacity: 0.6;
+}
+
+.archive-item:not(:has(a)) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    opacity: 0.5;
+}
+
+.archive-title {
+    font-size: 1.2rem;
+
+    @media screen and (max-width: 428px) {
+        font-size: 1rem;
+    }
+}
+
+.archive-date {
+    font-size: 1rem;
+    white-space: nowrap;
+
+    @media screen and (max-width: 428px) {
+        font-size: 0.85rem;
+    }
+}
+
 footer {
     text-align: center;
     padding: 2rem;
