@@ -340,8 +340,6 @@ dt, dd {
     max-height: calc(3 * (80px + 2rem));
     overflow: hidden;
     transition: max-height 0.5s ease;
-    margin: 0 -100%;
-    padding: 0 100%;
 
     @media screen and (max-width: 730px) {
         grid-template-columns: 1fr;
