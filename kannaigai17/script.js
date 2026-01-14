@@ -114,8 +114,11 @@ function initArchiveToggle() {
     });
 }
 
-// DOMの読み込み完了後にアニメーション開始
+// DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
-    runOpeningAnimation();
+    // オープニングアニメーション無効化 - セクションを即座に表示
+    const sections = document.querySelectorAll('.fade-in-section');
+    sections.forEach(section => section.classList.add('visible'));
+
     initArchiveToggle();
 });
