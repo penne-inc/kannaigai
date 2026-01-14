@@ -1,0 +1,129 @@
+{
+  "event": {
+    "title": "関内外OPEN! 17",
+    "subtitle": "EXHIBITION",
+    "date": "2026-02-23",
+    "dateDisplay": "2026年2月23日(月)",
+    "time": "13:00-17:00",
+    "venue": {
+      "name": "象の鼻テラス",
+      "nameEn": "ZOU-NO-HANA TERRACE",
+      "address": "〒231-0002 横浜市中区海岸通1丁目",
+      "access": "みなとみらい線「日本大通り駅」出口1より徒歩約3分、出口2より徒歩約5分"
+    }
+  },
+  "about": {
+    "titleJa": "関内外OPENとは",
+    "titleEn": "ABOUT",
+    "description": "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。本展では、それぞれの現場で再発見した"横浜の多面的な魅力"を、展示とトークセッションを通して紹介します。"
+  },
+  "exhibition": {
+    "titleJa": "4つのプロジェクト",
+    "titleEn": "EXHIBITION",
+    "description": "なにを考え、どのように進めたのか。そしてどんなことが起こったのか。プロジェクトごとにパネルとレポートを展示します。担当クリエイターも常駐しているので、質問があればお気軽にどうぞ。",
+    "projects": [
+      {
+        "id": 1,
+        "category": "発見",
+        "title": "びっくり！ YOKOHAMA",
+        "description": "関内外のクリエイターが個人的に"びっくりした横浜"の風景と、クリエイタープロフィールを紹介するInstagramアカウントを制作。",
+        "creators": [
+          { "name": "岩穴口颯音", "affiliation": "ondesign" },
+          { "name": "小林 璃代", "affiliation": "voids" },
+          { "name": "Rachel Matsumura", "affiliation": "studio nibroll" }
+        ]
+      },
+      {
+        "id": 2,
+        "category": "共創",
+        "title": "つながるリデザイン",
+        "description": "福祉作業所、学生、デザイナー、社会福祉協議会等が協働し、インクルーシブなチームでクッキーパッケージをリデザイン。",
+        "creators": [
+          { "name": "伊藤 佑也", "affiliation": "83graphics" },
+          { "name": "山田 祐介", "affiliation": null },
+          { "name": "上甲 尚弘", "affiliation": "TORULABO" }
+        ]
+      },
+      {
+        "id": 3,
+        "category": "交流",
+        "title": "関内×寺家 地域交流会",
+        "description": "自然豊かな寺家町で、関内外のクリエイターがツアーや食事会を通して交流。お互いの創造の原点に触れる機会に。",
+        "creators": [
+          { "name": "千代田 彩華", "affiliation": "ondesign" },
+          { "name": "三浦 佑介", "affiliation": "shubidua" },
+          { "name": "高橋 優弥", "affiliation": "ニューヤンキーノタムロバ" }
+        ]
+      },
+      {
+        "id": 4,
+        "category": "発酵",
+        "title": "アイデアコンポスト",
+        "description": "生ごみを堆肥に変えるコンポストのように、行き詰まったアイデアをみんなの発想で発酵させていくトークイベント。",
+        "creators": [
+          { "name": "介川 貴晶", "affiliation": "Penne" },
+          { "name": "宮本かおる", "affiliation": "OLUデザイン" }
+        ]
+      }
+    ]
+  },
+  "talkSession": {
+    "titleJa": "トークセッション",
+    "titleEn": "TALK SESSION",
+    "description": "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、これからの「まちとクリエイティブ」の関係を探ります。",
+    "time": "13:30-15:30",
+    "guests": [
+      {
+        "id": 1,
+        "role": "モデレーター",
+        "name": "ダバンティスジャンウィル",
+        "title": null,
+        "project": null
+      },
+      {
+        "id": 2,
+        "role": "ゲスト",
+        "name": "ダミー1",
+        "title": "肩書きダミー1",
+        "project": "びっくり！YOKOHAMA"
+      },
+      {
+        "id": 3,
+        "role": "ゲスト",
+        "name": "ダミー2",
+        "title": "肩書きダミー2",
+        "project": "つながるリデザイン"
+      },
+      {
+        "id": 4,
+        "role": "ゲスト",
+        "name": "ダミー3",
+        "title": "肩書きダミー3",
+        "project": "関内×寺家 地域交流会"
+      },
+      {
+        "id": 5,
+        "role": "ゲスト",
+        "name": "ダミー4",
+        "title": "肩書きダミー4",
+        "project": "アイデアコンポスト"
+      }
+    ]
+  },
+  "designPitch": {
+    "titleJa": "デザインピッチ",
+    "titleEn": "DESIGN PITCH",
+    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人3分でつないでいきます。登壇クリエイターはwebサイトでご確認ください。",
+    "creatorCount": 12,
+    "pitchDuration": "3分"
+  },
+  "kidsSpace": {
+    "titleJa": "くるり工房",
+    "titleEn": "KIDS SPACE",
+    "description": "普通なら捨ててしまうものも、見方を「くるり」としてみれば様々なモノに生まれ変わる。くるり工房による子ども向けの資源循環ワークショップ。時間制限ナシで創作に没頭していただけます。"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/kannaigaiopen/",
+    "facebook": "https://www.facebook.com/kannaigaiopen/"
+  }
+}
