@@ -656,66 +656,118 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 450px);
 
+}
 
-    @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+    .projects-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 3rem;
+        margin-block: 3rem;
     }
 }
+
 
 .project-card {
     position: relative;
     border-radius: 0;
+
+}
+.project-card::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.6, 1.2);
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    z-index: -1;
+}
 
-    @media screen and (min-width: 767px) {
-        padding: 1.5rem;
-        background-size: contain;
+
+
+.project-card--discovery::before {
+    background-image: url(image/color-discovery.svg);
+}
+.project-card--cocreation::before {
+    background-image: url(image/color-cocreation.svg);
+}
+.project-card--exchange::before {
+    background-image: url(image/color-exchange.svg);
+}
+.project-card--fermentation::before {
+    background-image: url(image/color-fermentation.svg);
+}
+
+
+@media screen and (min-width: 767px) {
+    .project-card {
         max-width: 450px;
         height: 450px;
-        padding: 2rem 3rem 3rem 2rem;
         align-content: center;
+    }
+
+    .project-card::before {
+        transform: scale(1);
+    }
+
+    .project-card--discovery {
+        padding: 2rem 3rem 3rem 3rem;
+    }
+    .project-card--cocreation {
+        padding: 2rem 3rem 3rem 3rem;
+    }
+    .project-card--exchange {
+        padding: 2rem 1rem 3rem 4rem;
+    }
+    .project-card--fermentation {
+        padding: 2rem 3rem 3rem 4rem;
     }
 }
 
 
-
-
-.project-card--discovery {
-    background-image: url(image/color-discovery.svg);
-}
-.project-card--cocreation {
-    background-image: url(image/color-cocreation.svg);
-}
-.project-card--exchange {
-    background-image: url(image/color-exchange.svg);
-}
-.project-card--fermentation {
-    background-image: url(image/color-fermentation.svg);
-}
-
 .project-category {
     display: inline-block;
-    font-size: 1.25rem;
+    font-size: .875rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
-    background-color: var(--color-white);
     padding: 0.25rem 1rem;
     letter-spacing: 0.25em;
+    background-size: cover;
 }
-
 .project-category::before {
     display: inline-block;
     content: '●';
 }
 
+
+.project-card--discovery .project-category {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCA2NCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMy43NCAyNS44OEwwIDBMNjMuNTggMS4yTDYwLjU3IDE5LjczTDMuNzQgMjUuODhaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==");
+}
+
+.project-card--cocreation .project-category {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCAyOSA2MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMjBfNykiPjxwYXRoIGQ9Ik0yMS43NSA2Mi43OUwwIDU5LjM2TDEuOTEgMEwyOC40NCAzLjcxTDIxLjc1IDYyLjc5WiIgZmlsbD0id2hpdGUiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJjbGlwMF8yMF83Ij48cmVjdCB3aWR0aD0iMjguNDQiIGhlaWdodD0iNjIuNzkiIGZpbGw9IndoaXRlIi8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+");
+
+}
+
+.project-card--exchange .project-category {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCAyOSA2MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjEuNzUgNjIuNzlMMCA1OS4zNkwxLjkxIDBMMjguNDQgMy43MUwyMS43NSA2Mi43OVoiIGZpbGw9IndoaXRlIi8+PC9zdmc+");
+}
+
+.project-card--fermentation .project-category {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMjYiIHZpZXdCb3g9IjAgMCA2MCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTEuMzUgMy44OEw1OS4wNyAyMC43N0wwIDI1LjFMMy40NyAwTDUxLjM1IDMuODhaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==");
+
+}
+
 @media screen and (min-width: 767px) {
     .project-category {
         position: absolute;
+        font-size: 1.25rem;
     }
     .project-card--discovery .project-category {
         top: 1em;
+        left: 0em;
     }
 
     .project-card--cocreation .project-category {
@@ -725,9 +777,10 @@ footer {
 
     .project-card--exchange .project-category {
         bottom: 1em;
+        left: 0em;
     }
 
-    .project-card--fermentation  .project-category {
+    .project-card--fermentation .project-category {
         bottom: 1em;
         right: 1em;
     }
