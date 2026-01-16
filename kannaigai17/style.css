@@ -701,6 +701,14 @@ footer {
     bottom: 1.5rem;
     z-index: 1000;
     margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.nav.is-visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Toggle button - hidden on desktop */
@@ -770,7 +778,9 @@ footer {
     }
 
     .nav-modal {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: fixed;
         top: 0;
         left: 0;
@@ -780,12 +790,14 @@ footer {
         writing-mode: horizontal-tb;
         text-orientation: mixed;
         max-height: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .nav-modal.is-open {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-modal ul {

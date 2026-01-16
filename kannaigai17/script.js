@@ -228,6 +228,36 @@ function initEyeTracking() {
     requestAnimationFrame(updateEyes);
 }
 
+/**
+ * ナビゲーションのスクロールフェードイン（Intersection Observer使用）
+ */
+function initNavScrollFadeIn() {
+    const nav = document.getElementById('nav');
+    const heroHeader = document.querySelector('.hero-header');
+
+    if (!nav || !heroHeader) {
+        console.warn('Nav or hero-header not found');
+        return;
+    }
+
+    // hero-headerを監視
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // hero-headerが画面外に出たらnavを表示
+            if (!entry.isIntersecting) {
+                nav.classList.add('is-visible');
+            } else {
+                nav.classList.remove('is-visible');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '0px'
+    });
+
+    observer.observe(heroHeader);
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
     // オープニングアニメーション無効化 - セクションを即座に表示
@@ -237,4 +267,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initArchiveToggle();
     initNavToggle();
     initEyeTracking();
+    initNavScrollFadeIn();
 });
