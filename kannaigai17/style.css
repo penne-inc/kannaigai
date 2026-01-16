@@ -94,14 +94,13 @@ html,body {
 
 
 .wrapper {
-
-    background:
-            radial-gradient(circle,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.2) 100%),
-            url("image/noise.png") repeat;
-    background-size:
-            auto,
-            1024px 1024px;
-    height: auto;
+    /*background:*/
+    /*        radial-gradient(circle,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.2) 100%),*/
+    /*        url("image/noise.png") repeat;*/
+    /*background-size:*/
+    /*        auto,*/
+    /*        1024px 1024px;*/
+    /*height: auto;*/
 }
 
 
@@ -109,7 +108,7 @@ main {
     max-width: 100%;
     height: 100%;
     margin: 0 auto;
-    padding: 8rem 2rem 6rem;
+    padding: 2rem 2rem 6rem;
     transition: opacity 0.8s ease;
     position: relative;
 
@@ -122,19 +121,21 @@ main {
         gap: 2rem;
     }
 }
-header, section:not(#archive),
+
+header {
+    max-width: 1024px;
+    min-height: 100vh;
+}
+section:not(#archive),
 section#exhibition .section-header,
 section#exhibition .section-description{
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
 }
 
 section#exhibition {
     max-width: 100%
-}
-
-.hero {
-    margin: 0 auto
 }
 
 
@@ -360,6 +361,7 @@ dt, dd {
 
     @media screen and (max-width: 730px) {
         grid-template-columns: 1fr;
+        padding: 0;
     }
 }
 
@@ -379,6 +381,10 @@ dt, dd {
     transition: opacity 0.3s ease, transform 0.3s ease;
     position: relative;
     border: 2px solid #ccc;
+    @media screen and (max-width: 730px) {
+        gap: 0rem;
+        padding: 1rem;
+    }
 }
 
 .archive-item a:hover {
@@ -419,10 +425,10 @@ dt, dd {
     align-content: center;
 }
 .archive-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
 
     @media screen and (max-width: 428px) {
-        font-size: 1rem;
+        font-size: .875rem;
     }
 }
 
@@ -562,17 +568,71 @@ footer {
 
 /* Hero Section */
 .hero-header {
-    text-align: center;
     margin-bottom: 2rem;
 }
 
-.hero-title {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+.hero {
+    margin: 0 auto
 }
 
+.hero-mv {
+    position: absolute;
+    width: 100%;
+    max-width: 1024px;
+    top: -16rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hero-mv-image {
+    position: absolute;
+}
+.mv__left {
+    height: 1240px;
+    transform: translateX(-25%);
+}
+.mv__right {
+    height: 1240px;
+    right: 0;
+    transform: translateX(25%);
+}
+
+.hero-mv-eye {
+    position: absolute;
+    z-index: 1;
+}
+
+.eye__left {
+    top: 650px;
+    left: 85px;
+}
+
+.eye__right {
+    top: 600px;
+    right: 106px;
+}
+
+.hero-title {
+}
+
+.hero-title img {
+    width: 100%;
+    max-width: 740px;
+}
+.hero-description img {
+    width: 100%;
+    margin-top: 400px;
+    margin-bottom: 80px;
+    max-width: 780px;
+}
+
+.hero-meta {
+
+}
+.hero-meta img{
+    width: 100%;
+    max-width: 292px;
+}
 .hero-title .subtitle {
     display: inline-block;
     margin-left: 0.5rem;
@@ -590,7 +650,7 @@ footer {
     margin-left: 0.5rem;
 }
 
-.hero-meta {
+.hero-schedule {
     font-size: 1rem;
     margin: 1rem 0;
 }
@@ -637,6 +697,10 @@ footer {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 0.02em;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.2rem;
+    }
 }
 
 .section-title-ja {
@@ -655,6 +719,7 @@ footer {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 450px);
+    justify-content: center;
 
 }
 
@@ -704,7 +769,7 @@ footer {
 @media screen and (min-width: 767px) {
     .project-card {
         max-width: 450px;
-        height: 450px;
+        height: 458px;
         align-content: center;
     }
 
@@ -713,16 +778,16 @@ footer {
     }
 
     .project-card--discovery {
-        padding: 2rem 3rem 3rem 3rem;
+        padding-inline: 3rem 5rem;
     }
     .project-card--cocreation {
-        padding: 2rem 3rem 3rem 3rem;
+        padding-inline: 5rem;
     }
     .project-card--exchange {
-        padding: 2rem 1rem 3rem 4rem;
+        padding-inline: 5rem;
     }
     .project-card--fermentation {
-        padding: 2rem 3rem 3rem 4rem;
+        padding-inline: 5rem;
     }
 }
 
@@ -776,12 +841,12 @@ footer {
     }
 
     .project-card--exchange .project-category {
-        bottom: 1em;
+        bottom: 3em;
         left: 0em;
     }
 
     .project-card--fermentation .project-category {
-        bottom: 1em;
+        bottom: 3em;
         right: 1em;
     }
 
@@ -796,7 +861,7 @@ footer {
 
 
 .project-title {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
@@ -823,7 +888,6 @@ footer {
 /* Talk Session */
 .talk-session {
     background: var(--color-white);
-    padding: 2rem;
     margin-top: 2rem;
 }
 
@@ -872,30 +936,24 @@ footer {
 
 /* Design Pitch */
 .design-pitch {
-    padding: 2rem;
     background: var(--color-white);
 }
 
 /* Kids Space */
 .kids-space {
-    padding: 2rem;
-    background: var(--color-gray);
 }
 
 /* Access */
 .access-section {
-    padding: 2rem;
-    background: var(--color-white);
 }
 
 .venue-info {
     margin-bottom: 1.5rem;
 }
 
-.venue-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.venue-name img{
+    width: 100%;
+    max-width: 360px;
 }
 
 .venue-name-en {
@@ -908,6 +966,11 @@ footer {
 .venue-access {
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
+}
+
+.venue-map img {
+    width: 100%;
+    max-width: 360px;
 }
 
 /* Credits */
@@ -925,3 +988,4 @@ footer {
 .credit-label {
     font-weight: 700;
 }
+
