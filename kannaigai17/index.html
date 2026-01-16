@@ -30,7 +30,7 @@
     <meta name="twitter:image" content="https://kannaigai.com/kannaigai17/image/ogp.png">
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#F0F0F0">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="image/favicon.png">
@@ -45,11 +45,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        // 2回目以降の訪問時はローディングを即非表示
+        if (localStorage.getItem('kannaigai17_visited')) {
+            document.documentElement.classList.add('skip-loading');
+        }
+    </script>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-progress"></div>
+        <div class="loading-spinner">
+            <img src="image/catchcopy.svg" width="320">
+        </div>
+    </div>
+
     <div class="wrapper">
         <main>
             <div class="hero-mv" aria-hidden="true">
-                <img class="hero-mv-image mv__left" src="image/mv-left.png" aria-hidden="true">
-                <img class="hero-mv-image mv__right" src="image/mv-right.png" aria-hidden="true">
+                <img class="hero-mv-image mv__left" data-src="image/mv-left.png" aria-hidden="true">
+                <img class="hero-mv-image mv__right" data-src="image/mv-right.png" aria-hidden="true">
                 <div class="hero-mv-eye eye__left" aria-hidden="true">
                     <svg width="95" height="95" viewBox="0 0 95 95" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="47.5" cy="47.5" r="47.5" fill="black"/>
