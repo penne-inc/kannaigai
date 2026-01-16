@@ -258,9 +258,106 @@ function initNavScrollFadeIn() {
     observer.observe(heroHeader);
 }
 
+/**
+ * ローディングオーバーレイの制御
+ * デスクトップのみ画像を読み込み、スマホでは読み込まない
+ * 初回訪問時は2秒間表示、次回以降はスキップ
+ */
+function initLoading() {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const heroMv = document.querySelector('.hero-mv');
+    const MOBILE_BREAKPOINT = 768;
+    const STORAGE_KEY = 'kannaigai17_visited';
+    const FIRST_VISIT_DURATION = 3000;
+
+    if (!loadingOverlay) return;
+
+    // 訪問済みかチェック
+    const hasVisited = localStorage.getItem(STORAGE_KEY);
+
+    // 訪問済みの場合はスキップ
+    if (hasVisited) {
+        loadingOverlay.classList.add('is-hidden');
+        // デスクトップの場合は画像を読み込む（バックグラウンドで）
+        if (window.innerWidth > MOBILE_BREAKPOINT && heroMv) {
+            const images = heroMv.querySelectorAll('img[data-src]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        }
+        return;
+    }
+
+    // 初回訪問をマーク
+    localStorage.setItem(STORAGE_KEY, 'true');
+
+    // スマホの場合は画像を読み込まず、2秒後にローディングを終了
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        setTimeout(() => {
+            loadingOverlay.classList.add('is-hidden');
+        }, FIRST_VISIT_DURATION);
+        return;
+    }
+
+    // デスクトップの場合のみ画像を読み込む
+    if (!heroMv) {
+        setTimeout(() => {
+            loadingOverlay.classList.add('is-hidden');
+        }, FIRST_VISIT_DURATION);
+        return;
+    }
+
+    const images = heroMv.querySelectorAll('img[data-src]');
+    let loadedCount = 0;
+    const totalImages = images.length;
+    let imagesLoaded = false;
+    let timerFinished = false;
+
+    function tryHideOverlay() {
+        // 画像読み込み完了 AND 2秒経過で非表示
+        if (imagesLoaded && timerFinished) {
+            loadingOverlay.classList.add('is-hidden');
+        }
+    }
+
+    function checkAllLoaded() {
+        loadedCount++;
+        if (loadedCount >= totalImages) {
+            imagesLoaded = true;
+            tryHideOverlay();
+        }
+    }
+
+    // 2秒タイマー
+    setTimeout(() => {
+        timerFinished = true;
+        tryHideOverlay();
+    }, FIRST_VISIT_DURATION);
+
+    if (totalImages === 0) {
+        imagesLoaded = true;
+        return;
+    }
+
+    // data-src から src にコピーして読み込み開始
+    images.forEach(img => {
+        img.addEventListener('load', checkAllLoaded);
+        img.addEventListener('error', checkAllLoaded);
+        img.src = img.dataset.src;
+    });
+
+    // フォールバック: 5秒後に強制的に非表示
+    setTimeout(() => {
+        loadingOverlay.classList.add('is-hidden');
+    }, 5000);
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
-    // オープニングアニメーション無効化 - セクションを即座に表示
+    // ローディング制御
+    initLoading();
+
+    // セクションを表示
     const sections = document.querySelectorAll('.fade-in-section');
     sections.forEach(section => section.classList.add('visible'));
 

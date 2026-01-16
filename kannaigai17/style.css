@@ -26,6 +26,63 @@ html,body {
     height: 100%;
 }
 
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 2回目以降の訪問時は最初から非表示 */
+.skip-loading .loading-overlay {
+    display: none;
+}
+
+.loading-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--color-black);
+    width: 0;
+    animation: progress 3s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.loading-spinner {
+    animation: blinking 0.8s linear infinite alternate;
+}
+
+@keyframes blinking {
+    from {
+        filter: opacity(0.2);
+    }
+    to {
+        filter: opacity(1);
+    }
+}
+
 /* Opening Animation */
 .opening-overlay {
     position: fixed;
