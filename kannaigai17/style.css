@@ -113,7 +113,7 @@ main {
     position: relative;
 
     @media screen and (max-width: 428px) {
-        padding: 4rem 2rem;
+        padding: 2rem 2rem 4rem;
     }
     display: grid;
     gap: 3rem;
@@ -125,13 +125,16 @@ main {
 header {
     max-width: 1024px;
     min-height: 100vh;
+
+    @media screen and (max-width: 428px) {
+        min-height: unset;
+    }
 }
-section:not(#archive),
+section,
 section#exhibition .section-header,
 section#exhibition .section-description{
     width: 100%;
     max-width: 800px;
-    margin: 0 auto;
 }
 
 section#exhibition {
@@ -569,6 +572,9 @@ footer {
 /* Hero Section */
 .hero-header {
     margin-bottom: 2rem;
+    @media screen and (max-width: 428px) {
+        margin-bototm: 0;
+    }
 }
 
 .hero {
@@ -612,6 +618,20 @@ footer {
     right: 106px;
 }
 
+@media screen and (max-width: 768px) {
+    .hero-mv {
+        height: 100%;
+        background-image: url(image/bg-mv.jpg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 0;
+    }
+    .hero-mv-image,
+    .hero-mv-eye {
+        display: none;
+    }
+}
+
 .hero-title {
 }
 
@@ -624,6 +644,11 @@ footer {
     margin-top: 400px;
     margin-bottom: 80px;
     max-width: 780px;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 180px;
+        margin-bottom: 20px;
+    }
 }
 
 .hero-meta {
@@ -632,6 +657,9 @@ footer {
 .hero-meta img{
     width: 100%;
     max-width: 292px;
+    @media screen and (max-width: 768px) {
+        max-width: 146px;
+    }
 }
 .hero-title .subtitle {
     display: inline-block;
@@ -675,10 +703,7 @@ footer {
     font-weight: 700;
 
     @media screen and (max-width: 768px) {
-        position: static;
-        writing-mode: horizontal-tb;
-        text-align: center;
-        margin-top: 2rem;
+        display: none;
     }
 }
 
@@ -720,6 +745,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(2, 450px);
     justify-content: center;
+    justify-content: start;
 
 }
 
