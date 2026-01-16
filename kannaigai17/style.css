@@ -607,6 +607,8 @@ footer {
 .hero-mv-eye {
     position: absolute;
     z-index: 1;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
 }
 
 .eye__left {
@@ -699,19 +701,121 @@ footer {
     bottom: 1.5rem;
     z-index: 1000;
     margin: 0;
+}
 
-    @media screen and (max-width: 768px) {
+/* Toggle button - hidden on desktop */
+.nav-toggle {
+    display: none;
+}
+
+/* Nav modal wrapper */
+.nav-modal {
+    max-height: 60vh;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.nav li {
+    margin: 0;
+}
+
+.nav a {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-black);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav a:hover {
+    opacity: 0.6;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .nav {
         right: 1rem;
         bottom: 1rem;
     }
-}
 
-.nav img {
-    height: auto;
-    width: 1.5rem;
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        background: var(--color-black);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
-    @media screen and (max-width: 768px) {
-        width: 1.2rem;
+    .nav-toggle-text {
+        color: var(--color-white);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+    }
+
+    .nav-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        max-height: none;
+    }
+
+    .nav-modal.is-open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-modal ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .nav-modal a {
+        font-size: 1.2rem;
+        letter-spacing: 0.15em;
+    }
+
+    .nav.is-open .nav-toggle {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 1001;
+    }
+
+    .nav.is-open .nav-toggle-text::before {
+        content: "閉じる";
+    }
+
+    .nav.is-open .nav-toggle-text {
+        font-size: 0;
+    }
+
+    .nav.is-open .nav-toggle-text::before {
+        font-size: 0.5rem;
     }
 }
 
@@ -921,7 +1025,6 @@ footer {
 
 /* Talk Session */
 .talk-session {
-    background: var(--color-white);
     margin-top: 2rem;
 }
 
@@ -970,7 +1073,6 @@ footer {
 
 /* Design Pitch */
 .design-pitch {
-    background: var(--color-white);
 }
 
 /* Kids Space */

@@ -114,6 +114,120 @@ function initArchiveToggle() {
     });
 }
 
+/**
+ * モバイルナビゲーションのモーダル機能
+ */
+function initNavToggle() {
+    const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navModal = document.getElementById('nav-modal');
+    const navLinks = navModal.querySelectorAll('a');
+
+    if (!navToggle || !navModal) return;
+
+    // トグルボタンのクリックイベント
+    navToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+
+        if (isOpen) {
+            closeNav();
+        } else {
+            openNav();
+        }
+    });
+
+    // リンククリックでモーダルを閉じる
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeNav();
+        });
+    });
+
+    // モーダル背景クリックで閉じる
+    navModal.addEventListener('click', (e) => {
+        if (e.target === navModal) {
+            closeNav();
+        }
+    });
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+            closeNav();
+        }
+    });
+
+    function openNav() {
+        nav.classList.add('is-open');
+        navModal.classList.add('is-open');
+        navToggle.setAttribute('aria-expanded', 'true');
+        navToggle.setAttribute('aria-label', 'メニューを閉じる');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+        nav.classList.remove('is-open');
+        navModal.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'メニューを開く');
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * 目がマウスを追従するアニメーション
+ */
+function initEyeTracking() {
+    const eyes = document.querySelectorAll('.hero-mv-eye');
+
+    if (eyes.length === 0) return;
+
+    // 最大移動量（px）
+    const MAX_MOVE = 15;
+
+    // マウス位置を追跡
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let isMouseMoving = false;
+
+    // マウス移動イベント
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        isMouseMoving = true;
+    });
+
+    // アニメーションループ
+    function updateEyes() {
+        eyes.forEach(eye => {
+            const rect = eye.getBoundingClientRect();
+            const eyeCenterX = rect.left + rect.width / 2;
+            const eyeCenterY = rect.top + rect.height / 2;
+
+            // マウスへの角度を計算
+            const deltaX = mouseX - eyeCenterX;
+            const deltaY = mouseY - eyeCenterY;
+            const angle = Math.atan2(deltaY, deltaX);
+
+            // 距離を計算（近いほど大きく動く、遠いと最大値）
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const moveAmount = Math.min(MAX_MOVE, distance * 0.05);
+
+            // 移動量を計算
+            const moveX = Math.cos(angle) * moveAmount;
+            const moveY = Math.sin(angle) * moveAmount;
+
+            // transform を適用
+            eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        requestAnimationFrame(updateEyes);
+    }
+
+    // アニメーション開始
+    requestAnimationFrame(updateEyes);
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
     // オープニングアニメーション無効化 - セクションを即座に表示
@@ -121,4 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => section.classList.add('visible'));
 
     initArchiveToggle();
+    initNavToggle();
+    initEyeTracking();
 });
