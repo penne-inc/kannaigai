@@ -1,3 +1,14 @@
+:root {
+    /* Color Palette - based on flyer design */
+    --color-discovery: #F7E96B;    /* 発見 - 黄色 */
+    --color-cocreation: #F5A0B8;   /* 共創 - ピンク */
+    --color-exchange: #A8D8B9;     /* 交流 - 緑 */
+    --color-fermentation: #A2C3E7; /* 発酵 - 水色 */
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-gray: #F0F0F0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,10 +17,10 @@
 
 html,body {
     font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.6;
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     font-feature-settings: "palt";
     overflow-x: hidden;
     height: 100%;
@@ -111,9 +122,15 @@ main {
         gap: 2rem;
     }
 }
-header, section:not(#archive) {
+header, section:not(#archive),
+section#exhibition .section-header,
+section#exhibition .section-description{
     max-width: 800px;
     margin: 0 auto;
+}
+
+section#exhibition {
+    max-width: 100%
 }
 
 .hero {
@@ -537,4 +554,321 @@ footer {
     @media screen and (max-width: 428px) {
         font-size: .75rem;
     }
+}
+
+/* =============================================
+   New Design Styles - based on flyer
+   ============================================= */
+
+/* Hero Section */
+.hero-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.hero-title .subtitle {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.hero-subtitle-ja {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid #000;
+    border-radius: 50%;
+    line-height: 2.3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+
+.hero-meta {
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.hero-admission {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.catchcopy {
+    font-size: 1.2rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+
+    @media screen and (max-width: 768px) {
+        position: static;
+        writing-mode: horizontal-tb;
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+/* Section Headers */
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.section-title-en {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.section-title-ja {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.section-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 450px);
+
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.project-card {
+    position: relative;
+    border-radius: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    @media screen and (min-width: 767px) {
+        padding: 1.5rem;
+        background-size: contain;
+        max-width: 450px;
+        height: 450px;
+        padding: 2rem 3rem 3rem 2rem;
+        align-content: center;
+    }
+}
+
+
+
+
+.project-card--discovery {
+    background-image: url(image/color-discovery.svg);
+}
+.project-card--cocreation {
+    background-image: url(image/color-cocreation.svg);
+}
+.project-card--exchange {
+    background-image: url(image/color-exchange.svg);
+}
+.project-card--fermentation {
+    background-image: url(image/color-fermentation.svg);
+}
+
+.project-category {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    background-color: var(--color-white);
+    padding: 0.25rem 1rem;
+    letter-spacing: 0.25em;
+}
+
+.project-category::before {
+    display: inline-block;
+    content: '●';
+}
+
+@media screen and (min-width: 767px) {
+    .project-category {
+        position: absolute;
+    }
+    .project-card--discovery .project-category {
+        top: 1em;
+    }
+
+    .project-card--cocreation .project-category {
+        top: 1em;
+        right: 1em;
+    }
+
+    .project-card--exchange .project-category {
+        bottom: 1em;
+    }
+
+    .project-card--fermentation  .project-category {
+        bottom: 1em;
+        right: 1em;
+    }
+
+
+    .project-card--cocreation .project-category,
+    .project-card--exchange .project-category {
+        writing-mode: vertical-rl;
+        padding: 1rem 0.25rem;
+    }
+
+}
+
+
+.project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.project-description {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.project-creators {
+    list-style: none;
+    font-size: 0.8rem;
+}
+
+.project-creators li {
+    margin-bottom: 0.25rem;
+}
+
+.creator-affiliation {
+    color: #555;
+}
+
+/* Talk Session */
+.talk-session {
+    background: var(--color-white);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.talk-time {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.guests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.guest-card {
+    padding: 1rem;
+    background: var(--color-gray);
+    text-align: center;
+}
+
+.guest-role {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.guest-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.guest-title {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.guest-project {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ddd;
+}
+
+/* Design Pitch */
+.design-pitch {
+    padding: 2rem;
+    background: var(--color-white);
+}
+
+/* Kids Space */
+.kids-space {
+    padding: 2rem;
+    background: var(--color-gray);
+}
+
+/* Access */
+.access-section {
+    padding: 2rem;
+    background: var(--color-white);
+}
+
+.venue-info {
+    margin-bottom: 1.5rem;
+}
+
+.venue-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.venue-name-en {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.venue-address,
+.venue-access {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Credits */
+.credits-section {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    padding: 2rem;
+    background: var(--color-gray);
+}
+
+.credit-row {
+    margin-bottom: 0.25rem;
+}
+
+.credit-label {
+    font-weight: 700;
 }

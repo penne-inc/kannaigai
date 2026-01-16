@@ -2,13 +2,19 @@
   "event": {
     "title": "関内外OPEN! 17",
     "subtitle": "EXHIBITION",
+    "subtitleJa": "展",
+    "catchcopy": "見慣れたまちの、視点を変える。",
     "date": "2026-02-23",
     "dateDisplay": "2026年2月23日(月)",
+    "dateDisplayEn": "2026.2.23 (MON)",
     "time": "13:00-17:00",
+    "admission": "入場無料・予約不要",
+    "contact": "kannaigai.info@gmail.com",
     "venue": {
       "name": "象の鼻テラス",
       "nameEn": "ZOU-NO-HANA TERRACE",
       "address": "〒231-0002 横浜市中区海岸通1丁目",
+      "addressEn": "1, KAIGANDORI, YOKOHAMA, NAKAKU, KANAGAWA, 231-0002, JAPAN",
       "access": "みなとみらい線「日本大通り駅」出口1より徒歩約3分、出口2より徒歩約5分"
     }
   },
@@ -25,6 +31,7 @@
       {
         "id": 1,
         "category": "発見",
+        "color": "#F7E96B",
         "title": "びっくり！ YOKOHAMA",
         "description": "関内外のクリエイターが個人的に\"びっくりした横浜\"の風景と、クリエイタープロフィールを紹介するInstagramアカウントを制作。",
         "creators": [
@@ -36,6 +43,7 @@
       {
         "id": 2,
         "category": "共創",
+        "color": "#F5A0B8",
         "title": "つながるリデザイン",
         "description": "福祉作業所、学生、デザイナー、社会福祉協議会等が協働し、インクルーシブなチームでクッキーパッケージをリデザイン。",
         "creators": [
@@ -47,6 +55,7 @@
       {
         "id": 3,
         "category": "交流",
+        "color": "#A8D8B9",
         "title": "関内×寺家 地域交流会",
         "description": "自然豊かな寺家町で、関内外のクリエイターがツアーや食事会を通して交流。お互いの創造の原点に触れる機会に。",
         "creators": [
@@ -58,6 +67,7 @@
       {
         "id": 4,
         "category": "発酵",
+        "color": "#E0E0E0",
         "title": "アイデアコンポスト",
         "description": "生ごみを堆肥に変えるコンポストのように、行き詰まったアイデアをみんなの発想で発酵させていくトークイベント。",
         "creators": [
