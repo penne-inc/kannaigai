@@ -664,8 +664,43 @@ footer {
 .hero-mv-eye {
     position: absolute;
     z-index: 1;
-    transition: transform 0.1s ease-out;
-    will-change: transform;
+}
+
+.hero-mv-eye svg {
+    display: block;
+    transform-origin: center center;
+    animation: blink 10s infinite;
+}
+
+@keyframes blink {
+    /* 0秒: 目は開いている */
+    0% {
+        transform: rotateX(0deg);
+    }
+    /* 0.75% ≈ 0.075秒: 目を閉じる */
+    0.75% {
+        transform: rotateX(90deg);
+    }
+    /* 1.5% ≈ 0.15秒: 目を開ける */
+    1.5% {
+        transform: rotateX(0deg);
+    }
+    /* 6秒後 (60%): 目は開いたまま */
+    59.25% {
+        transform: rotateX(0deg);
+    }
+    /* 6秒 + 0.075秒: 2回目の瞬き、目を閉じる */
+    60% {
+        transform: rotateX(90deg);
+    }
+    /* 6秒 + 0.15秒: 目を開ける */
+    60.75% {
+        transform: rotateX(0deg);
+    }
+    /* 10秒: ループ終了 */
+    100% {
+        transform: rotateX(0deg);
+    }
 }
 
 .eye__left {
