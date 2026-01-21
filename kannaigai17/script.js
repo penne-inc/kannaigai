@@ -266,7 +266,6 @@ function initNavScrollFadeIn() {
  */
 function initLoading() {
     const loadingOverlay = document.getElementById('loading-overlay');
-    const heroMv = document.querySelector('.hero-mv');
     const MOBILE_BREAKPOINT = 768;
     const STORAGE_KEY = 'kannaigai17_visited';
     const FIRST_VISIT_DURATION = 3000;
@@ -295,6 +294,8 @@ function initLoading() {
 
     // デスクトップの場合: vue-readyイベントで画像読み込み完了を監視
     window.addEventListener('vue-ready', () => {
+        const heroMv = document.querySelector('.hero-mv');
+
         if (!heroMv) {
             loadingOverlay.classList.add('is-hidden');
             return;
@@ -354,7 +355,6 @@ function initLoading() {
 document.addEventListener('DOMContentLoaded', () => {
     // ローディング制御
     initLoading();
-    initEyeTracking();
 });
 
 // Vueのデータ読み込み完了後の初期化
@@ -366,4 +366,5 @@ window.addEventListener('vue-ready', () => {
     initArchiveToggle();
     initNavToggle();
     initNavScrollFadeIn();
+    initEyeTracking();
 });

@@ -110,6 +110,7 @@
                         <span class="section-title-en">{{ data.exhibition.titleEn }}</span>
                         <span class="section-title-ja">{{ data.exhibition.titleJa }}</span>
                     </h2>
+                    <p class="event-time">時間 {{ data.exhibition.time }}</p>
                 </div>
                 <p class="section-description">{{ data.exhibition.description }}</p>
 
@@ -137,9 +138,9 @@
                         <span class="section-title-en">{{ data.talkSession.titleEn }}</span>
                         <span class="section-title-ja">{{ data.talkSession.titleJa }}</span>
                     </h2>
+                    <p class="event-time">時間 {{ data.talkSession.time }}</p>
                 </div>
                 <p class="section-description">{{ data.talkSession.description }}</p>
-                <p class="talk-time">時間 {{ data.talkSession.time }}</p>
 
                 <div class="section-header-sub">
                     <h3>MODERATOR<span class="section-title-ja">モデレーター</span></h3>
@@ -186,6 +187,7 @@
                         <span class="section-title-en">{{ data.designPitch.titleEn }}</span>
                         <span class="section-title-ja">{{ data.designPitch.titleJa }}</span>
                     </h2>
+                    <p class="event-time">時間 {{ data.designPitch.time }}</p>
                 </div>
                 <p class="section-description">{{ data.designPitch.description }}</p>
             </section>
@@ -197,6 +199,7 @@
                         <span class="section-title-en">{{ data.kidsSpace.titleEn }}</span>
                         <span class="section-title-ja">{{ data.kidsSpace.titleJa }}</span>
                     </h2>
+                    <p class="event-time">時間 {{ data.kidsSpace.time }}</p>
                 </div>
                 <p class="section-description">{{ data.kidsSpace.description }}</p>
             </section>
@@ -425,8 +428,8 @@
             </nav>
         </main>
 
-        <footer role="contentinfo">
-            <p>&copy; 2025 kannaigai. All rights reserved.</p>
+        <footer role="contentinfo" v-if="data">
+            <p v-html="data.credit"></p>
         </footer>
     </div>
     <script>

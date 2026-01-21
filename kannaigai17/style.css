@@ -286,10 +286,6 @@ section#exhibition {
 
 
 
-h2 {
-    margin-bottom: 1rem;
-}
-
 /* Visually hidden but accessible to screen readers */
 .visually-hidden {
     position: absolute;
@@ -1136,7 +1132,7 @@ footer {
     margin-top: 2rem;
 }
 
-.talk-time {
+.event-time {
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 1.5rem;

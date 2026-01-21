@@ -27,6 +27,7 @@
     "titleJa": "4つのプロジェクト",
     "titleEn": "EXHIBITION",
     "description": "なにを考え、どのように進めたのか。そしてどんなことが起こったのか。プロジェクトごとにパネルとレポートを展示します。担当クリエイターも常駐しているので、質問があればお気軽にどうぞ。",
+    "time": "13:00～17:00",
     "projects": [
       {
         "id": 1,
@@ -125,17 +126,20 @@
   "designPitch": {
     "titleJa": "デザインピッチ",
     "titleEn": "DESIGN PITCH",
-    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人3分でつないでいきます。登壇クリエイターはwebサイトでご確認ください。",
+    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。登壇クリエイターはwebサイトでご確認ください。",
+    "time": "16:00-17:00",
     "creatorCount": 12,
-    "pitchDuration": "3分"
+    "pitchDuration": "4分"
   },
   "kidsSpace": {
     "titleJa": "くるり工房",
     "titleEn": "KIDS SPACE",
-    "description": "普通なら捨ててしまうものも、見方を「くるり」としてみれば様々なモノに生まれ変わる。くるり工房による子ども向けの資源循環ワークショップ。時間制限ナシで創作に没頭していただけます。"
+    "description": "普通なら捨ててしまうものも、見方を「くるり」としてみれば様々なモノに生まれ変わる。くるり工房による子ども向けの資源循環ワークショップ。時間制限ナシで創作に没頭していただけます。",
+    "time": "13:00-17:00"
   },
   "social": {
     "instagram": "https://www.instagram.com/kannaigaiopen/",
     "facebook": "https://www.facebook.com/kannaigaiopen/"
-  }
+  },
+  "credit": "&copy; 2025 kannaigai. All rights reserved."
 }
