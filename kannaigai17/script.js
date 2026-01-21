@@ -121,9 +121,10 @@ function initNavToggle() {
     const nav = document.getElementById('nav');
     const navToggle = document.getElementById('nav-toggle');
     const navModal = document.getElementById('nav-modal');
-    const navLinks = navModal.querySelectorAll('a');
 
     if (!navToggle || !navModal) return;
+
+    const navLinks = navModal.querySelectorAll('a');
 
     // トグルボタンのクリックイベント
     navToggle.addEventListener('click', () => {
@@ -278,20 +279,13 @@ function initLoading() {
     // 訪問済みの場合はスキップ
     if (hasVisited) {
         loadingOverlay.classList.add('is-hidden');
-        // デスクトップの場合は画像を読み込む（バックグラウンドで）
-        if (window.innerWidth > MOBILE_BREAKPOINT && heroMv) {
-            const images = heroMv.querySelectorAll('img[data-src]');
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            });
-        }
         return;
     }
 
     // 初回訪問をマーク
     localStorage.setItem(STORAGE_KEY, 'true');
 
-    // スマホの場合は画像を読み込まず、2秒後にローディングを終了
+    // スマホの場合は画像を読み込まず、指定時間後にローディングを終了
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
         setTimeout(() => {
             loadingOverlay.classList.add('is-hidden');
@@ -299,51 +293,55 @@ function initLoading() {
         return;
     }
 
-    // デスクトップの場合のみ画像を読み込む
-    if (!heroMv) {
+    // デスクトップの場合: vue-readyイベントで画像読み込み完了を監視
+    window.addEventListener('vue-ready', () => {
+        if (!heroMv) {
+            loadingOverlay.classList.add('is-hidden');
+            return;
+        }
+
+        const images = heroMv.querySelectorAll('.hero-mv-image');
+        let loadedCount = 0;
+        const totalImages = images.length;
+        let imagesLoaded = false;
+        let timerFinished = false;
+
+        function tryHideOverlay() {
+            if (imagesLoaded && timerFinished) {
+                loadingOverlay.classList.add('is-hidden');
+            }
+        }
+
+        function checkAllLoaded() {
+            loadedCount++;
+            if (loadedCount >= totalImages) {
+                imagesLoaded = true;
+                tryHideOverlay();
+            }
+        }
+
+        // タイマー
         setTimeout(() => {
-            loadingOverlay.classList.add('is-hidden');
-        }, FIRST_VISIT_DURATION);
-        return;
-    }
-
-    const images = heroMv.querySelectorAll('img[data-src]');
-    let loadedCount = 0;
-    const totalImages = images.length;
-    let imagesLoaded = false;
-    let timerFinished = false;
-
-    function tryHideOverlay() {
-        // 画像読み込み完了 AND 2秒経過で非表示
-        if (imagesLoaded && timerFinished) {
-            loadingOverlay.classList.add('is-hidden');
-        }
-    }
-
-    function checkAllLoaded() {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-            imagesLoaded = true;
+            timerFinished = true;
             tryHideOverlay();
+        }, FIRST_VISIT_DURATION);
+
+        if (totalImages === 0) {
+            imagesLoaded = true;
+            timerFinished = true;
+            tryHideOverlay();
+            return;
         }
-    }
 
-    // 2秒タイマー
-    setTimeout(() => {
-        timerFinished = true;
-        tryHideOverlay();
-    }, FIRST_VISIT_DURATION);
-
-    if (totalImages === 0) {
-        imagesLoaded = true;
-        return;
-    }
-
-    // data-src から src にコピーして読み込み開始
-    images.forEach(img => {
-        img.addEventListener('load', checkAllLoaded);
-        img.addEventListener('error', checkAllLoaded);
-        img.src = img.dataset.src;
+        // 画像読み込み完了を監視
+        images.forEach(img => {
+            if (img.complete) {
+                checkAllLoaded();
+            } else {
+                img.addEventListener('load', checkAllLoaded);
+                img.addEventListener('error', checkAllLoaded);
+            }
+        });
     });
 
     // フォールバック: 5秒後に強制的に非表示
@@ -356,13 +354,16 @@ function initLoading() {
 document.addEventListener('DOMContentLoaded', () => {
     // ローディング制御
     initLoading();
+    initEyeTracking();
+});
 
+// Vueのデータ読み込み完了後の初期化
+window.addEventListener('vue-ready', () => {
     // セクションを表示
     const sections = document.querySelectorAll('.fade-in-section');
     sections.forEach(section => section.classList.add('visible'));
 
     initArchiveToggle();
     initNavToggle();
-    initEyeTracking();
     initNavScrollFadeIn();
 });
