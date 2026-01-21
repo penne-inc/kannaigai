@@ -67,7 +67,7 @@
       {
         "id": 4,
         "category": "発酵",
-        "color": "#E0E0E0",
+        "color": "#a2c3e7",
         "title": "アイデアコンポスト",
         "description": "生ごみを堆肥に変えるコンポストのように、行き詰まったアイデアをみんなの発想で発酵させていくトークイベント。",
         "creators": [
@@ -82,41 +82,43 @@
     "titleEn": "TALK SESSION",
     "description": "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、これからの「まちとクリエイティブ」の関係を探ります。",
     "time": "13:30-15:30",
+    "moderator": {
+      "name": "ダバンティスジャンウィル",
+      "title": null,
+      "photo": null
+    },
     "guests": [
       {
         "id": 1,
-        "role": "モデレーター",
-        "name": "ダバンティスジャンウィル",
-        "title": null,
-        "project": null
+        "name": "桂有生",
+        "title": "横浜市都市デザイン室",
+        "color": "#F7E96B",
+        "project": "びっくり！YOKOHAMA",
+        "photo": null
       },
       {
         "id": 2,
-        "role": "ゲスト",
-        "name": "ダミー1",
-        "title": "肩書きダミー1",
-        "project": "びっくり！YOKOHAMA"
+        "name": "鈴木啓太",
+        "title": "社会福祉法人かたるべ会 うれしの",
+        "color": "#F5A0B8",
+        "project": "つながるリデザイン",
+        "photo": null
       },
       {
         "id": 3,
-        "role": "ゲスト",
-        "name": "ダミー2",
-        "title": "肩書きダミー2",
-        "project": "つながるリデザイン"
+        "name": "藤好つむぎ",
+        "title": "里のengawa/萬駄屋/kirimisut",
+        "color": "#A8D8B9",
+        "project": "関内×寺家 地域交流会",
+        "photo": null
       },
       {
         "id": 4,
-        "role": "ゲスト",
-        "name": "ダミー3",
-        "title": "肩書きダミー3",
-        "project": "関内×寺家 地域交流会"
-      },
-      {
-        "id": 5,
-        "role": "ゲスト",
-        "name": "ダミー4",
-        "title": "肩書きダミー4",
-        "project": "アイデアコンポスト"
+        "name": "木村ナホコ",
+        "title": "かもめデザイン舎",
+        "color": "#a2c3e7",
+        "project": "アイデアコンポスト",
+        "photo": null
       }
     ]
   },

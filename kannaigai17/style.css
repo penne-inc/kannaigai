@@ -927,11 +927,16 @@ footer {
     margin-bottom: 1.5rem;
 }
 
+.section-header-sub {
+    margin-bottom: 1.5rem;
+}
+
 .section-header h2 {
     display: flex;
     align-items: center;
     gap: .75rem;
 }
+
 
 .section-title-en {
     font-size: 1.8rem;
@@ -1137,22 +1142,68 @@ footer {
     margin-bottom: 1.5rem;
 }
 
+.moderator-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 391px;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-gray);
+    margin-bottom: 2rem;
+    @media screen and (max-width: 768px) {
+        max-width: 100%;
+    }
+}
+
+.moderator-card .guest-photo {
+    width: 80px;
+    min-width: 80px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 0;
+}
+
+.moderator-card .guest-info {
+    flex: 1;
+}
+
 .guests-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
 }
 
 .guest-card {
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: .75rem 1rem;
     background: var(--color-gray);
-    text-align: center;
+    position: relative;
 }
 
-.guest-role {
-    font-size: 0.75rem;
-    color: #666;
+.guest-project {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: white;
+    padding: 0 .5em;
+    display: inline-block;
     margin-bottom: 0.25rem;
+}
+
+.guest-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.guest-card .guest-photo {
+    width: 80px;
+    min-width: 80px;
+    aspect-ratio: 1 / 1;
+}
+
+.guest-card .guest-info {
+    flex: 1;
 }
 
 .guest-name {
@@ -1163,15 +1214,21 @@ footer {
 
 .guest-title {
     font-size: 0.8rem;
-    color: #555;
 }
 
-.guest-project {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid #ddd;
+.guest-photo {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.guest-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.guest-photo--placeholder {
+    background-color: #ccc;
 }
 
 /* Design Pitch */
