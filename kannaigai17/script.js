@@ -365,7 +365,7 @@ function initProjectCardShake() {
     const SHAKE_SPEED = 0.015; // 揺れの速度係数
     const DECAY_RATE = 0.95; // 減衰率
 
-    let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    let lastScrollY = window.scrollY;
     let currentIntensity = 0;
 
     // 各カードの位相（バラバラに動くように）
@@ -395,52 +395,60 @@ function initProjectCardShake() {
 
     cards.forEach(card => observer.observe(card));
 
-    // requestAnimationFrameで統合ループ（スクロール監視 + アニメーション）
+    // アニメーション状態管理
+    let isAnimating = false;
 
-    function animationLoop() {
-        const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+    // スクロールイベントで強度を上げる
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
         const scrollDelta = Math.abs(currentScrollY - lastScrollY);
 
-        // スクロールを検出したら強度を上げる
         if (scrollDelta > 0.5) {
             currentIntensity = Math.min(currentIntensity + scrollDelta * 0.08, 1);
             lastScrollY = currentScrollY;
+
+            // アニメーションが動いていなければ開始
+            if (!isAnimating && visibleCards.size > 0) {
+                isAnimating = true;
+                animateShake();
+            }
         }
+    }, { passive: true });
 
-        // 揺れアニメーション
-        if (currentIntensity > 0.01 && visibleCards.size > 0) {
-            const time = performance.now() * SHAKE_SPEED;
-
-            visibleCards.forEach(card => {
-                const phase = cardPhases.get(card) || 0;
-
-                // サイン波で揺れを生成（カードごとに位相が異なる）
-                const shakeX = Math.sin(time + phase) * SHAKE_INTENSITY * currentIntensity;
-                const shakeY = Math.cos(time * 1.3 + phase) * SHAKE_INTENSITY * 0.6 * currentIntensity;
-                const rotate = Math.sin(time * 0.7 + phase * 0.5) * ROTATE_INTENSITY * currentIntensity;
-
-                card.style.setProperty('--shake-x', `${shakeX}px`);
-                card.style.setProperty('--shake-y', `${shakeY}px`);
-                card.style.setProperty('--shake-rotate', `${rotate}deg`);
-            });
-
-            // 減衰
-            currentIntensity *= DECAY_RATE;
-        } else if (currentIntensity <= 0.01) {
-            // 揺れが止まったらリセット
+    // rAFでアニメーションのみ実行
+    function animateShake() {
+        // 揺れが十分小さくなったら停止
+        if (currentIntensity <= 0.01) {
+            isAnimating = false;
             visibleCards.forEach(card => {
                 card.style.setProperty('--shake-x', '0px');
                 card.style.setProperty('--shake-y', '0px');
                 card.style.setProperty('--shake-rotate', '0deg');
             });
             currentIntensity = 0;
+            return;
         }
 
-        requestAnimationFrame(animationLoop);
-    }
+        const time = performance.now() * SHAKE_SPEED;
 
-    // アニメーションループ開始
-    requestAnimationFrame(animationLoop);
+        visibleCards.forEach(card => {
+            const phase = cardPhases.get(card) || 0;
+
+            // サイン波で揺れを生成（カードごとに位相が異なる）
+            const shakeX = Math.sin(time + phase) * SHAKE_INTENSITY * currentIntensity;
+            const shakeY = Math.cos(time * 1.3 + phase) * SHAKE_INTENSITY * 0.6 * currentIntensity;
+            const rotate = Math.sin(time * 0.7 + phase * 0.5) * ROTATE_INTENSITY * currentIntensity;
+
+            card.style.setProperty('--shake-x', `${shakeX}px`);
+            card.style.setProperty('--shake-y', `${shakeY}px`);
+            card.style.setProperty('--shake-rotate', `${rotate}deg`);
+        });
+
+        // 減衰
+        currentIntensity *= DECAY_RATE;
+
+        requestAnimationFrame(animateShake);
+    }
 }
 
 // DOMの読み込み完了後の初期化
