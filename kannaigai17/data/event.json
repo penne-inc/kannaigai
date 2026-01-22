@@ -20,7 +20,7 @@
     }
   },
   "about": {
-    "titleJa": "関内外OPENとは",
+    "titleJa": "関内外OPEN!とは",
     "titleEn": "ABOUT",
     "description": "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、展示とトークセッションを通して紹介します。"
   },
@@ -38,7 +38,7 @@
         "description": "関内外のクリエイターが個人的に<br>\"びっくりした横浜\"の風景と、<br>クリエイタープロフィールを紹介する<br>Instagramアカウントを制作。",
         "creators": [
           { "name": "岩穴口颯音", "affiliation": "ondesign" },
-          { "name": "小林 璃代", "affiliation": "voids" },
+          { "name": "小林 璃代子", "affiliation": "voids" },
           { "name": "Rachel Matsumura", "affiliation": "studio nibroll" }
         ]
       },
@@ -127,9 +127,9 @@
   "designPitch": {
     "titleJa": "デザインピッチ",
     "titleEn": "DESIGN PITCH",
-    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。",
+    "description": "関内外を拠点に多方面で活躍している10名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。",
     "time": "16:00-17:00",
-    "creatorCount": 12,
+    "creatorCount": 10,
     "pitchDuration": "4分"
   },
   "kidsSpace": {

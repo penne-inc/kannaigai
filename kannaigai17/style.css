@@ -23,7 +23,6 @@ html,body {
     font-weight: 500;
     font-feature-settings: "palt";
     overflow-x: hidden;
-    height: 100%;
 }
 
 /* Loading Overlay */
