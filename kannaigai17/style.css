@@ -1,7 +1,7 @@
 :root {
     /* Color Palette - based on flyer design */
-    --color-discovery: #F7E96B;    /* 発見 - 黄色 */
-    --color-cocreation: #F5A0B8;   /* 共創 - ピンク */
+    --color-discovery: #F5A0B8;    /* 発見 - 黄色 */
+    --color-cocreation: #F7E96B;   /* 共創 - ピンク */
     --color-exchange: #A8D8B9;     /* 交流 - 緑 */
     --color-fermentation: #A2C3E7; /* 発酵 - 水色 */
     --color-black: #000000;
@@ -923,21 +923,33 @@ footer {
     margin-bottom: 1.5rem;
 }
 
+.section-header:has(+ .event-time) {
+    margin-bottom: calc(.5rem - 3px);
+}
+
 .section-header-sub {
     margin-bottom: 1.5rem;
 }
 
-.section-header h2 {
+.section-header h2{
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: .75rem;
+    border-bottom: 3px solid;
+    padding-bottom: 0.75rem;
+}
+.section-header-sub h3{
+    display: flex;
+    align-items: end;
+    gap: .75em;
 }
 
 
 .section-title-en {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: 0.02em;
+    line-height: 1;
 
     @media screen and (max-width: 768px) {
         font-size: 1.2rem;
@@ -945,9 +957,10 @@ footer {
 }
 
 .section-title-ja {
-    font-size: 0.9rem;
-    color: #666;
-    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    @media screen and (max-width: 768px) {
+        font-size: .75rem;
+    }
 }
 
 .section-description {
@@ -959,9 +972,8 @@ footer {
 /* Projects Grid */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 450px);
-    justify-content: center;
-    justify-content: start;
+    grid-template-columns: repeat(2, max-content);
+
 
 }
 
@@ -982,10 +994,9 @@ footer {
 .project-card::before {
     position: absolute;
     content: "";
-    inset: 0;
     width: 100%;
     height: 100%;
-    transform: scale(1.6, 1.2);
+    transform: scale(1.4);
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -995,16 +1006,16 @@ footer {
 
 
 .project-card:nth-of-type(1)::before {
-    background-image: url(image/color-discovery.svg);
+    background-image: url(image/color-discovery.png);
 }
 .project-card:nth-of-type(2)::before {
-    background-image: url(image/color-cocreation.svg);
+    background-image: url(image/color-cocreation.png);
 }
 .project-card:nth-of-type(3)::before {
-    background-image: url(image/color-exchange.svg);
+    background-image: url(image/color-exchange.png);
 }
 .project-card:nth-of-type(4)::before {
-    background-image: url(image/color-fermentation.svg);
+    background-image: url(image/color-fermentation.png);
 }
 
 
@@ -1018,18 +1029,41 @@ footer {
     .project-card::before {
         transform: scale(1);
     }
-
     .project-card:nth-of-type(1) {
-        padding-inline: 3rem 5rem;
+        padding-top: 3rem;
+        padding-inline: 5rem 5rem;
     }
     .project-card:nth-of-type(2) {
-        padding-inline: 5rem;
+        padding-top: 3rem;
+        padding-inline: 6rem 4rem;
     }
     .project-card:nth-of-type(3) {
         padding-inline: 5rem;
     }
     .project-card:nth-of-type(4) {
-        padding-inline: 5rem;
+        padding-inline: 5rem 6rem;
+        padding-bottom: 3rem;
+    }
+
+    .project-card:nth-of-type(1)::before {
+        background-position: bottom right;
+        bottom: 0;
+        right: -30px;
+    }
+    .project-card:nth-of-type(2)::before {
+        background-position: bottom left;
+        bottom: 0;
+        left: 29px;
+    }
+    .project-card:nth-of-type(3)::before {
+        background-position: top left;
+        top: 0;
+        right: 0;
+    }
+    .project-card:nth-of-type(4)::before {
+        background-position: top right;
+        top: 0;
+        left: 0;
     }
 }
 
@@ -1073,30 +1107,28 @@ footer {
         font-size: 1.25rem;
     }
     .project-card:nth-of-type(1) .project-category {
-        top: 1em;
+        top: 2em;
         left: 0em;
     }
 
     .project-card:nth-of-type(2) .project-category {
-        top: 1em;
+        top: 2em;
         right: 1em;
+        writing-mode: vertical-rl;
+        padding: 1rem 0.25rem;
     }
 
     .project-card:nth-of-type(3) .project-category {
         bottom: 3em;
-        left: 0em;
+        left: 1em;
+        writing-mode: vertical-rl;
+        padding: 1rem 0.25rem;
+
     }
 
     .project-card:nth-of-type(4) .project-category {
         bottom: 3em;
-        right: 1em;
-    }
-
-
-    .project-card--cocreation .project-category,
-    .project-card--exchange .project-category {
-        writing-mode: vertical-rl;
-        padding: 1rem 0.25rem;
+        right: 2em;
     }
 
 }
@@ -1133,9 +1165,24 @@ footer {
 }
 
 .event-time {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1rem;
+    }
+}
+
+.event-time::before {
+    content: '時間';
+    font-size: 1rem;
+    padding-right: 0.75rem;
+    color: var(--color-black);
+
+    @media screen and (max-width: 768px) {
+        font-size: 0.75rem;
+    }
 }
 
 .moderator-card {
@@ -1235,6 +1282,11 @@ footer {
 .kids-space {
 }
 
+.kids-space a{
+    color: var(--color-black);
+    padding-left: 1em;
+}
+
 /* Access */
 .access-section {
 }
@@ -1254,6 +1306,11 @@ footer {
     margin-left: 0.5rem;
 }
 
+.venue-name {
+    font-size: 1.7rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
 .venue-address,
 .venue-access {
     font-size: 0.9rem;

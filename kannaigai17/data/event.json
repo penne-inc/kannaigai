@@ -33,8 +33,8 @@
         "id": 1,
         "category": "発見",
         "color": "#F7E96B",
-        "title": "びっくり！ YOKOHAMA",
-        "description": "関内外のクリエイターが個人的に\"びっくりした横浜\"の風景と、クリエイタープロフィールを紹介するInstagramアカウントを制作。",
+        "title": "びっクリ！ YOKOHAMA",
+        "description": "関内外のクリエイターが個人的に<br>\"びっくりした横浜\"の風景と、<br>クリエイタープロフィールを紹介する<br>Instagramアカウントを制作。",
         "creators": [
           { "name": "岩穴口颯音", "affiliation": "ondesign" },
           { "name": "小林 璃代", "affiliation": "voids" },
@@ -46,7 +46,7 @@
         "category": "共創",
         "color": "#F5A0B8",
         "title": "つながるリデザイン",
-        "description": "福祉作業所、学生、デザイナー、社会福祉協議会等が協働し、インクルーシブなチームでクッキーパッケージをリデザイン。",
+        "description": "福祉作業所、<br>学生、デザイナー、<br>社会福祉協議会等が協働し、<br>インクルーシブなチームで<br>クッキーパッケージをリデザイン。",
         "creators": [
           { "name": "伊藤 佑也", "affiliation": "83graphics" },
           { "name": "山田 祐介", "affiliation": null },
@@ -58,7 +58,7 @@
         "category": "交流",
         "color": "#A8D8B9",
         "title": "関内×寺家 地域交流会",
-        "description": "自然豊かな寺家町で、関内外のクリエイターがツアーや食事会を通して交流。お互いの創造の原点に触れる機会に。",
+        "description": "自然豊かな寺家町で、<br>関内外のクリエイターが<br>ツアーや食事会を通して交流。<br>お互いの創造の<br>原点に触れる機会に。",
         "creators": [
           { "name": "千代田 彩華", "affiliation": "ondesign" },
           { "name": "三浦 佑介", "affiliation": "shubidua" },
@@ -70,7 +70,7 @@
         "category": "発酵",
         "color": "#a2c3e7",
         "title": "アイデアコンポスト",
-        "description": "生ごみを堆肥に変えるコンポストのように、行き詰まったアイデアをみんなの発想で発酵させていくトークイベント。",
+        "description": "生ごみを堆肥に変える<br>コンポストのように、<br>行き詰まったアイデアを<br>みんなの発想で発酵させていく<br>トークイベント。",
         "creators": [
           { "name": "介川 貴晶", "affiliation": "Penne" },
           { "name": "宮本かおる", "affiliation": "OLUデザイン" }
@@ -94,7 +94,7 @@
         "name": "桂有生",
         "title": "横浜市都市デザイン室",
         "color": "#F7E96B",
-        "project": "びっくり！YOKOHAMA",
+        "project": "びっクリ！YOKOHAMA",
         "photo": null
       },
       {
@@ -132,9 +132,11 @@
     "pitchDuration": "4分"
   },
   "kidsSpace": {
-    "titleJa": "くるり工房",
+    "titleJa": "キッズスペース",
     "titleEn": "KIDS SPACE",
-    "description": "普通なら捨ててしまうものも、見方を「くるり」としてみれば様々なモノに生まれ変わる。くるり工房による子ども向けの資源循環ワークショップ。時間制限ナシで創作に没頭していただけます。",
+    "description": "くるり工房は、『ものの見方を「くるり」する』をコンセプトに横浜で活動するアップサイクル工房です。廃材スタンプを使ったアップサイクル体験、ポストカードやミニバッグ、サコッシュづくり、さらに大きなキャンバスやドレスに自由にお絵描きも楽しめます。視点を「くるり」として、楽しいを表現し、日常に少し特別な思い出を持ち帰ってみませんか。※予約不要、時間制限なしで、制作に没頭していただけます。",
+    "name": "くるり工房",
+    "link": "https://kururiworks.com/",
     "time": "13:00-17:00"
   },
   "social": {

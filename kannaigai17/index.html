@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>関内外OPEN!17</title>
     <meta name="title" content="関内外OPEN!17">
-    <meta name="description" content="関内外OPEN!17 - 見慣れたまちの、視点を変える。2026年2月23日(月) 象の鼻テラスにて開催。">
+    <meta name="description" content="関内外OPEN!17 - 見慣れたまちの、視点を変える。2026年2月23日(月・祝) 象の鼻テラスにて開催。">
     <meta name="keywords" content="関内外,OPEN,横浜,イベント,kannaigai,EXHIBITION,展示">
     <meta name="author" content="Kannaigai">
 
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kannaigai.com/kannaigai17/">
     <meta property="og:title" content="関内外OPEN!17">
-    <meta property="og:description" content="見慣れたまちの、視点を変える。2026年2月23日(月) 象の鼻テラスにて開催。">
+    <meta property="og:description" content="見慣れたまちの、視点を変える。2026年2月23日(月・祝) 象の鼻テラスにて開催。">
     <meta property="og:image" content="https://kannaigai.com/kannaigai17/image/ogp.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://kannaigai.com/kannaigai17/">
     <meta name="twitter:title" content="関内外OPEN!17">
-    <meta name="twitter:description" content="見慣れたまちの、視点を変える。2026年2月23日(月) 象の鼻テラスにて開催。">
+    <meta name="twitter:description" content="見慣れたまちの、視点を変える。2026年2月23日(月・祝) 象の鼻テラスにて開催。">
     <meta name="twitter:image" content="https://kannaigai.com/kannaigai17/image/ogp.png">
 
     <!-- Theme Color -->
@@ -85,7 +85,7 @@
                     <img src="image/mv-title.svg" alt="関内外OPEN! 17 EXHIBITION! 展">
                 </h1>
                 <p class="hero-description">
-                    <img src="image/mv-description.svg" alt="2026年2月23日(月)13:00 ‐ 17:00像の鼻テラス〒231‐0002横浜市中区海岸通1丁目">
+                    <img src="image/mv-description.svg" alt="2026年2月23日(月・祝)13:00 ‐ 17:00像の鼻テラス〒231‐0002横浜市中区海岸通1丁目">
                 </p>
                 <p class="hero-meta">
                     <img src="image/mv-meta.svg" alt="入場無料・予約不要">
@@ -110,8 +110,8 @@
                         <span class="section-title-en">{{ data.exhibition.titleEn }}</span>
                         <span class="section-title-ja">{{ data.exhibition.titleJa }}</span>
                     </h2>
-                    <p class="event-time">時間 {{ data.exhibition.time }}</p>
                 </div>
+                <p class="event-time">{{ data.exhibition.time }}</p>
                 <p class="section-description">{{ data.exhibition.description }}</p>
 
                 <div class="projects-grid">
@@ -121,7 +121,7 @@
                         class="project-card">
                         <p class="project-category">{{ project.category }}</p>
                         <h3 class="project-title">{{ project.title }}</h3>
-                        <p class="project-description">{{ project.description }}</p>
+                        <p class="project-description" v-html="project.description"></p>
                         <ul class="project-creators">
                             <li v-for="(creator, index) in project.creators" :key="index">
                                 {{ creator.name }}<span v-if="creator.affiliation" class="creator-affiliation">_{{ creator.affiliation }}</span>
@@ -138,8 +138,8 @@
                         <span class="section-title-en">{{ data.talkSession.titleEn }}</span>
                         <span class="section-title-ja">{{ data.talkSession.titleJa }}</span>
                     </h2>
-                    <p class="event-time">時間 {{ data.talkSession.time }}</p>
                 </div>
+                <p class="event-time">{{ data.talkSession.time }}</p>
                 <p class="section-description">{{ data.talkSession.description }}</p>
 
                 <div class="section-header-sub">
@@ -187,8 +187,8 @@
                         <span class="section-title-en">{{ data.designPitch.titleEn }}</span>
                         <span class="section-title-ja">{{ data.designPitch.titleJa }}</span>
                     </h2>
-                    <p class="event-time">時間 {{ data.designPitch.time }}</p>
                 </div>
+                <p class="event-time">{{ data.designPitch.time }}</p>
                 <p class="section-description">{{ data.designPitch.description }}</p>
             </section>
 
@@ -199,9 +199,10 @@
                         <span class="section-title-en">{{ data.kidsSpace.titleEn }}</span>
                         <span class="section-title-ja">{{ data.kidsSpace.titleJa }}</span>
                     </h2>
-                    <p class="event-time">時間 {{ data.kidsSpace.time }}</p>
                 </div>
+                <p class="event-time">{{ data.kidsSpace.time }}</p>
                 <p class="section-description">{{ data.kidsSpace.description }}</p>
+                <p class="section-link">{{ data.kidsSpace.name }} <a :href="data.kidsSpace.link" target="_blank">{{ data.kidsSpace.link }}</a> </p>
             </section>
 
             <!-- ACCESS Section -->
@@ -214,9 +215,9 @@
                 </div>
                 <div class="venue-info">
                     <p class="venue-name">
-                        <img src="image/zounohana.png" :alt="data.event.venue.name"/>
+                        象の鼻テラス<br>ZOU - NO - HANA TERRACE
                     </p>
-                    <p class="venue-address">{{ data.event.venue.address }}</p>
+                    <p class="venue-address">住所: {{ data.event.venue.address }}</p>
                     <p class="venue-access">アクセス: {{ data.event.venue.access }}</p>
                     <p class="venue-map">
                         <img src="image/map.png" aria-hidden="true" alt="地図"/>
