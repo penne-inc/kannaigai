@@ -12,10 +12,11 @@
     "contact": "kannaigai.info@gmail.com",
     "venue": {
       "name": "象の鼻テラス",
-      "nameEn": "ZOU-NO-HANA TERRACE",
+      "nameEn": "ZOU - NO - HANA TERRACE",
       "address": "〒231-0002 横浜市中区海岸通1丁目",
       "addressEn": "1, KAIGANDORI, YOKOHAMA, NAKAKU, KANAGAWA, 231-0002, JAPAN",
-      "access": "みなとみらい線「日本大通り駅」出口1より徒歩約3分、出口2より徒歩約5分"
+      "access": "みなとみらい線「日本大通り駅」出口1より徒歩約3分、出口2より徒歩約5分",
+      "googleMap": "https://goo.gl/maps/JieP6CRqSvhbnenCA"
     }
   },
   "about": {
@@ -27,13 +28,14 @@
     "titleJa": "4つのプロジェクト",
     "titleEn": "EXHIBITION",
     "description": "なにを考え、どのように進めたのか。そしてどんなことが起こったのか。プロジェクトごとにパネルとレポートを展示します。担当クリエイターも常駐しているので、質問があればお気軽にどうぞ。",
+    "time": "13:00～17:00",
     "projects": [
       {
         "id": 1,
         "category": "発見",
         "color": "#F7E96B",
-        "title": "びっくり！ YOKOHAMA",
-        "description": "関内外のクリエイターが個人的に\"びっくりした横浜\"の風景と、クリエイタープロフィールを紹介するInstagramアカウントを制作。",
+        "title": "びっクリ！ YOKOHAMA",
+        "description": "関内外のクリエイターが個人的に<br>\"びっくりした横浜\"の風景と、<br>クリエイタープロフィールを紹介する<br>Instagramアカウントを制作。",
         "creators": [
           { "name": "岩穴口颯音", "affiliation": "ondesign" },
           { "name": "小林 璃代", "affiliation": "voids" },
@@ -45,7 +47,7 @@
         "category": "共創",
         "color": "#F5A0B8",
         "title": "つながるリデザイン",
-        "description": "福祉作業所、学生、デザイナー、社会福祉協議会等が協働し、インクルーシブなチームでクッキーパッケージをリデザイン。",
+        "description": "福祉作業所、<br>学生、デザイナー、<br>社会福祉協議会等が協働し、<br>インクルーシブなチームで<br>クッキーパッケージをリデザイン。",
         "creators": [
           { "name": "伊藤 佑也", "affiliation": "83graphics" },
           { "name": "山田 祐介", "affiliation": null },
@@ -57,7 +59,7 @@
         "category": "交流",
         "color": "#A8D8B9",
         "title": "関内×寺家 地域交流会",
-        "description": "自然豊かな寺家町で、関内外のクリエイターがツアーや食事会を通して交流。お互いの創造の原点に触れる機会に。",
+        "description": "自然豊かな寺家町で、<br>関内外のクリエイターが<br>ツアーや食事会を通して交流。<br>お互いの創造の<br>原点に触れる機会に。",
         "creators": [
           { "name": "千代田 彩華", "affiliation": "ondesign" },
           { "name": "三浦 佑介", "affiliation": "shubidua" },
@@ -67,9 +69,9 @@
       {
         "id": 4,
         "category": "発酵",
-        "color": "#E0E0E0",
+        "color": "#a2c3e7",
         "title": "アイデアコンポスト",
-        "description": "生ごみを堆肥に変えるコンポストのように、行き詰まったアイデアをみんなの発想で発酵させていくトークイベント。",
+        "description": "生ごみを堆肥に変える<br>コンポストのように、<br>行き詰まったアイデアを<br>みんなの発想で発酵させていく<br>トークイベント。",
         "creators": [
           { "name": "介川 貴晶", "affiliation": "Penne" },
           { "name": "宮本かおる", "affiliation": "OLUデザイン" }
@@ -82,58 +84,183 @@
     "titleEn": "TALK SESSION",
     "description": "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、これからの「まちとクリエイティブ」の関係を探ります。",
     "time": "13:30-15:30",
+    "moderator": {
+      "name": "ダバンテス・ジャンウィル",
+      "title": null,
+      "photo": "image/daba.jpg"
+    },
     "guests": [
       {
         "id": 1,
-        "role": "モデレーター",
-        "name": "ダバンティスジャンウィル",
-        "title": null,
-        "project": null
+        "name": "桂有生",
+        "title": "横浜市都市デザイン室",
+        "color": "#F7E96B",
+        "project": "びっクリ！YOKOHAMA",
+        "photo": null
       },
       {
         "id": 2,
-        "role": "ゲスト",
-        "name": "ダミー1",
-        "title": "肩書きダミー1",
-        "project": "びっくり！YOKOHAMA"
+        "name": "鈴木啓太",
+        "title": "社会福祉法人かたるべ会 うれしの",
+        "color": "#F5A0B8",
+        "project": "つながるリデザイン",
+        "photo": null
       },
       {
         "id": 3,
-        "role": "ゲスト",
-        "name": "ダミー2",
-        "title": "肩書きダミー2",
-        "project": "つながるリデザイン"
+        "name": "藤好つむぎ",
+        "title": "里のengawa/萬駄屋/kirimisut",
+        "color": "#A8D8B9",
+        "project": "関内×寺家 地域交流会",
+        "photo": "image/guest03.webp"
       },
       {
         "id": 4,
-        "role": "ゲスト",
-        "name": "ダミー3",
-        "title": "肩書きダミー3",
-        "project": "関内×寺家 地域交流会"
-      },
-      {
-        "id": 5,
-        "role": "ゲスト",
-        "name": "ダミー4",
-        "title": "肩書きダミー4",
-        "project": "アイデアコンポスト"
+        "name": "木村ナホコ",
+        "title": "かもめデザイン舎",
+        "color": "#a2c3e7",
+        "project": "アイデアコンポスト",
+        "photo": "image/guest04.webp"
       }
     ]
   },
   "designPitch": {
     "titleJa": "デザインピッチ",
     "titleEn": "DESIGN PITCH",
-    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人3分でつないでいきます。登壇クリエイターはwebサイトでご確認ください。",
+    "description": "関内外を拠点に多方面で活躍している12名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。",
+    "time": "16:00-17:00",
     "creatorCount": 12,
-    "pitchDuration": "3分"
+    "pitchDuration": "4分"
   },
   "kidsSpace": {
-    "titleJa": "くるり工房",
+    "titleJa": "くるり工房ワークショップ",
     "titleEn": "KIDS SPACE",
-    "description": "普通なら捨ててしまうものも、見方を「くるり」としてみれば様々なモノに生まれ変わる。くるり工房による子ども向けの資源循環ワークショップ。時間制限ナシで創作に没頭していただけます。"
+    "description": "くるり工房は、『ものの見方を「くるり」する』をコンセプトに横浜で活動するアップサイクル工房です。廃材スタンプを使ったアップサイクル体験、ポストカードやミニバッグ、サコッシュづくり、さらに大きなキャンバスやドレスに自由にお絵描きも楽しめます。視点を「くるり」として、楽しいを表現し、日常に少し特別な思い出を持ち帰ってみませんか。※予約不要、時間制限なしで、制作に没頭していただけます。",
+    "name": "くるり工房",
+    "link": "https://kururiworks.com/",
+    "time": "13:00-17:00",
+    "photos": ["image/kids01.webp", "image/kids02.webp"]
+  },
+  "archive": {
+    "titleJa": "アーカイブ",
+    "items": [
+      {
+        "id": 16,
+        "title": "関内外OPEN!16",
+        "date": "2024年11月3日",
+        "url": "http://kannaigai.yafjp.org/kannaigai16/",
+        "image": "image/archive16.jpg"
+      },
+      {
+        "id": 15,
+        "title": "関内外OPEN!15",
+        "date": "2023年10月14日〜15日",
+        "url": "http://kannaigai.yafjp.org/kannaigai15/",
+        "image": "image/archive15.jpg"
+      },
+      {
+        "id": 14,
+        "title": "関内外OPEN!14",
+        "date": "2022年10月1日〜2日",
+        "url": "http://kannaigai.yafjp.org/kannaigai14/",
+        "image": "image/archive14.jpg"
+      },
+      {
+        "id": 13,
+        "title": "関内外OPEN!13",
+        "date": "2021年11月3日〜7日",
+        "url": "http://kannaigai.yafjp.org/kannaigai13/",
+        "image": "image/archive13.jpg"
+      },
+      {
+        "id": 12,
+        "title": "関内外OPEN!12",
+        "date": "2020年11月3日",
+        "url": "https://acy.yafjp.org/projects/2020/18288/",
+        "image": "image/archive12.jpg"
+      },
+      {
+        "id": 11,
+        "title": "関内外OPEN!11",
+        "date": "2019年11月2日〜3日",
+        "url": "http://kannaigai.yafjp.org/kannaigai11/",
+        "image": "image/archive11.jpg"
+      },
+      {
+        "id": 10,
+        "title": "関内外OPEN!10",
+        "date": "2018年11月3日〜4日",
+        "url": "https://acy.yafjp.org/projects/2018/60666/",
+        "image": null
+      },
+      {
+        "id": 9,
+        "title": "関内外OPEN!9",
+        "date": "2017年11月3日〜4日",
+        "url": "https://acy.yafjp.org/projects/2017/60756/",
+        "image": null
+      },
+      {
+        "id": 8,
+        "title": "関内外OPEN!8",
+        "date": "2016年11月5日〜6日",
+        "url": "https://acy.yafjp.org/projects/2016/60831/",
+        "image": null
+      },
+      {
+        "id": 7,
+        "title": "関内外OPEN!7",
+        "date": "2015年11月7日〜8日",
+        "url": "https://www.hamakei.com/headline/9630/",
+        "image": null
+      },
+      {
+        "id": 6,
+        "title": "関内外OPEN!6",
+        "date": "2014年10月17日〜19日",
+        "url": "https://acy.yafjp.org/news/2014/96495/",
+        "image": null
+      },
+      {
+        "id": 5,
+        "title": "関内外OPEN!5",
+        "date": "2013年11月1日〜2日",
+        "url": "https://acy.yafjp.org/news/2013/95418/",
+        "image": null
+      },
+      {
+        "id": 4,
+        "title": "関内外OPEN!4",
+        "date": "2012年10月26日〜28日",
+        "url": "https://acy.yafjp.org/projects/2012/61058/",
+        "image": null
+      },
+      {
+        "id": 3,
+        "title": "関内外OPEN!3",
+        "date": "2011年11月1日〜2日",
+        "url": "https://www.hamakei.com/headline/6364/",
+        "image": null
+      },
+      {
+        "id": 2,
+        "title": "関内外OPEN!2",
+        "date": "2010年9月11日〜12日",
+        "url": "https://www.hamakei.com/headline/5439/",
+        "image": null
+      },
+      {
+        "id": 1,
+        "title": "関内外OPEN!",
+        "date": "2009年9月4日〜6日",
+        "url": "https://www.hamakei.com/headline/4299/",
+        "image": null
+      }
+    ]
   },
   "social": {
     "instagram": "https://www.instagram.com/kannaigaiopen/",
     "facebook": "https://www.facebook.com/kannaigaiopen/"
-  }
+  },
+  "credit": "&copy; 2025 kannaigai. All rights reserved."
 }

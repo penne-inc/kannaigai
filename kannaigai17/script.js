@@ -121,9 +121,10 @@ function initNavToggle() {
     const nav = document.getElementById('nav');
     const navToggle = document.getElementById('nav-toggle');
     const navModal = document.getElementById('nav-modal');
-    const navLinks = navModal.querySelectorAll('a');
 
     if (!navToggle || !navModal) return;
+
+    const navLinks = navModal.querySelectorAll('a');
 
     // トグルボタンのクリックイベント
     navToggle.addEventListener('click', () => {
@@ -265,7 +266,6 @@ function initNavScrollFadeIn() {
  */
 function initLoading() {
     const loadingOverlay = document.getElementById('loading-overlay');
-    const heroMv = document.querySelector('.hero-mv');
     const MOBILE_BREAKPOINT = 768;
     const STORAGE_KEY = 'kannaigai17_visited';
     const FIRST_VISIT_DURATION = 3000;
@@ -278,20 +278,13 @@ function initLoading() {
     // 訪問済みの場合はスキップ
     if (hasVisited) {
         loadingOverlay.classList.add('is-hidden');
-        // デスクトップの場合は画像を読み込む（バックグラウンドで）
-        if (window.innerWidth > MOBILE_BREAKPOINT && heroMv) {
-            const images = heroMv.querySelectorAll('img[data-src]');
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            });
-        }
         return;
     }
 
     // 初回訪問をマーク
     localStorage.setItem(STORAGE_KEY, 'true');
 
-    // スマホの場合は画像を読み込まず、2秒後にローディングを終了
+    // スマホの場合は画像を読み込まず、指定時間後にローディングを終了
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
         setTimeout(() => {
             loadingOverlay.classList.add('is-hidden');
@@ -299,51 +292,57 @@ function initLoading() {
         return;
     }
 
-    // デスクトップの場合のみ画像を読み込む
-    if (!heroMv) {
+    // デスクトップの場合: vue-readyイベントで画像読み込み完了を監視
+    window.addEventListener('vue-ready', () => {
+        const heroMv = document.querySelector('.hero-mv');
+
+        if (!heroMv) {
+            loadingOverlay.classList.add('is-hidden');
+            return;
+        }
+
+        const images = heroMv.querySelectorAll('.hero-mv-image');
+        let loadedCount = 0;
+        const totalImages = images.length;
+        let imagesLoaded = false;
+        let timerFinished = false;
+
+        function tryHideOverlay() {
+            if (imagesLoaded && timerFinished) {
+                loadingOverlay.classList.add('is-hidden');
+            }
+        }
+
+        function checkAllLoaded() {
+            loadedCount++;
+            if (loadedCount >= totalImages) {
+                imagesLoaded = true;
+                tryHideOverlay();
+            }
+        }
+
+        // タイマー
         setTimeout(() => {
-            loadingOverlay.classList.add('is-hidden');
-        }, FIRST_VISIT_DURATION);
-        return;
-    }
-
-    const images = heroMv.querySelectorAll('img[data-src]');
-    let loadedCount = 0;
-    const totalImages = images.length;
-    let imagesLoaded = false;
-    let timerFinished = false;
-
-    function tryHideOverlay() {
-        // 画像読み込み完了 AND 2秒経過で非表示
-        if (imagesLoaded && timerFinished) {
-            loadingOverlay.classList.add('is-hidden');
-        }
-    }
-
-    function checkAllLoaded() {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-            imagesLoaded = true;
+            timerFinished = true;
             tryHideOverlay();
+        }, FIRST_VISIT_DURATION);
+
+        if (totalImages === 0) {
+            imagesLoaded = true;
+            timerFinished = true;
+            tryHideOverlay();
+            return;
         }
-    }
 
-    // 2秒タイマー
-    setTimeout(() => {
-        timerFinished = true;
-        tryHideOverlay();
-    }, FIRST_VISIT_DURATION);
-
-    if (totalImages === 0) {
-        imagesLoaded = true;
-        return;
-    }
-
-    // data-src から src にコピーして読み込み開始
-    images.forEach(img => {
-        img.addEventListener('load', checkAllLoaded);
-        img.addEventListener('error', checkAllLoaded);
-        img.src = img.dataset.src;
+        // 画像読み込み完了を監視
+        images.forEach(img => {
+            if (img.complete) {
+                checkAllLoaded();
+            } else {
+                img.addEventListener('load', checkAllLoaded);
+                img.addEventListener('error', checkAllLoaded);
+            }
+        });
     });
 
     // フォールバック: 5秒後に強制的に非表示
@@ -352,17 +351,113 @@ function initLoading() {
     }, 5000);
 }
 
+/**
+ * プロジェクトカードのスクロール連動揺れアニメーション
+ */
+function initProjectCardShake() {
+    const cards = document.querySelectorAll('.project-card');
+
+    if (cards.length === 0) return;
+
+    // 揺れのパラメータ
+    const SHAKE_INTENSITY = 4; // 最大揺れ幅（px）
+    const ROTATE_INTENSITY = 1.5; // 最大回転角度（deg）
+    const SHAKE_SPEED = 0.015; // 揺れの速度係数
+    const DECAY_RATE = 0.95; // 減衰率
+
+    let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    let currentIntensity = 0;
+
+    // 各カードの位相（バラバラに動くように）
+    const cardPhases = new Map();
+    cards.forEach((card, index) => {
+        cardPhases.set(card, index * Math.PI / 2);
+    });
+
+    // IntersectionObserverでビューポート内のカードを検出
+    const visibleCards = new Set();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                visibleCards.add(entry.target);
+            } else {
+                visibleCards.delete(entry.target);
+                // 画面外に出たらリセット
+                entry.target.style.setProperty('--shake-x', '0px');
+                entry.target.style.setProperty('--shake-y', '0px');
+                entry.target.style.setProperty('--shake-rotate', '0deg');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '50px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+
+    // requestAnimationFrameで統合ループ（スクロール監視 + アニメーション）
+
+    function animationLoop() {
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+
+        // スクロールを検出したら強度を上げる
+        if (scrollDelta > 0.5) {
+            currentIntensity = Math.min(currentIntensity + scrollDelta * 0.08, 1);
+            lastScrollY = currentScrollY;
+        }
+
+        // 揺れアニメーション
+        if (currentIntensity > 0.01 && visibleCards.size > 0) {
+            const time = performance.now() * SHAKE_SPEED;
+
+            visibleCards.forEach(card => {
+                const phase = cardPhases.get(card) || 0;
+
+                // サイン波で揺れを生成（カードごとに位相が異なる）
+                const shakeX = Math.sin(time + phase) * SHAKE_INTENSITY * currentIntensity;
+                const shakeY = Math.cos(time * 1.3 + phase) * SHAKE_INTENSITY * 0.6 * currentIntensity;
+                const rotate = Math.sin(time * 0.7 + phase * 0.5) * ROTATE_INTENSITY * currentIntensity;
+
+                card.style.setProperty('--shake-x', `${shakeX}px`);
+                card.style.setProperty('--shake-y', `${shakeY}px`);
+                card.style.setProperty('--shake-rotate', `${rotate}deg`);
+            });
+
+            // 減衰
+            currentIntensity *= DECAY_RATE;
+        } else if (currentIntensity <= 0.01) {
+            // 揺れが止まったらリセット
+            visibleCards.forEach(card => {
+                card.style.setProperty('--shake-x', '0px');
+                card.style.setProperty('--shake-y', '0px');
+                card.style.setProperty('--shake-rotate', '0deg');
+            });
+            currentIntensity = 0;
+        }
+
+        requestAnimationFrame(animationLoop);
+    }
+
+    // アニメーションループ開始
+    requestAnimationFrame(animationLoop);
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
     // ローディング制御
     initLoading();
+});
 
+// Vueのデータ読み込み完了後の初期化
+window.addEventListener('vue-ready', () => {
     // セクションを表示
     const sections = document.querySelectorAll('.fade-in-section');
     sections.forEach(section => section.classList.add('visible'));
 
     initArchiveToggle();
     initNavToggle();
-    initEyeTracking();
     initNavScrollFadeIn();
+    initEyeTracking();
+    initProjectCardShake();
 });
