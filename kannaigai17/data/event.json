@@ -12,7 +12,7 @@
     "contact": "kannaigai.info@gmail.com",
     "venue": {
       "name": "象の鼻テラス",
-      "nameEn": "ZOU-NO-HANA TERRACE",
+      "nameEn": "ZOU - NO - HANA TERRACE",
       "address": "〒231-0002 横浜市中区海岸通1丁目",
       "addressEn": "1, KAIGANDORI, YOKOHAMA, NAKAKU, KANAGAWA, 231-0002, JAPAN",
       "access": "みなとみらい線「日本大通り駅」出口1より徒歩約3分、出口2より徒歩約5分",
@@ -139,6 +139,123 @@
     "name": "くるり工房",
     "link": "https://kururiworks.com/",
     "time": "13:00-17:00"
+  },
+  "archive": {
+    "titleJa": "アーカイブ",
+    "items": [
+      {
+        "id": 16,
+        "title": "関内外OPEN!16",
+        "date": "2024年11月3日",
+        "url": "http://kannaigai.yafjp.org/kannaigai16/",
+        "image": "image/archive16.jpg"
+      },
+      {
+        "id": 15,
+        "title": "関内外OPEN!15",
+        "date": "2023年10月14日〜15日",
+        "url": "http://kannaigai.yafjp.org/kannaigai15/",
+        "image": "image/archive15.jpg"
+      },
+      {
+        "id": 14,
+        "title": "関内外OPEN!14",
+        "date": "2022年10月1日〜2日",
+        "url": "http://kannaigai.yafjp.org/kannaigai14/",
+        "image": "image/archive14.jpg"
+      },
+      {
+        "id": 13,
+        "title": "関内外OPEN!13",
+        "date": "2021年11月3日〜7日",
+        "url": "http://kannaigai.yafjp.org/kannaigai13/",
+        "image": "image/archive13.jpg"
+      },
+      {
+        "id": 12,
+        "title": "関内外OPEN!12",
+        "date": "2020年11月3日",
+        "url": "https://acy.yafjp.org/projects/2020/18288/",
+        "image": "image/archive12.jpg"
+      },
+      {
+        "id": 11,
+        "title": "関内外OPEN!11",
+        "date": "2019年11月2日〜3日",
+        "url": "http://kannaigai.yafjp.org/kannaigai11/",
+        "image": "image/archive11.jpg"
+      },
+      {
+        "id": 10,
+        "title": "関内外OPEN!10",
+        "date": "2018年11月3日〜4日",
+        "url": "https://acy.yafjp.org/projects/2018/60666/",
+        "image": null
+      },
+      {
+        "id": 9,
+        "title": "関内外OPEN!9",
+        "date": "2017年11月3日〜4日",
+        "url": "https://acy.yafjp.org/projects/2017/60756/",
+        "image": null
+      },
+      {
+        "id": 8,
+        "title": "関内外OPEN!8",
+        "date": "2016年11月5日〜6日",
+        "url": "https://acy.yafjp.org/projects/2016/60831/",
+        "image": null
+      },
+      {
+        "id": 7,
+        "title": "関内外OPEN!7",
+        "date": "2015年11月7日〜8日",
+        "url": "https://www.hamakei.com/headline/9630/",
+        "image": null
+      },
+      {
+        "id": 6,
+        "title": "関内外OPEN!6",
+        "date": "2014年10月17日〜19日",
+        "url": "https://acy.yafjp.org/news/2014/96495/",
+        "image": null
+      },
+      {
+        "id": 5,
+        "title": "関内外OPEN!5",
+        "date": "2013年11月1日〜2日",
+        "url": "https://acy.yafjp.org/news/2013/95418/",
+        "image": null
+      },
+      {
+        "id": 4,
+        "title": "関内外OPEN!4",
+        "date": "2012年10月26日〜28日",
+        "url": "https://acy.yafjp.org/projects/2012/61058/",
+        "image": null
+      },
+      {
+        "id": 3,
+        "title": "関内外OPEN!3",
+        "date": "2011年11月1日〜2日",
+        "url": "https://www.hamakei.com/headline/6364/",
+        "image": null
+      },
+      {
+        "id": 2,
+        "title": "関内外OPEN!2",
+        "date": "2010年9月11日〜12日",
+        "url": "https://www.hamakei.com/headline/5439/",
+        "image": null
+      },
+      {
+        "id": 1,
+        "title": "関内外OPEN!",
+        "date": "2009年9月4日〜6日",
+        "url": "https://www.hamakei.com/headline/4299/",
+        "image": null
+      }
+    ]
   },
   "social": {
     "instagram": "https://www.instagram.com/kannaigaiopen/",
