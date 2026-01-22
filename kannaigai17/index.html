@@ -127,7 +127,30 @@
                                 {{ creator.name }}<span v-if="creator.affiliation" class="creator-affiliation">_{{ creator.affiliation }}</span>
                             </li>
                         </ul>
+                        <div
+                            v-if="project.photo"
+                            class="photo-thumbnail"
+                            :style="{
+                                '-webkit-mask-image': project.shape ? 'url(' + project.shape + ')' : 'none',
+                                'mask-image': project.shape ? 'url(' + project.shape + ')' : 'none',
+                                'background-color': project.color
+                            }"
+                            @click="openPhoto(project.id)">
+                            <img :src="project.photo" :alt="project.title">
+                            <span class="photo-thumbnail-text">View Photo</span>
+                        </div>
                     </article>
+                    <!-- Photo Overlay (grid全体を覆う) -->
+                    <div
+                        v-if="selectedProjectId"
+                        class="photo-overlay"
+                        :class="{ 'is-active': selectedProjectId }"
+                        @click="closePhoto">
+                        <div class="photo-overlay-content">
+                            <img :src="getSelectedProject?.photo" :alt="getSelectedProject?.title">
+                            <p v-if="getSelectedProject?.caption" class="photo-caption">{{ getSelectedProject.caption }}</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -306,7 +329,22 @@
         createApp({
             data() {
                 return {
-                    data: null
+                    data: null,
+                    selectedProjectId: null
+                }
+            },
+            computed: {
+                getSelectedProject() {
+                    if (!this.data || !this.selectedProjectId) return null;
+                    return this.data.exhibition.projects.find(p => p.id === this.selectedProjectId);
+                }
+            },
+            methods: {
+                openPhoto(projectId) {
+                    this.selectedProjectId = projectId;
+                },
+                closePhoto() {
+                    this.selectedProjectId = null;
                 }
             },
             async mounted() {

@@ -969,10 +969,9 @@ footer {
 
 /* Projects Grid */
 .projects-grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, max-content);
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -1131,6 +1130,25 @@ footer {
         right: 3rem;
     }
 
+    .project-card:nth-of-type(1) .photo-thumbnail {
+        bottom: 1rem;
+        right: 0rem;
+    }
+
+    .project-card:nth-of-type(2) .photo-thumbnail {
+        bottom: 0rem;
+        right: 1rem;
+    }
+
+    .project-card:nth-of-type(3) .photo-thumbnail {
+        bottom: 6rem;
+        right: 1.5rem;
+    }
+
+    .project-card:nth-of-type(4) .photo-thumbnail {
+        bottom: 8rem;
+        right: -1rem;
+    }
 }
 
 
@@ -1157,6 +1175,117 @@ footer {
 
 .creator-affiliation {
     color: #555;
+}
+
+/* Photo Thumbnail */
+.photo-thumbnail {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    position: absolute;
+    z-index: 2;
+    transform: scale(.75);
+    right: -20px;
+    bottom: 0;
+
+    @media screen and (min-width: 767px) {
+        transform: scale(0);
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .project-card:hover .photo-thumbnail {
+        transform: scale(1);
+    }
+}
+
+.photo-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
+
+}
+
+.photo-thumbnail-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    color: var(--color-black);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+
+    @media screen and (min-width: 767px) {
+        transform: translate(-50%, -50%) scale(0);
+        font-size: 0.85rem;
+    }
+
+}
+
+
+
+.project-card:hover .photo-thumbnail-text {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Photo Overlay (grid全体を覆う) */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    padding: 2rem;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: overlayFadeIn 0.3s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.photo-overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.photo-overlay-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.photo-caption {
+    margin-top: 1rem;
+    color: var(--color-black);
+    font-size: 0.875rem;
+    text-align: center;
 }
 
 /* Talk Session */
