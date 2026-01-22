@@ -351,6 +351,98 @@ function initLoading() {
     }, 5000);
 }
 
+/**
+ * プロジェクトカードのスクロール連動揺れアニメーション
+ */
+function initProjectCardShake() {
+    const cards = document.querySelectorAll('.project-card');
+
+    if (cards.length === 0) return;
+
+    // 揺れのパラメータ
+    const SHAKE_INTENSITY = 4; // 最大揺れ幅（px）
+    const ROTATE_INTENSITY = 1.5; // 最大回転角度（deg）
+    const SHAKE_SPEED = 0.015; // 揺れの速度係数
+    const DECAY_RATE = 0.95; // 減衰率
+
+    let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    let currentIntensity = 0;
+
+    // 各カードの位相（バラバラに動くように）
+    const cardPhases = new Map();
+    cards.forEach((card, index) => {
+        cardPhases.set(card, index * Math.PI / 2);
+    });
+
+    // IntersectionObserverでビューポート内のカードを検出
+    const visibleCards = new Set();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                visibleCards.add(entry.target);
+            } else {
+                visibleCards.delete(entry.target);
+                // 画面外に出たらリセット
+                entry.target.style.setProperty('--shake-x', '0px');
+                entry.target.style.setProperty('--shake-y', '0px');
+                entry.target.style.setProperty('--shake-rotate', '0deg');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '50px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+
+    // requestAnimationFrameで統合ループ（スクロール監視 + アニメーション）
+
+    function animationLoop() {
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+
+        // スクロールを検出したら強度を上げる
+        if (scrollDelta > 0.5) {
+            currentIntensity = Math.min(currentIntensity + scrollDelta * 0.08, 1);
+            lastScrollY = currentScrollY;
+        }
+
+        // 揺れアニメーション
+        if (currentIntensity > 0.01 && visibleCards.size > 0) {
+            const time = performance.now() * SHAKE_SPEED;
+
+            visibleCards.forEach(card => {
+                const phase = cardPhases.get(card) || 0;
+
+                // サイン波で揺れを生成（カードごとに位相が異なる）
+                const shakeX = Math.sin(time + phase) * SHAKE_INTENSITY * currentIntensity;
+                const shakeY = Math.cos(time * 1.3 + phase) * SHAKE_INTENSITY * 0.6 * currentIntensity;
+                const rotate = Math.sin(time * 0.7 + phase * 0.5) * ROTATE_INTENSITY * currentIntensity;
+
+                card.style.setProperty('--shake-x', `${shakeX}px`);
+                card.style.setProperty('--shake-y', `${shakeY}px`);
+                card.style.setProperty('--shake-rotate', `${rotate}deg`);
+            });
+
+            // 減衰
+            currentIntensity *= DECAY_RATE;
+        } else if (currentIntensity <= 0.01) {
+            // 揺れが止まったらリセット
+            visibleCards.forEach(card => {
+                card.style.setProperty('--shake-x', '0px');
+                card.style.setProperty('--shake-y', '0px');
+                card.style.setProperty('--shake-rotate', '0deg');
+            });
+            currentIntensity = 0;
+        }
+
+        requestAnimationFrame(animationLoop);
+    }
+
+    // アニメーションループ開始
+    requestAnimationFrame(animationLoop);
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
     // ローディング制御
@@ -367,4 +459,5 @@ window.addEventListener('vue-ready', () => {
     initNavToggle();
     initNavScrollFadeIn();
     initEyeTracking();
+    initProjectCardShake();
 });
