@@ -202,6 +202,11 @@
                 </div>
                 <p class="event-time">{{ data.kidsSpace.time }}</p>
                 <p class="section-description">{{ data.kidsSpace.description }}</p>
+                <div v-if="data.kidsSpace.photos" class="kids-photos">
+                    <div v-for="(photo, index) in data.kidsSpace.photos" :key="index" class="kids-photo">
+                        <img :src="photo" :alt="data.kidsSpace.name + ' 写真' + (index + 1)">
+                    </div>
+                </div>
                 <p class="section-link">{{ data.kidsSpace.name }} <a :href="data.kidsSpace.link" target="_blank">{{ data.kidsSpace.link }}</a> </p>
             </section>
 
@@ -284,9 +289,8 @@
                         <li><a href="#exhibition">プログラム</a></li>
                         <li><a href="#talk-session">トークセッション</a></li>
                         <li><a href="#design-pitch">デザインピッチ</a></li>
-                        <li><a href="#kids-space">キッズスペース</a></li>
+                        <li><a href="#kids-space">くるり工房ワークショップ</a></li>
                         <li><a href="#access">アクセス</a></li>
-                        <li><a href="#archive">アーカイブ</a></li>
                     </ul>
                 </div>
             </nav>
