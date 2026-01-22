@@ -140,17 +140,7 @@
                             <span class="photo-thumbnail-text">View Photo</span>
                         </div>
                     </article>
-                    <!-- Photo Overlay (grid全体を覆う) -->
-                    <div
-                        v-if="selectedProjectId"
-                        class="photo-overlay"
-                        :class="{ 'is-active': selectedProjectId }"
-                        @click="closePhoto">
-                        <div class="photo-overlay-content">
-                            <img :src="getSelectedProject?.photo" :alt="getSelectedProject?.title">
-                            <p v-if="getSelectedProject?.caption" class="photo-caption">{{ getSelectedProject.caption }}</p>
-                        </div>
-                    </div>
+
                 </div>
             </section>
 
@@ -322,6 +312,18 @@
         <footer role="contentinfo" v-if="data">
             <p v-html="data.credit"></p>
         </footer>
+        <!-- Photo Overlay (grid全体を覆う) -->
+        <div
+                v-if="selectedProjectId"
+                class="photo-overlay"
+                :class="{ 'is-active': selectedProjectId }"
+                @click="closePhoto">
+            <button class="photo-overlay-close" @click.stop="closePhoto">&times;</button>
+            <div class="photo-overlay-content" @click.stop>
+                <img :src="getSelectedProject?.photo" :alt="getSelectedProject?.title">
+                <p v-if="getSelectedProject?.caption" class="photo-caption">{{ getSelectedProject.caption }}</p>
+            </div>
+        </div>
     </div>
     <script>
         const { createApp, nextTick } = Vue;
