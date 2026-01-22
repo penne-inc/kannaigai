@@ -1070,9 +1070,9 @@ footer {
 
 .project-category {
     display: inline-block;
-    font-size: .875rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1.25rem;
     padding: 0.25rem 1rem;
     letter-spacing: 0.25em;
     background-size: cover;
