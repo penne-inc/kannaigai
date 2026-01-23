@@ -274,5 +274,19 @@
     "instagram": "https://www.instagram.com/kannaigaiopen/",
     "facebook": "https://www.facebook.com/kannaigaiopen/"
   },
+  "credits": [
+    { "label": "お問い合わせ", "values": ["kannaigai.info@gmail.com"] },
+    { "label": "主催", "values": ["関内外OPEN!17事務局（関内外クリエイターズ／アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））"] },
+    { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局","令和7年度 文化庁 文化芸術創造拠点形成事業"] },
+    { "label": "協力", "values": ["象の鼻テラス"] }
+  ],
+  "navigation": [
+    { "href": "#about", "label": "関内外OPEN!とは" },
+    { "href": "#exhibition", "label": "プログラム" },
+    { "href": "#talk-session", "label": "トークセッション" },
+    { "href": "#design-pitch", "label": "デザインピッチ" },
+    { "href": "#kids-space", "label": "くるり工房ワークショップ" },
+    { "href": "#access", "label": "アクセス" }
+  ],
   "credit": "&copy; 2025 kannaigai. All rights reserved."
 }

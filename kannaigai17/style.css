@@ -366,9 +366,7 @@ dt, dd {
 }
 
 .credit-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
     gap: .75rem 1rem;
 
     @media screen and (max-width: 428px) {
@@ -710,15 +708,26 @@ footer {
 
 @media screen and (max-width: 768px) {
     .hero-mv {
-        height: 100%;
-        background-image: url(image/bg-mv.jpg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        top: 0;
+        top: -6rem;
     }
-    .hero-mv-image,
-    .hero-mv-eye {
-        display: none;
+
+    .hero-mv-image.mv__left {
+        top: 60px;
+    }
+    .eye__left {
+        top: 330px;
+        left: 31px;
+    }
+    .eye__right {
+        top: 249px;
+        right: 42px;
+    }
+    .hero-mv-image {
+        height: 540px;
+    }
+    .hero-mv-eye svg{
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -1258,10 +1267,19 @@ footer {
     animation: overlayFadeIn 0.3s ease forwards;
 }
 
+.photo-overlay-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .photo-overlay-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: -0.75rem;
+    right: -0.75rem;
     width: 2.5rem;
     height: 2.5rem;
     background: var(--color-black);
@@ -1287,14 +1305,6 @@ footer {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.photo-overlay-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .photo-overlay-content img {
@@ -1516,16 +1526,47 @@ footer {
 /* Credits */
 .credits-section {
     font-size: 0.8rem;
+    padding-top: 1.5rem;
     line-height: 1.8;
-    padding: 2rem;
-    background: var(--color-gray);
+    border-top: 3px solid var(--color-black);
 }
 
 .credit-row {
-    margin-bottom: 0.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .credit-label {
     font-weight: 700;
+    white-space: nowrap;
+}
+
+.credit-label::after {
+    content: '：';
+}
+
+.credit-value {
+    margin: 0;
+}
+
+.credit-value span {
+    display: block;
+}
+
+.credit-value--full {
+    grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 768px) {
+    .credit-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .credit-value--full {
+        grid-column: auto;
+    }
 }
 
