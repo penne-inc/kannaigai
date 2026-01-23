@@ -366,9 +366,7 @@ dt, dd {
 }
 
 .credit-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
     gap: .75rem 1rem;
 
     @media screen and (max-width: 428px) {
@@ -1528,16 +1526,47 @@ footer {
 /* Credits */
 .credits-section {
     font-size: 0.8rem;
+    padding-top: 1.5rem;
     line-height: 1.8;
-    padding: 2rem;
-    background: var(--color-gray);
+    border-top: 3px solid var(--color-black);
 }
 
 .credit-row {
-    margin-bottom: 0.25rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .credit-label {
     font-weight: 700;
+    white-space: nowrap;
+}
+
+.credit-label::after {
+    content: '：';
+}
+
+.credit-value {
+    margin: 0;
+}
+
+.credit-value span {
+    display: block;
+}
+
+.credit-value--full {
+    grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 768px) {
+    .credit-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .credit-value--full {
+        grid-column: auto;
+    }
 }
 

@@ -284,13 +284,14 @@
             <!-- Credits Section -->
             <section id="credit" class="credits-section fade-in-section" aria-labelledby="credit-heading">
                 <h2 id="credit-heading" class="visually-hidden">クレジット</h2>
-                <div class="credit-content">
-                    <p class="credit-row"><span class="credit-label">お問い合わせ：</span>{{ data.event.contact }}</p>
-                    <p class="credit-row"><span class="credit-label">主催：</span>関内外OPEN!17事務局（関内外クリエイターズ／アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））</p>
-                    <p class="credit-row"><span class="credit-label">共催：</span>横浜市 にぎわいスポーツ文化局</p>
-                    <p class="credit-row"><span class="credit-label">協力：</span>象の鼻テラス</p>
-                    <p class="credit-row">令和7年度 文化庁 文化芸術創造拠点形成事業</p>
-                </div>
+                <dl class="credit-content">
+                    <div v-for="(item, index) in data.credits" :key="index" class="credit-row">
+                        <dt v-if="item.label" class="credit-label">{{ item.label }}</dt>
+                        <dd class="credit-value" :class="{ 'credit-value--full': !item.label }">
+                            <span v-for="(val, vIndex) in item.values" :key="vIndex">{{ val }}</span>
+                        </dd>
+                    </div>
+                </dl>
             </section>
             <nav class="nav" id="nav">
                 <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
@@ -298,12 +299,9 @@
                 </button>
                 <div class="nav-modal" id="nav-modal">
                     <ul>
-                        <li><a href="#about">関内外OPEN!とは</a></li>
-                        <li><a href="#exhibition">プログラム</a></li>
-                        <li><a href="#talk-session">トークセッション</a></li>
-                        <li><a href="#design-pitch">デザインピッチ</a></li>
-                        <li><a href="#kids-space">くるり工房ワークショップ</a></li>
-                        <li><a href="#access">アクセス</a></li>
+                        <li v-for="(item, index) in data.navigation" :key="index">
+                            <a :href="item.href">{{ item.label }}</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
