@@ -936,6 +936,7 @@ footer {
     gap: .75rem;
     border-bottom: 3px solid;
     padding-bottom: 0.75rem;
+    line-height: 1;
 }
 .section-header-sub h3{
     display: flex;
@@ -948,10 +949,9 @@ footer {
     font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    line-height: 1;
 
     @media screen and (max-width: 768px) {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 }
 
@@ -964,16 +964,14 @@ footer {
 
 .section-description {
     font-size: 0.95rem;
-    line-height: 1.8;
     margin-bottom: 2rem;
 }
 
 /* Projects Grid */
 .projects-grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, max-content);
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -1030,19 +1028,20 @@ footer {
         transform: scale(1) translate(var(--shake-x, 0px), var(--shake-y, 0px)) rotate(var(--shake-rotate, 0deg));
     }
     .project-card:nth-of-type(1) {
-        padding-top: 3rem;
-        padding-inline: 5rem 5rem;
+        padding-top: 5rem;
+        padding-inline: 5rem 0;
     }
     .project-card:nth-of-type(2) {
         padding-top: 3rem;
-        padding-inline: 6rem 4rem;
+        padding-inline: 6rem 0rem;
     }
     .project-card:nth-of-type(3) {
-        padding-inline: 5rem;
+        padding-inline: 6rem 4rem;
+        padding-bottom: 0rem;
     }
     .project-card:nth-of-type(4) {
         padding-inline: 5rem 6rem;
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
     }
 
     .project-card:nth-of-type(1)::before {
@@ -1070,9 +1069,9 @@ footer {
 
 .project-category {
     display: inline-block;
-    font-size: .875rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1.25rem;
     padding: 0.25rem 1rem;
     letter-spacing: 0.25em;
     background-size: cover;
@@ -1104,33 +1103,52 @@ footer {
 @media screen and (min-width: 767px) {
     .project-category {
         position: absolute;
-        font-size: 1.25rem;
+        font-size: 1.6rem;
     }
     .project-card:nth-of-type(1) .project-category {
-        top: 2em;
-        left: 0em;
+        top: 4rem;
+        left: 1rem;
     }
 
     .project-card:nth-of-type(2) .project-category {
-        top: 2em;
-        right: 1em;
+        top: 3rem;
+        right: 1rem;
         writing-mode: vertical-rl;
         padding: 1rem 0.25rem;
     }
 
     .project-card:nth-of-type(3) .project-category {
-        bottom: 3em;
-        left: 1em;
+        bottom: 1rem;
+        left: 1.5rem;
         writing-mode: vertical-rl;
         padding: 1rem 0.25rem;
 
     }
 
     .project-card:nth-of-type(4) .project-category {
-        bottom: 3em;
-        right: 2em;
+        bottom: 2rem;
+        right: 3rem;
     }
 
+    .project-card:nth-of-type(1) .photo-thumbnail {
+        bottom: 1rem;
+        right: 0rem;
+    }
+
+    .project-card:nth-of-type(2) .photo-thumbnail {
+        bottom: 0rem;
+        right: 1rem;
+    }
+
+    .project-card:nth-of-type(3) .photo-thumbnail {
+        bottom: 6rem;
+        right: 1.5rem;
+    }
+
+    .project-card:nth-of-type(4) .photo-thumbnail {
+        bottom: 8rem;
+        right: -1rem;
+    }
 }
 
 
@@ -1157,6 +1175,140 @@ footer {
 
 .creator-affiliation {
     color: #555;
+}
+
+/* Photo Thumbnail */
+.photo-thumbnail {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    position: absolute;
+    z-index: 2;
+    transform: scale(.75);
+    right: -20px;
+    bottom: 0;
+
+    @media screen and (min-width: 767px) {
+        transform: scale(0);
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .project-card:hover .photo-thumbnail {
+        transform: scale(1);
+    }
+}
+
+.photo-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
+
+}
+
+.photo-thumbnail-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    color: var(--color-black);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+
+    @media screen and (min-width: 767px) {
+        transform: translate(-50%, -50%) scale(0);
+        font-size: 0.85rem;
+    }
+
+}
+
+
+
+.project-card:hover .photo-thumbnail-text {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Photo Overlay (grid全体を覆う) */
+.photo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: overlayFadeIn 0.3s ease forwards;
+}
+
+.photo-overlay-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    z-index: 101;
+}
+
+.photo-overlay-close:hover {
+    opacity: 0.8;
+}
+
+@keyframes overlayFadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.photo-overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.photo-overlay-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.photo-caption {
+    margin-top: 1rem;
+    color: var(--color-black);
+    font-size: 0.875rem;
+    text-align: center;
 }
 
 /* Talk Session */
