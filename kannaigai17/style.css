@@ -710,15 +710,26 @@ footer {
 
 @media screen and (max-width: 768px) {
     .hero-mv {
-        height: 100%;
-        background-image: url(image/bg-mv.jpg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        top: 0;
+        top: -6rem;
     }
-    .hero-mv-image,
-    .hero-mv-eye {
-        display: none;
+
+    .hero-mv-image.mv__left {
+        top: 60px;
+    }
+    .eye__left {
+        top: 330px;
+        left: 31px;
+    }
+    .eye__right {
+        top: 249px;
+        right: 42px;
+    }
+    .hero-mv-image {
+        height: 540px;
+    }
+    .hero-mv-eye svg{
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -1258,10 +1269,19 @@ footer {
     animation: overlayFadeIn 0.3s ease forwards;
 }
 
+.photo-overlay-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .photo-overlay-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: -0.75rem;
+    right: -0.75rem;
     width: 2.5rem;
     height: 2.5rem;
     background: var(--color-black);
@@ -1287,14 +1307,6 @@ footer {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.photo-overlay-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .photo-overlay-content img {
