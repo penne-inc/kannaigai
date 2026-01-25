@@ -101,6 +101,16 @@
                     </h2>
                 </div>
                 <p class="section-description">{{ data.about.description }}</p>
+                <div v-if="data.about.photos" class="about-photos">
+                    <div class="about-photos-track">
+                        <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
+                        <div v-for="(photo, index) in data.about.photos" :key="'b-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- EXHIBITION Section -->
@@ -161,6 +171,7 @@
                 <div class="moderator-card">
                     <div class="guest-info">
                         <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
+                        <p v-if="data.talkSession.moderator.title" class="guest-title">{{ data.talkSession.moderator.title }}</p>
                     </div>
                     <div v-if="data.talkSession.moderator.photo" class="guest-photo">
                         <img :src="data.talkSession.moderator.photo" :alt="data.talkSession.moderator.name">

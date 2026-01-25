@@ -22,7 +22,15 @@
   "about": {
     "titleJa": "関内外OPEN!とは",
     "titleEn": "ABOUT",
-    "description": "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、展示とトークセッションを通して紹介します。"
+    "description": "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、展示とトークセッションを通して紹介します。",
+    "photos": [
+      "image/01_photo_kannaigai16.jpg",
+      "image/02_photo_kannaigai16.jpg",
+      "image/03_photo_kannaigai16.jpg",
+      "image/04_photo_kannaigai16.jpg",
+      "image/05_photo_kannaigai16.jpg",
+      "image/06_photo_kannaigai17.jpg"
+    ]
   },
   "exhibition": {
     "titleJa": "4つのプロジェクト",
@@ -97,18 +105,18 @@
     "description": "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、これからの「まちとクリエイティブ」の関係を探ります。",
     "time": "13:30-15:30",
     "moderator": {
-      "name": "ダバンテス・ジャンウィル",
-      "title": null,
+      "name": "ダバンテス ジャンウィル",
+      "title": "マチノテコ共同代表",
       "photo": "image/daba.jpg"
     },
     "guests": [
       {
         "id": 1,
         "name": "桂有生",
-        "title": "横浜市都市デザイン室",
+        "title": "横浜市都市デザイン室 都市デザイナー",
         "color": "#F7E96B",
         "project": "びっクリ！YOKOHAMA",
-        "photo": null
+        "photo": "image/guest01.jpg"
       },
       {
         "id": 2,
@@ -277,8 +285,8 @@
   "credits": [
     { "label": "お問い合わせ", "values": ["kannaigai.info@gmail.com"] },
     { "label": "主催", "values": ["関内外OPEN!17事務局（関内外クリエイターズ／アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））"] },
-    { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局","令和7年度 文化庁 文化芸術創造拠点形成事業"] },
-    { "label": "協力", "values": ["象の鼻テラス"] }
+    { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局"] },
+    { "label": "協力", "values": ["象の鼻テラス","令和7年度 文化庁 文化芸術創造拠点形成事業"] }
   ],
   "navigation": [
     { "href": "#about", "label": "関内外OPEN!とは" },
