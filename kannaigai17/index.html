@@ -94,13 +94,13 @@
 
             <!-- ABOUT Section -->
             <section id="about" class="fade-in-section" aria-labelledby="about-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="about-heading">
                         <span class="section-title-en">{{ data.about.titleEn }}</span>
                         <span class="section-title-ja">{{ data.about.titleJa }}</span>
                     </h2>
                 </div>
-                <div v-if="data.about.photos" class="about-photos">
+                <div v-if="data.about.photos" class="about-photos scroll-fade-in">
                     <div class="about-photos-track">
                         <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
                             <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
@@ -110,28 +110,29 @@
                         </div>
                     </div>
                 </div>
-                <p v-for="(text, index) in data.about.description" v-html="text"></p>
+                <p v-for="(text, index) in data.about.description" v-html="text" class="scroll-fade-in"></p>
 
             </section>
 
             <!-- EXHIBITION Section -->
             <section id="exhibition" class="fade-in-section" aria-labelledby="exhibition-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="exhibition-heading">
                         <span class="section-title-en">{{ data.exhibition.titleEn }}</span>
                         <span class="section-title-ja">{{ data.exhibition.titleJa }}</span>
                     </h2>
                     <span class="section-title-event-time">{{ data.exhibition.time }}</span>
                 </div>
-                <div class="section-description">
+                <div class="section-description scroll-fade-in">
                     <p v-for="(text, index) in data.exhibition.description" v-html="text"></p>
                 </div>
 
                 <div class="projects-grid">
                     <article
-                        v-for="project in data.exhibition.projects"
+                        v-for="(project, index) in data.exhibition.projects"
                         :key="project.id"
-                        class="project-card">
+                        class="project-card scroll-fade-in"
+                        :style="{ transitionDelay: (index * 0.15) + 's' }">
                         <p class="project-category">{{ project.category }}</p>
                         <h3 class="project-title">{{ project.title }}</h3>
                         <p class="project-description" v-html="project.description"></p>
@@ -159,21 +160,21 @@
 
             <!-- TALK SESSION Section -->
             <section id="talk-session" class="talk-session fade-in-section" aria-labelledby="talk-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="talk-heading">
                         <span class="section-title-en">{{ data.talkSession.titleEn }}</span>
                         <span class="section-title-ja">{{ data.talkSession.titleJa }}</span>
                     </h2>
                     <span class="section-title-event-time">{{ data.talkSession.time }}</span>
                 </div>
-                <div class="section-description">
+                <div class="section-description scroll-fade-in">
                     <p v-for="(text, index) in data.talkSession.description" v-html="text"></p>
                 </div>
 
-                <div class="section-header-sub">
+                <div class="section-header-sub scroll-fade-in">
                     <h3>MODERATOR<span class="section-title-ja">モデレーター</span></h3>
                 </div>
-                <div class="moderator-card">
+                <div class="moderator-card scroll-fade-in">
                     <div v-if="data.talkSession.moderator.photo" class="guest-photo">
                         <img :src="data.talkSession.moderator.photo" :alt="data.talkSession.moderator.name">
                     </div>
@@ -185,16 +186,16 @@
                     </div>
                 </div>
 
-                <div class="section-header-sub">
+                <div class="section-header-sub scroll-fade-in">
                     <h3>GUEST<span class="section-title-ja">ゲスト</span></h3>
                     <span class="section-title-ja">（敬称略）</span>
                 </div>
                 <div class="guests-grid">
                     <div
-                        v-for="guest in data.talkSession.guests"
+                        v-for="(guest, index) in data.talkSession.guests"
                         :key="guest.id"
-                        class="guest-card"
-                        :style="{ backgroundColor: guest.color }">
+                        class="guest-card scroll-fade-in"
+                        :style="{ backgroundColor: guest.color, transitionDelay: (index * 0.1) + 's' }">
                         <div class="guest-row">
                             <div v-if="guest.photo" class="guest-photo">
                                 <img :src="guest.photo" :alt="guest.name">
@@ -214,25 +215,26 @@
 
             <!-- DESIGN PITCH Section -->
             <section id="design-pitch" class="design-pitch fade-in-section" aria-labelledby="pitch-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="pitch-heading">
                         <span class="section-title-en">{{ data.designPitch.titleEn }}</span>
                         <span class="section-title-ja">{{ data.designPitch.titleJa }}</span>
                     </h2>
                     <span class="section-title-event-time">{{ data.designPitch.time }}</span>
                 </div>
-                <div class="section-description">
+                <div class="section-description scroll-fade-in">
                     <p v-for="(text, index) in data.designPitch.description" v-html="text"></p>
                 </div>
-                <div class="section-header-sub">
+                <div class="section-header-sub scroll-fade-in">
                     <h3>CREATOR<span class="section-title-ja">発表クリエイター</span></h3>
                     <span class="section-title-ja">（五十音順／敬称略／一部）</span>
                 </div>
                 <div class="guests-grid">
                     <div
-                            v-for="guest in data.designPitch.guests"
+                            v-for="(guest, index) in data.designPitch.guests"
                             :key="guest.id"
-                            class="guest-card">
+                            class="guest-card scroll-fade-in"
+                            :style="{ transitionDelay: (index * 0.1) + 's' }">
                         <div class="guest-row">
                             <div v-if="guest.photo" class="guest-photo">
                                 <img :src="guest.photo" :alt="guest.name">
@@ -252,17 +254,17 @@
 
             <!-- KIDS SPACE Section -->
             <section id="kids-space" class="kids-space fade-in-section" aria-labelledby="kids-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="kids-heading">
                         <span class="section-title-en">{{ data.kidsSpace.titleEn }}</span>
                         <span class="section-title-ja">{{ data.kidsSpace.titleJa }}</span>
                     </h2>
                     <span class="section-title-event-time">{{ data.kidsSpace.time }}</span>
                 </div>
-                <div class="section-description">
+                <div class="section-description scroll-fade-in">
                     <p v-for="(text, index) in data.kidsSpace.description" v-html="text"></p>
                 </div>
-                <div v-if="data.kidsSpace.photos" class="kids-photos">
+                <div v-if="data.kidsSpace.photos" class="kids-photos scroll-fade-in" style="transition-delay: 0.15s">
                     <div v-for="(photo, index) in data.kidsSpace.photos" :key="index" class="kids-photo">
                         <img :src="photo" :alt="data.kidsSpace.name + ' 写真' + (index + 1)">
                     </div>
@@ -272,7 +274,7 @@
 
             <!-- ACCESS Section -->
             <section id="access" class="access-section fade-in-section" aria-labelledby="access-heading">
-                <div class="section-header">
+                <div class="section-header scroll-fade-in">
                     <h2 id="access-heading">
                         <span class="section-title-en">ACCESS</span>
                         <span class="section-title-ja">アクセス</span>
@@ -331,7 +333,7 @@
             <!-- Credits Section -->
             <section id="credit" class="credits-section fade-in-section" aria-labelledby="credit-heading">
                 <h2 id="credit-heading" class="visually-hidden">クレジット</h2>
-                <dl class="credit-content">
+                <dl class="credit-content scroll-fade-in">
                     <div v-for="(item, index) in data.credits" :key="index" class="credit-row">
                         <dt v-if="item.label" class="credit-label">{{ item.label }}</dt>
                         <dd class="credit-value" :class="{ 'credit-value--full': !item.label }">
@@ -339,7 +341,7 @@
                         </dd>
                     </div>
                 </dl>
-                <div class="executive-committee">
+                <div class="executive-committee scroll-fade-in" style="transition-delay: 0.15s">
                     <h3>{{ data.executiveCommittee.title }}</h3>
                     <dl class="executive-committee-list">
                         <div v-for="(role, index) in data.executiveCommittee.members" :key="index" class="executive-committee-row">

@@ -451,6 +451,30 @@ function initProjectCardShake() {
     }
 }
 
+/**
+ * スクロール連動フェードインアニメーション（Intersection Observer使用）
+ * .scroll-fade-in 要素が画面に入ったら .is-visible を付与（一度だけ）
+ */
+function initScrollFadeIn() {
+    const elements = document.querySelectorAll('.scroll-fade-in');
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    elements.forEach(el => observer.observe(el));
+}
+
 // DOMの読み込み完了後の初期化
 document.addEventListener('DOMContentLoaded', () => {
     // ローディング制御
@@ -468,4 +492,5 @@ window.addEventListener('vue-ready', () => {
     initNavScrollFadeIn();
     initEyeTracking();
     initProjectCardShake();
+    initScrollFadeIn();
 });

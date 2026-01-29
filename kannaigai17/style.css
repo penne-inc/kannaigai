@@ -273,14 +273,119 @@ section#exhibition {
 /* Fade-in animation for sections */
 .fade-in-section {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(2rem);
     transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.fade-in-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Scroll-triggered fade-in for child elements */
+
+:root {
+    --animation-time: 1.6s;
+    --animation-delay: 0.4s;
 }
+.scroll-fade-in {
+    opacity: 0;
+    transition: opacity var(--animation-time) ease;
+
+    &.is-visible {
+        opacity: 1;
+    }
+
+    & img {
+        transform: scale(0.8);
+        transition: transform 0.8s ease;
+    }
+
+    &.is-visible img {
+        transform: scale(1);
+    }
+
+    &.section-header {
+
+        &::after {
+            width: 0;
+            transition: width var(--animation-time) ease;
+        }
+
+        &.is-visible::after {
+            width: 100%;
+
+        }
+        h2 {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition:
+                    opacity var(--animation-time) var(--animation-delay) ease,
+                    transform var(--animation-time) var(--animation-delay) ease;
+        }
+
+
+        &.is-visible h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title-event-time {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition:
+                    opacity var(--animation-time) calc(var(--animation-delay) * 4 ) ease,
+                    transform var(--animation-time) calc(var(--animation-delay) * 4 ) ease;
+        }
+        &.is-visible .section-title-event-time {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+    &.section-header-sub {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition:
+                opacity var(--animation-time) var(--animation-delay) ease,
+                transform var(--animation-time) var(--animation-delay) ease;
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.section-description {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition:
+                opacity var(--animation-time) calc(var(--animation-delay) * 2) ease,
+                transform var(--animation-time) calc(var(--animation-delay) * 2) ease;
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .guest-links img{
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+            opacity var(--animation-time) calc(var(--animation-delay) * 4) ease,
+            transform var(--animation-time) calc(var(--animation-delay) * 4) ease;
+    }
+
+    &.is-visible .guest-links img{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+}
+
+
 
 
 
