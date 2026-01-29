@@ -182,13 +182,15 @@ header {
         min-height: unset;
     }
 }
+section {
+    padding-inline: 2rem;
+    overflow: hidden;
+}
 section,
 section#exhibition .section-header,
 section#exhibition .section-description{
     width: 100%;
     max-width: 800px;
-    padding-inline: 2rem;
-    overflow: hidden;
 }
 
 section#exhibition {
@@ -328,8 +330,8 @@ section#exhibition {
             opacity: 0;
             transform: translateY(2rem);
             transition:
-                    opacity var(--animation-time) ease calc(var(--animation-delay) * 4),
-                    transform var(--animation-time) ease calc(var(--animation-delay) * 4);
+                    opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
+                    transform var(--animation-time) ease calc(var(--animation-delay) * 3);
             @media screen and (max-width: 768px) {
                 transition:
                     opacity var(--animation-time) ease var(--animation-delay),
@@ -1580,6 +1582,10 @@ h3 .section-title-ja {
     font-weight: 700;
     margin-bottom: 0.25rem;
     letter-spacing: 0.05rem;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1rem;
+    }
 }
 
 .guest-title {
