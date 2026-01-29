@@ -263,13 +263,13 @@
                     </h2>
                     <span class="section-title-event-time">{{ data.kidsSpace.time }}</span>
                 </div>
-                <div class="section-description scroll-fade-in">
-                    <p v-for="(text, index) in data.kidsSpace.description" v-html="text"></p>
-                </div>
                 <div v-if="data.kidsSpace.photos" class="kids-photos scroll-fade-in" style="transition-delay: 0.15s">
                     <div v-for="(photo, index) in data.kidsSpace.photos" :key="index" class="kids-photo">
                         <img :src="photo" :alt="data.kidsSpace.name + ' 写真' + (index + 1)">
                     </div>
+                </div>
+                <div class="section-description scroll-fade-in">
+                    <p v-for="(text, index) in data.kidsSpace.description" v-html="text"></p>
                 </div>
                 <p class="section-link">{{ data.kidsSpace.name }} <a :href="data.kidsSpace.link" target="_blank">{{ data.kidsSpace.link }}</a> </p>
             </section>
