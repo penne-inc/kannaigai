@@ -71,7 +71,7 @@
         "caption": null,
         "creators": [
           { "name": "伊藤 佑也", "affiliation": "83graphics" },
-          { "name": "山田 祐介", "affiliation": null },
+          { "name": "山田 裕介", "affiliation": null },
           { "name": "上甲 尚弘", "affiliation": "TORULABO" }
         ]
       },
@@ -116,7 +116,10 @@
     "moderator": {
       "name": "ダバンテス ジャンウィル",
       "title": "マチノテコ共同代表",
-      "photo": "image/daba.webp"
+      "photo": "image/daba.webp",
+      "links": [
+        {"ig" :  "https://www.instagram.com/janwill__/"}
+      ]
     },
     "guests": [
       {
@@ -125,7 +128,11 @@
         "title": "横浜市都市デザイン室<br>都市デザイナー",
         "color": "#F7E96B",
         "project": "びっクリ！YOKOHAMA",
-        "photo": "image/guest01.jpg"
+        "photo": "image/guest01.jpg",
+        "links": [
+          {"x" :  "https://x.com/kacuri"}
+        ]
+
       },
       {
         "id": 2,
@@ -149,7 +156,10 @@
         "title": "かもめデザイン舎",
         "color": "#a2c3e7",
         "project": "アイデアコンポスト",
-        "photo": "image/guest04.webp"
+        "photo": "image/guest04.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/kamome_sdw/"}
+        ]
       }
     ]
   },
@@ -160,7 +170,45 @@
       "関内外を拠点に多方面で活躍している10名のクリエイターの活動内容を、生の声で聞けるピッチトークです。<br class=\"br-pc-only\"/>建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。"],
     "time": "16:00-17:00",
     "creatorCount": 10,
-    "pitchDuration": "4分"
+    "pitchDuration": "4分",
+    "guests": [
+      {
+        "id": 1,
+        "name": "川本尚毅",
+        "title": "株式会社N and R Foldings Japan",
+        "photo": "image/creator01.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/naoki.kawamoto/"}
+        ]
+      },
+      {
+        "id": 2,
+        "name": "小泉瑛一",
+        "title": "about your city",
+        "photo": "image/creator02.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/yoichi_ayc/"}
+        ]
+      },
+      {
+        "id": 3,
+        "name": "ヒトミチヒロ",
+        "title": null,
+        "photo": "image/creator03.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/melodijah/"}
+        ]
+      },
+      {
+        "id": 4,
+        "name": "山本晃",
+        "title": "DATTARUJIN株式会社",
+        "photo": "image/creator04.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/dattarujin/"}
+        ]
+      }
+    ]
   },
   "kidsSpace": {
     "titleJa": "くるり工房ワークショップ",

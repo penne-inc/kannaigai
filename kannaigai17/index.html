@@ -182,11 +182,13 @@
                     <div class="guest-info">
                         <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
                         <p v-if="data.talkSession.moderator.title" class="guest-title">{{ data.talkSession.moderator.title }}</p>
+                        <guest-links v-if="data.talkSession.moderator.links" :links="data.talkSession.moderator.links"></guest-links>
                     </div>
                 </div>
 
                 <div class="section-header-sub">
-                    <h3>GUEST<span class="section-title-ja">ゲスト<span style="font-size: 0.75rem">（敬称略）</span></span></h3>
+                    <h3>GUEST<span class="section-title-ja">ゲスト</span></h3>
+                    <span class="section-title-ja">（敬称略）</span>
                 </div>
                 <div class="guests-grid">
                     <div
@@ -203,6 +205,7 @@
                                 <p class="guest-project">{{ guest.project }}</p>
                                 <p class="guest-name">{{ guest.name }}</p>
                                 <p class="guest-title" v-html="guest.title"></p>
+                                <guest-links v-if="guest.links" :links="guest.links"></guest-links>
                             </div>
                         </div>
                     </div>
@@ -222,6 +225,30 @@
                 <div class="section-description">
                     <p v-for="(text, index) in data.designPitch.description" v-html="text"></p>
                 </div>
+                <div class="section-header-sub">
+                    <h3>CREATOR<span class="section-title-ja">発表クリエイター</span></h3>
+                    <span class="section-title-ja">（五十音順／敬称略／一部）</span>
+                </div>
+                <div class="guests-grid">
+                    <div
+                            v-for="guest in data.designPitch.guests"
+                            :key="guest.id"
+                            class="guest-card">
+                        <div class="guest-row">
+                            <div v-if="guest.photo" class="guest-photo">
+                                <img :src="guest.photo" :alt="guest.name">
+                            </div>
+                            <div v-else class="guest-photo guest-photo--placeholder"></div>
+                            <div class="guest-info">
+                                <p class="guest-name">{{ guest.name }}</p>
+                                <p class="guest-title" v-html="guest.title"></p>
+                                <guest-links v-if="guest.links" :links="guest.links"></guest-links>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </section>
 
             <!-- KIDS SPACE Section -->
@@ -347,7 +374,7 @@
     <script>
         const { createApp, nextTick } = Vue;
 
-        createApp({
+        const app = createApp({
             data() {
                 return {
                     data: null,
@@ -378,7 +405,23 @@
                     console.error('Failed to load event data:', error);
                 }
             }
-        }).mount('#app');
+        });
+
+        app.component('guest-links', {
+            props: ['links'],
+            template: `
+                <div class="guest-links" v-for="link in links">
+                    <a v-if="link.ig" :href="link.ig" target="_blank" rel="noopener noreferrer" class="share-button share-button-nocolor share-button-instagram" aria-label="Instagram">
+                        <img src="./image/icon-ig-bk.png" alt="Instagram" width="24" height="24">
+                    </a>
+                    <a v-if="link.x" :href="link.x" target="_blank" rel="noopener noreferrer" class="share-button share-button-nocolor share-button-x" aria-label="x">
+                        <img src="./image/icon-x-bk.png" alt="X" width="24" height="24">
+                    </a>
+                </div>
+            `
+        });
+
+        app.mount('#app');
     </script>
     <script src="script.js"></script>
 </body>
