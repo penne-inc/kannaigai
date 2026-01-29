@@ -110,7 +110,9 @@
                         </div>
                     </div>
                 </div>
-                <p v-for="(text, index) in data.about.description" v-html="text" class="scroll-fade-in"></p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.about.description" v-html="text" class="scroll-fade-in"></p>
+                </div>
 
             </section>
 
@@ -280,7 +282,7 @@
                         <span class="section-title-ja">アクセス</span>
                     </h2>
                 </div>
-                <div class="venue-info">
+                <div class="venue-info scroll-fade-in">
                     <p class="venue-name">{{ data.event.venue.name }}<br>{{ data.event.venue.nameEn }}</p>
                     <p class="venue-address">住所: {{ data.event.venue.address }}</p>
                     <p class="venue-access">アクセス: {{ data.event.venue.access }}</p>
@@ -297,7 +299,7 @@
             <section id="archive" class="fade-in-section" aria-labelledby="archive-heading">
                 <h2 id="archive-heading">{{ data.archive.titleJa }}</h2>
                 <ul class="archive-list">
-                    <li v-for="item in data.archive.items" :key="item.id" class="archive-item">
+                    <li v-for="item in data.archive.items" :key="item.id" class="archive-item scroll-fade-in">
                         <a :href="item.url" target="_blank" rel="noopener noreferrer">
                             <span class="archive-text">
                                 <span class="archive-title">{{ item.title }}</span>

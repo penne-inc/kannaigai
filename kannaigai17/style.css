@@ -285,8 +285,8 @@ section#exhibition {
 /* Scroll-triggered fade-in for child elements */
 
 :root {
-    --animation-time: 1.6s;
-    --animation-delay: 0.4s;
+    --animation-time: 1s;
+    --animation-delay: 0.2s;
 }
 .scroll-fade-in {
     opacity: 0;
@@ -298,7 +298,7 @@ section#exhibition {
 
     & img {
         transform: scale(0.8);
-        transition: transform 0.8s ease;
+        transition: transform var(--animation-time) ease;
     }
 
     &.is-visible img {
@@ -306,24 +306,26 @@ section#exhibition {
     }
 
     &.section-header {
+        /* 子要素が個別にopacityを制御するため親は即表示 */
+        opacity: 1;
 
         &::after {
-            width: 0;
-            transition: width var(--animation-time) ease;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--animation-time) ease;
         }
 
         &.is-visible::after {
-            width: 100%;
-
+            transform: scaleX(1);
         }
+
         h2 {
             opacity: 0;
             transform: translateY(2rem);
             transition:
-                    opacity var(--animation-time) var(--animation-delay) ease,
-                    transform var(--animation-time) var(--animation-delay) ease;
+                    opacity var(--animation-time) ease var(--animation-delay),
+                    transform var(--animation-time) ease var(--animation-delay);
         }
-
 
         &.is-visible h2 {
             opacity: 1;
@@ -334,21 +336,21 @@ section#exhibition {
             opacity: 0;
             transform: translateY(2rem);
             transition:
-                    opacity var(--animation-time) calc(var(--animation-delay) * 4 ) ease,
-                    transform var(--animation-time) calc(var(--animation-delay) * 4 ) ease;
+                    opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
+                    transform var(--animation-time) ease calc(var(--animation-delay) * 3);
         }
+
         &.is-visible .section-title-event-time {
             opacity: 1;
             transform: translateY(0);
         }
-
     }
+
     &.section-header-sub {
-        opacity: 0;
         transform: translateY(2rem);
         transition:
-                opacity var(--animation-time) var(--animation-delay) ease,
-                transform var(--animation-time) var(--animation-delay) ease;
+                opacity var(--animation-time) ease var(--animation-delay),
+                transform var(--animation-time) ease var(--animation-delay);
 
         &.is-visible {
             opacity: 1;
@@ -357,11 +359,10 @@ section#exhibition {
     }
 
     &.section-description {
-        opacity: 0;
         transform: translateY(2rem);
         transition:
-                opacity var(--animation-time) calc(var(--animation-delay) * 2) ease,
-                transform var(--animation-time) calc(var(--animation-delay) * 2) ease;
+                opacity var(--animation-time) ease calc(var(--animation-delay) * 2),
+                transform var(--animation-time) ease calc(var(--animation-delay) * 2);
 
         &.is-visible {
             opacity: 1;
@@ -369,20 +370,18 @@ section#exhibition {
         }
     }
 
-    .guest-links img{
+    .guest-links img {
         opacity: 0;
         transform: scale(0.8);
         transition:
-            opacity var(--animation-time) calc(var(--animation-delay) * 4) ease,
-            transform var(--animation-time) calc(var(--animation-delay) * 4) ease;
+                opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
+                transform var(--animation-time) ease calc(var(--animation-delay) * 3);
     }
 
-    &.is-visible .guest-links img{
+    &.is-visible .guest-links img {
         opacity: 1;
         transform: scale(1);
     }
-
-
 }
 
 
@@ -1680,6 +1679,7 @@ h3 .section-title-ja {
 
 /* About Photos */
 .about-photos {
+    margin-bottom :1.5rem;
     @media screen and (max-width: 768px) {
         margin: 1.5rem calc(-1 * var(--content-padding, 1rem));
         margin-left: calc(-50vw + 50%);
