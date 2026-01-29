@@ -100,7 +100,19 @@
                         <span class="section-title-ja">{{ data.about.titleJa }}</span>
                     </h2>
                 </div>
-                <p class="section-description">{{ data.about.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.about.description" v-html="text"></p>
+                </div>
+                <div v-if="data.about.photos" class="about-photos">
+                    <div class="about-photos-track">
+                        <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
+                        <div v-for="(photo, index) in data.about.photos" :key="'b-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- EXHIBITION Section -->
@@ -110,9 +122,11 @@
                         <span class="section-title-en">{{ data.exhibition.titleEn }}</span>
                         <span class="section-title-ja">{{ data.exhibition.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.exhibition.time }}</span>
                 </div>
-                <p class="event-time">{{ data.exhibition.time }}</p>
-                <p class="section-description">{{ data.exhibition.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.exhibition.description" v-html="text"></p>
+                </div>
 
                 <div class="projects-grid">
                     <article
@@ -151,25 +165,30 @@
                         <span class="section-title-en">{{ data.talkSession.titleEn }}</span>
                         <span class="section-title-ja">{{ data.talkSession.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.talkSession.time }}</span>
                 </div>
-                <p class="event-time">{{ data.talkSession.time }}</p>
-                <p class="section-description">{{ data.talkSession.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.talkSession.description" v-html="text"></p>
+                </div>
 
                 <div class="section-header-sub">
                     <h3>MODERATOR<span class="section-title-ja">モデレーター</span></h3>
                 </div>
                 <div class="moderator-card">
-                    <div class="guest-info">
-                        <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
-                    </div>
                     <div v-if="data.talkSession.moderator.photo" class="guest-photo">
                         <img :src="data.talkSession.moderator.photo" :alt="data.talkSession.moderator.name">
                     </div>
                     <div v-else class="guest-photo guest-photo--placeholder"></div>
+                    <div class="guest-info">
+                        <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
+                        <p v-if="data.talkSession.moderator.title" class="guest-title">{{ data.talkSession.moderator.title }}</p>
+                        <guest-links v-if="data.talkSession.moderator.links" :links="data.talkSession.moderator.links"></guest-links>
+                    </div>
                 </div>
 
                 <div class="section-header-sub">
-                    <h3>GUEST<span class="section-title-ja">ゲスト<span style="font-size: 0.75rem">（敬称略）</span></span></h3>
+                    <h3>GUEST<span class="section-title-ja">ゲスト</span></h3>
+                    <span class="section-title-ja">（敬称略）</span>
                 </div>
                 <div class="guests-grid">
                     <div
@@ -178,15 +197,16 @@
                         class="guest-card"
                         :style="{ backgroundColor: guest.color }">
                         <div class="guest-row">
-                            <div class="guest-info">
-                                <p class="guest-project">{{ guest.project }}</p>
-                                <p class="guest-name">{{ guest.name }}</p>
-                                <p class="guest-title">{{ guest.title }}</p>
-                            </div>
                             <div v-if="guest.photo" class="guest-photo">
                                 <img :src="guest.photo" :alt="guest.name">
                             </div>
                             <div v-else class="guest-photo guest-photo--placeholder"></div>
+                            <div class="guest-info">
+                                <p class="guest-project">{{ guest.project }}</p>
+                                <p class="guest-name">{{ guest.name }}</p>
+                                <p class="guest-title" v-html="guest.title"></p>
+                                <guest-links v-if="guest.links" :links="guest.links"></guest-links>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,9 +220,35 @@
                         <span class="section-title-en">{{ data.designPitch.titleEn }}</span>
                         <span class="section-title-ja">{{ data.designPitch.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.designPitch.time }}</span>
                 </div>
-                <p class="event-time">{{ data.designPitch.time }}</p>
-                <p class="section-description">{{ data.designPitch.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.designPitch.description" v-html="text"></p>
+                </div>
+                <div class="section-header-sub">
+                    <h3>CREATOR<span class="section-title-ja">発表クリエイター</span></h3>
+                    <span class="section-title-ja">（五十音順／敬称略／一部）</span>
+                </div>
+                <div class="guests-grid">
+                    <div
+                            v-for="guest in data.designPitch.guests"
+                            :key="guest.id"
+                            class="guest-card">
+                        <div class="guest-row">
+                            <div v-if="guest.photo" class="guest-photo">
+                                <img :src="guest.photo" :alt="guest.name">
+                            </div>
+                            <div v-else class="guest-photo guest-photo--placeholder"></div>
+                            <div class="guest-info">
+                                <p class="guest-name">{{ guest.name }}</p>
+                                <p class="guest-title" v-html="guest.title"></p>
+                                <guest-links v-if="guest.links" :links="guest.links"></guest-links>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </section>
 
             <!-- KIDS SPACE Section -->
@@ -212,9 +258,11 @@
                         <span class="section-title-en">{{ data.kidsSpace.titleEn }}</span>
                         <span class="section-title-ja">{{ data.kidsSpace.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.kidsSpace.time }}</span>
                 </div>
-                <p class="event-time">{{ data.kidsSpace.time }}</p>
-                <p class="section-description">{{ data.kidsSpace.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.kidsSpace.description" v-html="text"></p>
+                </div>
                 <div v-if="data.kidsSpace.photos" class="kids-photos">
                     <div v-for="(photo, index) in data.kidsSpace.photos" :key="index" class="kids-photo">
                         <img :src="photo" :alt="data.kidsSpace.name + ' 写真' + (index + 1)">
@@ -292,6 +340,20 @@
                         </dd>
                     </div>
                 </dl>
+                <div class="executive-committee">
+                    <h3>{{ data.executiveCommittee.title }}</h3>
+                    <dl class="executive-committee-list">
+                        <div v-for="(role, index) in data.executiveCommittee.members" :key="index" class="executive-committee-row">
+                            <dt class="executive-committee-role">{{ role.role }}</dt>
+                            <dd class="executive-committee-members">
+                                <span v-for="(member, mIndex) in role.members" :key="mIndex" class="executive-committee-member">
+                                    <a v-if="member.link" :href="member.link" target="_blank" rel="noopener noreferrer">{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></a>
+                                    <template v-else>{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></template>
+                                </span>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
             </section>
             <nav class="nav" id="nav">
                 <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
@@ -326,7 +388,7 @@
     <script>
         const { createApp, nextTick } = Vue;
 
-        createApp({
+        const app = createApp({
             data() {
                 return {
                     data: null,
@@ -357,7 +419,23 @@
                     console.error('Failed to load event data:', error);
                 }
             }
-        }).mount('#app');
+        });
+
+        app.component('guest-links', {
+            props: ['links'],
+            template: `
+                <div class="guest-links" v-for="link in links">
+                    <a v-if="link.ig" :href="link.ig" target="_blank" rel="noopener noreferrer" class="share-button share-button-nocolor share-button-instagram" aria-label="Instagram">
+                        <img src="./image/icon-ig-bk.png" alt="Instagram" width="24" height="24">
+                    </a>
+                    <a v-if="link.x" :href="link.x" target="_blank" rel="noopener noreferrer" class="share-button share-button-nocolor share-button-x" aria-label="x">
+                        <img src="./image/icon-x-bk.png" alt="X" width="24" height="24">
+                    </a>
+                </div>
+            `
+        });
+
+        app.mount('#app');
     </script>
     <script src="script.js"></script>
 </body>

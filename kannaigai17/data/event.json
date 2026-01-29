@@ -22,12 +22,27 @@
   "about": {
     "titleJa": "関内外OPEN!とは",
     "titleEn": "ABOUT",
-    "description": "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、年に一度の創造的かつ実験的なイベントです。17年目の今年は、活動の舞台を関内から横浜全域へと広げ、発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、展示とトークセッションを通して紹介します。"
+    "description": [
+      "関内外OPEN!は、横浜・関内周辺を拠点とするクリエイターたちによる、<br class=\"br-pc-only\"/>年に一度の創造的かつ実験的なイベントです。",
+      "17年目の今年は、活動の舞台を関内から横浜全域へと広げ、<br class=\"br-pc-only\"/>発見・共創・交流・発酵の4つの実験的プロジェクトに挑みました。",
+      "本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、<br class=\"br-pc-only\"/>展示とトークセッションを通して紹介します。"
+    ],
+    "photos": [
+      "image/01_photo_kannaigai16.jpg",
+      "image/02_photo_kannaigai16.jpg",
+      "image/03_photo_kannaigai16.jpg",
+      "image/04_photo_kannaigai16.jpg",
+      "image/05_photo_kannaigai16.jpg",
+      "image/06_photo_kannaigai17.jpg"
+    ]
   },
   "exhibition": {
     "titleJa": "4つのプロジェクト",
     "titleEn": "EXHIBITION",
-    "description": "なにを考え、どのように進めたのか。そしてどんなことが起こったのか。プロジェクトごとにパネルとレポートを展示します。担当クリエイターも常駐しているので、質問があればお気軽にどうぞ。",
+    "description": [
+      "なにを考え、どのように進めたのか。そしてどんなことが起こったのか。<br class=\"br-pc-only\"/>プロジェクトごとにパネルとレポートを展示します。",
+      "担当クリエイターも常駐しているので、質問があればお気軽にどうぞ。"
+    ],
     "time": "13:00～17:00",
     "projects": [
       {
@@ -56,7 +71,7 @@
         "caption": null,
         "creators": [
           { "name": "伊藤 佑也", "affiliation": "83graphics" },
-          { "name": "山田 祐介", "affiliation": null },
+          { "name": "山田 裕介", "affiliation": null },
           { "name": "上甲 尚弘", "affiliation": "TORULABO" }
         ]
       },
@@ -94,34 +109,43 @@
   "talkSession": {
     "titleJa": "トークセッション",
     "titleEn": "TALK SESSION",
-    "description": "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、これからの「まちとクリエイティブ」の関係を探ります。",
+    "description": [
+      "各プロジェクトを担当したクリエイターと、協働したゲストによるクロストークを行います。",
+      "それぞれの活動の経緯や現場での発見、協働を通して見えてきた可能性を共有しながら、<br class=\"br-pc-only\"/>これからの「まちとクリエイティブ」の関係を探ります。"],
     "time": "13:30-15:30",
     "moderator": {
-      "name": "ダバンテス・ジャンウィル",
-      "title": null,
-      "photo": "image/daba.jpg"
+      "name": "ダバンテス ジャンウィル",
+      "title": "マチノテコ共同代表",
+      "photo": "image/daba.webp",
+      "links": [
+        {"ig" :  "https://www.instagram.com/janwill__/"}
+      ]
     },
     "guests": [
       {
         "id": 1,
         "name": "桂有生",
-        "title": "横浜市都市デザイン室",
+        "title": "横浜市都市デザイン室<br>都市デザイナー",
         "color": "#F7E96B",
         "project": "びっクリ！YOKOHAMA",
-        "photo": null
+        "photo": "image/guest01.jpg",
+        "links": [
+          {"x" :  "https://x.com/kacuri"}
+        ]
+
       },
       {
         "id": 2,
         "name": "鈴木啓太",
-        "title": "社会福祉法人かたるべ会 うれしの",
+        "title": "社会福祉法人かたるべ会<br>うれしの",
         "color": "#F5A0B8",
         "project": "つながるリデザイン",
-        "photo": null
+        "photo": "image/guest02.webp"
       },
       {
         "id": 3,
         "name": "藤好つむぎ",
-        "title": "里のengawa/萬駄屋/kirimisut",
+        "title": "里のengawa",
         "color": "#A8D8B9",
         "project": "関内×寺家 地域交流会",
         "photo": "image/guest03.webp"
@@ -132,22 +156,68 @@
         "title": "かもめデザイン舎",
         "color": "#a2c3e7",
         "project": "アイデアコンポスト",
-        "photo": "image/guest04.webp"
+        "photo": "image/guest04.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/kamome_sdw/"}
+        ]
       }
     ]
   },
   "designPitch": {
     "titleJa": "デザインピッチ",
     "titleEn": "DESIGN PITCH",
-    "description": "関内外を拠点に多方面で活躍している10名のクリエイターの活動内容を、生の声で聞けるピッチトークです。建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。",
+    "description": [
+      "関内外を拠点に多方面で活躍している10名のクリエイターの活動内容を、生の声で聞けるピッチトークです。<br class=\"br-pc-only\"/>建築家、デザイナー、カメラマンなど。1人4分でつないでいきます。"],
     "time": "16:00-17:00",
     "creatorCount": 10,
-    "pitchDuration": "4分"
+    "pitchDuration": "4分",
+    "guests": [
+      {
+        "id": 1,
+        "name": "川本尚毅",
+        "title": "株式会社N and R Foldings Japan",
+        "photo": "image/creator01.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/naoki.kawamoto/"}
+        ]
+      },
+      {
+        "id": 2,
+        "name": "小泉瑛一",
+        "title": "about your city",
+        "photo": "image/creator02.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/yoichi_ayc/"}
+        ]
+      },
+      {
+        "id": 3,
+        "name": "ヒトミチヒロ",
+        "title": null,
+        "photo": "image/creator03.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/melodijah/"}
+        ]
+      },
+      {
+        "id": 4,
+        "name": "山本晃",
+        "title": "DATTARUJIN株式会社",
+        "photo": "image/creator04.webp",
+        "links": [
+          {"ig" :  "https://www.instagram.com/dattarujin/"}
+        ]
+      }
+    ]
   },
   "kidsSpace": {
     "titleJa": "くるり工房ワークショップ",
     "titleEn": "KIDS SPACE",
-    "description": "くるり工房は、『ものの見方を「くるり」する』をコンセプトに横浜で活動するアップサイクル工房です。廃材スタンプを使ったアップサイクル体験、ポストカードやミニバッグ、サコッシュづくり、さらに大きなキャンバスやドレスに自由にお絵描きも楽しめます。視点を「くるり」として、楽しいを表現し、日常に少し特別な思い出を持ち帰ってみませんか。※予約不要、時間制限なしで、制作に没頭していただけます。",
+    "description": [
+      "くるり工房は、『ものの見方を「くるり」する』をコンセプトに横浜で活動するアップサイクル工房です。",
+      "廃材スタンプを使ったアップサイクル体験、ポストカードやミニバッグ、サコッシュづくり、さらに大きなキャンバスやドレスに自由にお絵描きも楽しめます。視点を「くるり」として、楽しいを表現し、日常に少し特別な思い出を持ち帰ってみませんか。",
+      "※予約不要、時間制限なしで、制作に没頭していただけます。"
+    ],
     "name": "くるり工房",
     "link": "https://kururiworks.com/",
     "time": "13:00-17:00",
@@ -277,9 +347,25 @@
   "credits": [
     { "label": "お問い合わせ", "values": ["kannaigai.info@gmail.com"] },
     { "label": "主催", "values": ["関内外OPEN!17事務局（関内外クリエイターズ／アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））"] },
-    { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局","令和7年度 文化庁 文化芸術創造拠点形成事業"] },
-    { "label": "協力", "values": ["象の鼻テラス"] }
+    { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局"] },
+    { "label": "協力", "values": ["象の鼻テラス","令和7年度 文化庁 文化芸術創造拠点形成事業"] }
   ],
+  "executiveCommittee": {
+    "title": "関内外OPEN!17幹事",
+    "members": [
+      { "role": "Creative Director", "members": [{ "name": "安食真", "affiliation": "studio nibroll", "link": "https://www.nibroll.jp/" }] },
+      { "role": "Art Director", "members": [{ "name": "伊藤佑也", "affiliation": "83graphics", "link": "https://yuya-i.com/" }] },
+      { "role": "Creative Partner", "members": [{ "name": "三浦佑介", "affiliation": "shubidua", "link": "https://shubidua.tumblr.com/" }] },
+      { "role": "Web Design", "members": [{ "name": "介川貴晶", "affiliation": "Penne", "link": "nne.co.jp" }] },
+      { "role": "Venue Design", "members": [{ "name": "原﨑寛明", "affiliation": "CHA", "link": "https://c-h-a.jp/" }] },
+      { "role": "Project Management", "members": [
+        { "name": "岩穴口颯音", "affiliation": "ondesign", "link": "https://www.ondesign.co.jp/" },
+        { "name": "方瀬りっか", "affiliation": null, "link": null },
+        { "name": "小林璃代子", "affiliation": "voids", "link": "https://voids.jp/" },
+        { "name": "千代田彩華", "affiliation": "ondesign", "link": "https://www.ondesign.co.jp/" }
+      ] }
+    ]
+  },
   "navigation": [
     { "href": "#about", "label": "関内外OPEN!とは" },
     { "href": "#exhibition", "label": "プログラム" },
