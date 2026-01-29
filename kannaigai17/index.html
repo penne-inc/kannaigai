@@ -175,14 +175,14 @@
                     <h3>MODERATOR<span class="section-title-ja">モデレーター</span></h3>
                 </div>
                 <div class="moderator-card">
-                    <div class="guest-info">
-                        <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
-                        <p v-if="data.talkSession.moderator.title" class="guest-title">{{ data.talkSession.moderator.title }}</p>
-                    </div>
                     <div v-if="data.talkSession.moderator.photo" class="guest-photo">
                         <img :src="data.talkSession.moderator.photo" :alt="data.talkSession.moderator.name">
                     </div>
                     <div v-else class="guest-photo guest-photo--placeholder"></div>
+                    <div class="guest-info">
+                        <p class="guest-name">{{ data.talkSession.moderator.name }}</p>
+                        <p v-if="data.talkSession.moderator.title" class="guest-title">{{ data.talkSession.moderator.title }}</p>
+                    </div>
                 </div>
 
                 <div class="section-header-sub">
@@ -195,15 +195,15 @@
                         class="guest-card"
                         :style="{ backgroundColor: guest.color }">
                         <div class="guest-row">
-                            <div class="guest-info">
-                                <p class="guest-project">{{ guest.project }}</p>
-                                <p class="guest-name">{{ guest.name }}</p>
-                                <p class="guest-title">{{ guest.title }}</p>
-                            </div>
                             <div v-if="guest.photo" class="guest-photo">
                                 <img :src="guest.photo" :alt="guest.name">
                             </div>
                             <div v-else class="guest-photo guest-photo--placeholder"></div>
+                            <div class="guest-info">
+                                <p class="guest-project">{{ guest.project }}</p>
+                                <p class="guest-name">{{ guest.name }}</p>
+                                <p class="guest-title" v-html="guest.title"></p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -116,13 +116,13 @@
     "moderator": {
       "name": "ダバンテス ジャンウィル",
       "title": "マチノテコ共同代表",
-      "photo": "image/daba.jpg"
+      "photo": "image/daba.webp"
     },
     "guests": [
       {
         "id": 1,
         "name": "桂有生",
-        "title": "横浜市都市デザイン室 都市デザイナー",
+        "title": "横浜市都市デザイン室<br>都市デザイナー",
         "color": "#F7E96B",
         "project": "びっクリ！YOKOHAMA",
         "photo": "image/guest01.jpg"
@@ -130,15 +130,15 @@
       {
         "id": 2,
         "name": "鈴木啓太",
-        "title": "社会福祉法人かたるべ会 うれしの",
+        "title": "社会福祉法人かたるべ会<br>うれしの",
         "color": "#F5A0B8",
         "project": "つながるリデザイン",
-        "photo": null
+        "photo": "image/guest02.webp"
       },
       {
         "id": 3,
         "name": "藤好つむぎ",
-        "title": "里のengawa/萬駄屋/kirimisut",
+        "title": "里のengawa",
         "color": "#A8D8B9",
         "project": "関内×寺家 地域交流会",
         "photo": "image/guest03.webp"
