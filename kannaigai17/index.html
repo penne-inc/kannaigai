@@ -112,16 +112,6 @@
                     </div>
                     <p v-for="(text, index) in data.about.description" v-html="text"></p>
                 </div>
-                <div v-if="data.about.photos" class="about-photos">
-                    <div class="about-photos-track">
-                        <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
-                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
-                        </div>
-                        <div v-for="(photo, index) in data.about.photos" :key="'b-' + index" class="about-photo">
-                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <!-- EXHIBITION Section -->
