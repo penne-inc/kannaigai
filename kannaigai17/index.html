@@ -100,7 +100,9 @@
                         <span class="section-title-ja">{{ data.about.titleJa }}</span>
                     </h2>
                 </div>
-                <p class="section-description">{{ data.about.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.about.description" v-html="text"></p>
+                </div>
                 <div v-if="data.about.photos" class="about-photos">
                     <div class="about-photos-track">
                         <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
@@ -120,9 +122,11 @@
                         <span class="section-title-en">{{ data.exhibition.titleEn }}</span>
                         <span class="section-title-ja">{{ data.exhibition.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.exhibition.time }}</span>
                 </div>
-                <p class="event-time">{{ data.exhibition.time }}</p>
-                <p class="section-description">{{ data.exhibition.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.exhibition.description" v-html="text"></p>
+                </div>
 
                 <div class="projects-grid">
                     <article
@@ -161,9 +165,11 @@
                         <span class="section-title-en">{{ data.talkSession.titleEn }}</span>
                         <span class="section-title-ja">{{ data.talkSession.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.talkSession.time }}</span>
                 </div>
-                <p class="event-time">{{ data.talkSession.time }}</p>
-                <p class="section-description">{{ data.talkSession.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.talkSession.description" v-html="text"></p>
+                </div>
 
                 <div class="section-header-sub">
                     <h3>MODERATOR<span class="section-title-ja">モデレーター</span></h3>
@@ -211,9 +217,11 @@
                         <span class="section-title-en">{{ data.designPitch.titleEn }}</span>
                         <span class="section-title-ja">{{ data.designPitch.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.designPitch.time }}</span>
                 </div>
-                <p class="event-time">{{ data.designPitch.time }}</p>
-                <p class="section-description">{{ data.designPitch.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.designPitch.description" v-html="text"></p>
+                </div>
             </section>
 
             <!-- KIDS SPACE Section -->
@@ -223,9 +231,11 @@
                         <span class="section-title-en">{{ data.kidsSpace.titleEn }}</span>
                         <span class="section-title-ja">{{ data.kidsSpace.titleJa }}</span>
                     </h2>
+                    <span class="section-title-event-time">{{ data.kidsSpace.time }}</span>
                 </div>
-                <p class="event-time">{{ data.kidsSpace.time }}</p>
-                <p class="section-description">{{ data.kidsSpace.description }}</p>
+                <div class="section-description">
+                    <p v-for="(text, index) in data.kidsSpace.description" v-html="text"></p>
+                </div>
                 <div v-if="data.kidsSpace.photos" class="kids-photos">
                     <div v-for="(photo, index) in data.kidsSpace.photos" :key="index" class="kids-photo">
                         <img :src="photo" :alt="data.kidsSpace.name + ' 写真' + (index + 1)">
