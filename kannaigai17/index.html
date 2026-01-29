@@ -100,18 +100,18 @@
                         <span class="section-title-ja">{{ data.about.titleJa }}</span>
                     </h2>
                 </div>
-                <div class="section-description">
-                    <div class="about-video">
-                        <iframe
-                                src="https://www.youtube.com/embed/8H7xp1-vLf4"
-                                title="関内外OPEN!17"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                        </iframe>
+                <div v-if="data.about.photos" class="about-photos">
+                    <div class="about-photos-track">
+                        <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
+                        <div v-for="(photo, index) in data.about.photos" :key="'b-' + index" class="about-photo">
+                            <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
+                        </div>
                     </div>
-                    <p v-for="(text, index) in data.about.description" v-html="text"></p>
                 </div>
+                <p v-for="(text, index) in data.about.description" v-html="text"></p>
+
             </section>
 
             <!-- EXHIBITION Section -->
