@@ -182,13 +182,15 @@ header {
         min-height: unset;
     }
 }
+section {
+    padding-inline: 2rem;
+    overflow: hidden;
+}
 section,
 section#exhibition .section-header,
 section#exhibition .section-description{
     width: 100%;
     max-width: 800px;
-    padding-inline: 2rem;
-    overflow: hidden;
 }
 
 section#exhibition {
