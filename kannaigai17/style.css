@@ -173,9 +173,9 @@ main {
         padding: 2rem 2rem 4rem;
     }
     display: grid;
-    gap: 3rem;
+    gap: 8rem;
     @media screen and (max-width: 428px) {
-        gap: 2rem;
+        gap: 6rem;
     }
 }
 
@@ -336,8 +336,13 @@ section#exhibition {
             opacity: 0;
             transform: translateY(2rem);
             transition:
-                    opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
-                    transform var(--animation-time) ease calc(var(--animation-delay) * 3);
+                    opacity var(--animation-time) ease calc(var(--animation-delay) * 4),
+                    transform var(--animation-time) ease calc(var(--animation-delay) * 4);
+            @media screen and (max-width: 768px) {
+                transition:
+                    opacity var(--animation-time) ease var(--animation-delay),
+                    transform var(--animation-time) ease var(--animation-delay);
+            }
         }
 
         &.is-visible .section-title-event-time {
@@ -361,8 +366,8 @@ section#exhibition {
     &.section-description {
         transform: translateY(2rem);
         transition:
-                opacity var(--animation-time) ease calc(var(--animation-delay) * 2),
-                transform var(--animation-time) ease calc(var(--animation-delay) * 2);
+                opacity var(--animation-time) ease calc(var(--animation-delay) * 5),
+                transform var(--animation-time) ease calc(var(--animation-delay) * 5);
 
         &.is-visible {
             opacity: 1;
