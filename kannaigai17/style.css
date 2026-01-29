@@ -1653,7 +1653,6 @@ h3 .section-title-ja {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 0 1rem;
-    margin-bottom: 0.5rem;
 }
 
 .credit-label {
@@ -1685,6 +1684,62 @@ h3 .section-title-ja {
 
     .credit-value--full {
         grid-column: auto;
+    }
+}
+
+/* Executive Committee */
+.executive-committee {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 3px solid var(--color-black);
+}
+
+.executive-committee h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.executive-committee-list {
+    display: grid;
+}
+
+.executive-committee-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1rem;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.executive-committee-role {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.executive-committee-role::after {
+    content: '：';
+}
+
+.executive-committee-members {
+    margin: 0;
+}
+
+.executive-committee-member:not(:last-child)::after {
+    content: '、';
+}
+
+.executive-committee-members a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+@media screen and (max-width: 768px) {
+    .executive-committee-row {
+        grid-template-columns: 1fr;
+        gap: 0;
     }
 }
 

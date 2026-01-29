@@ -340,6 +340,20 @@
                         </dd>
                     </div>
                 </dl>
+                <div class="executive-committee">
+                    <h3>{{ data.executiveCommittee.title }}</h3>
+                    <dl class="executive-committee-list">
+                        <div v-for="(role, index) in data.executiveCommittee.members" :key="index" class="executive-committee-row">
+                            <dt class="executive-committee-role">{{ role.role }}</dt>
+                            <dd class="executive-committee-members">
+                                <span v-for="(member, mIndex) in role.members" :key="mIndex" class="executive-committee-member">
+                                    <a v-if="member.link" :href="member.link" target="_blank" rel="noopener noreferrer">{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></a>
+                                    <template v-else>{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></template>
+                                </span>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
             </section>
             <nav class="nav" id="nav">
                 <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">

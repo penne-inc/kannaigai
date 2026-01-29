@@ -350,6 +350,22 @@
     { "label": "共催", "values": ["横浜市 にぎわいスポーツ文化局"] },
     { "label": "協力", "values": ["象の鼻テラス","令和7年度 文化庁 文化芸術創造拠点形成事業"] }
   ],
+  "executiveCommittee": {
+    "title": "関内外OPEN!17幹事",
+    "members": [
+      { "role": "Creative Director", "members": [{ "name": "安食真", "affiliation": "studio nibroll", "link": "https://www.nibroll.jp/" }] },
+      { "role": "Art Director", "members": [{ "name": "伊藤佑也", "affiliation": "83graphics", "link": "https://yuya-i.com/" }] },
+      { "role": "Creative Partner", "members": [{ "name": "三浦佑介", "affiliation": "shubidua", "link": "https://shubidua.tumblr.com/" }] },
+      { "role": "Web Design", "members": [{ "name": "介川貴晶", "affiliation": "Penne", "link": "nne.co.jp" }] },
+      { "role": "Venue Design", "members": [{ "name": "原﨑寛明", "affiliation": "CHA", "link": "https://c-h-a.jp/" }] },
+      { "role": "Project Management", "members": [
+        { "name": "岩穴口颯音", "affiliation": "ondesign", "link": "https://www.ondesign.co.jp/" },
+        { "name": "方瀬りっか", "affiliation": null, "link": null },
+        { "name": "小林璃代子", "affiliation": "voids", "link": "https://voids.jp/" },
+        { "name": "千代田彩華", "affiliation": "ondesign", "link": "https://www.ondesign.co.jp/" }
+      ] }
+    ]
+  },
   "navigation": [
     { "href": "#about", "label": "関内外OPEN!とは" },
     { "href": "#exhibition", "label": "プログラム" },
