@@ -1679,13 +1679,13 @@ h3 .section-title-ja {
 
 /* About Photos */
 .about-photos {
-    margin-bottom :1.5rem;
-    @media screen and (max-width: 768px) {
-        margin: 1.5rem calc(-1 * var(--content-padding, 1rem));
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
-    }
     width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-bottom: 1.5rem;
+    @media screen and (max-width: 768px) {
+        overflow: hidden;
+    }
 }
 
 .about-photos-track {
@@ -1697,7 +1697,10 @@ h3 .section-title-ja {
 
 .about-photo {
     flex: 0 0 auto;
-    width: 280px;
+
+    @media screen and (min-width: 768px) {
+        width: 280px;
+    }
 }
 
 .about-photo img {
