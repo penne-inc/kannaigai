@@ -273,14 +273,118 @@ section#exhibition {
 /* Fade-in animation for sections */
 .fade-in-section {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(2rem);
     transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.fade-in-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Scroll-triggered fade-in for child elements */
+
+:root {
+    --animation-time: 1s;
+    --animation-delay: 0.2s;
 }
+.scroll-fade-in {
+    opacity: 0;
+    transition: opacity var(--animation-time) ease;
+
+    &.is-visible {
+        opacity: 1;
+    }
+
+    & img {
+        transform: scale(0.8);
+        transition: transform var(--animation-time) ease;
+    }
+
+    &.is-visible img {
+        transform: scale(1);
+    }
+
+    &.section-header {
+        /* 子要素が個別にopacityを制御するため親は即表示 */
+        opacity: 1;
+
+        &::after {
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--animation-time) ease;
+        }
+
+        &.is-visible::after {
+            transform: scaleX(1);
+        }
+
+        h2 {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition:
+                    opacity var(--animation-time) ease var(--animation-delay),
+                    transform var(--animation-time) ease var(--animation-delay);
+        }
+
+        &.is-visible h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title-event-time {
+            opacity: 0;
+            transform: translateY(2rem);
+            transition:
+                    opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
+                    transform var(--animation-time) ease calc(var(--animation-delay) * 3);
+        }
+
+        &.is-visible .section-title-event-time {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.section-header-sub {
+        transform: translateY(2rem);
+        transition:
+                opacity var(--animation-time) ease var(--animation-delay),
+                transform var(--animation-time) ease var(--animation-delay);
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.section-description {
+        transform: translateY(2rem);
+        transition:
+                opacity var(--animation-time) ease calc(var(--animation-delay) * 2),
+                transform var(--animation-time) ease calc(var(--animation-delay) * 2);
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .guest-links img {
+        opacity: 0;
+        transform: scale(0.8);
+        transition:
+                opacity var(--animation-time) ease calc(var(--animation-delay) * 3),
+                transform var(--animation-time) ease calc(var(--animation-delay) * 3);
+    }
+
+    &.is-visible .guest-links img {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
 
 
 
@@ -610,9 +714,10 @@ dt, dd {
     background: #1877f2;
 }
 .guest-links {
-    position: absolute;
-    right: calc(1rem - 15px);
-    bottom: calc(.75rem - 12px);
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
 footer {
@@ -937,15 +1042,24 @@ footer {
 /* Section Headers */
 .section-header {
     margin-bottom: 1.5rem;
-    border-bottom: 3px solid;
     display: flex;
     align-items: end;
     gap: .75rem;
     position: relative;
+    overflow: hidden;
 
     @media screen and (max-width: 768px) {
         display: block;
     }
+}
+
+.section-header::after {
+    content: " ";
+    width: 100%;
+    height: 3px;
+    background: var(--color-black);
+    position: absolute;
+    bottom: 0;
 }
 
 .section-header-sub {
@@ -957,11 +1071,21 @@ footer {
     align-items: end;
     gap: .75rem;
     @media screen and (max-width: 768px) {
-        display: grid;
-        padding-bottom: .5rem;
-    }
+        display: flex;
+        gap: .25rem;
 
+        align-items: start;
+        flex-flow: column-reverse;
+        align-items: baseline;
+    }
 }
+
+.section-header h2:not(:has(~ .section-title-event-time)) {
+    @media screen and (max-width: 768px) {
+        padding-bottom: 1rem;
+    }
+}
+
 .section-header-sub h3{
     display: flex;
     align-items: end;
@@ -1449,8 +1573,8 @@ h3 .section-title-ja {
     font-weight: 700;
     background: white;
     padding: 0 .5em;
-    display: inline-block;
     margin-bottom: 0.3rem;
+    width: fit-content;
 
     @media screen and (max-width: 768px) {
         font-size: 0.5rem;
@@ -1476,8 +1600,13 @@ h3 .section-title-ja {
 }
 
 .guest-card .guest-info {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    height: 100%;
+    width: 100%;
 }
+
 
 .guest-name {
     font-size: 1.2rem;
@@ -1542,18 +1671,6 @@ h3 .section-title-ja {
     }
 }
 
-/* About Video */
-.about-video {
-    max-width: 400px;
-    margin: 1.5rem 0;
-    aspect-ratio: 9 / 16;
-    @media screen and (min-width: 768px) {
-        margin-top: 0;
-        max-width: 200px;
-        float: right;
-    }
-}
-
 .about-video iframe {
     width: 100%;
     height: 100%;
@@ -1562,9 +1679,12 @@ h3 .section-title-ja {
 
 /* About Photos */
 .about-photos {
-    margin: 1.5rem calc(-1 * var(--content-padding, 1rem));
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
+    margin-bottom :1.5rem;
+    @media screen and (max-width: 768px) {
+        margin: 1.5rem calc(-1 * var(--content-padding, 1rem));
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
     width: 100vw;
 }
 
@@ -1602,6 +1722,9 @@ h3 .section-title-ja {
 
     .about-photo img {
         height: 240px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
     }
 }
 
