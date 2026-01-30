@@ -186,11 +186,18 @@ section {
     padding-inline: 2rem;
     overflow: hidden;
 }
-section,
-section#exhibition .section-header,
-section#exhibition .section-description{
+section > div {
     width: 100%;
     max-width: 800px;
+}
+section > div.width-full {
+    width: 100%;
+    max-width: 100%;
+}
+
+section > div.width-lg {
+    width: 100%;
+    max-width: 960px;
 }
 
 section#exhibition {
@@ -477,7 +484,8 @@ dt, dd {
 }
 
 #archive {
-    margin-top: 3rem;
+    padding-block: 6rem;
+    background: var(--color-gray);
 }
 
 #archive h2 {
@@ -636,6 +644,7 @@ dt, dd {
     justify-content: center;
     gap: 1rem;
     align-items: center;
+    padding-bottom: 3rem;
 }
 
 .share-button {
@@ -1524,7 +1533,7 @@ h3 .section-title-ja {
 
 .guests-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 1rem;
 }
 
@@ -1642,18 +1651,10 @@ h3 .section-title-ja {
     height: 100%;
     border-radius: 8px;
 }
-#about {
-    overflow: visible;
-}
+
 /* About Photos */
 .about-photos {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    margin-bottom: 1.5rem;
-    @media screen and (max-width: 768px) {
-        overflow: hidden;
-    }
+    width: 100%;
 }
 
 .about-photos-track {
@@ -1754,9 +1755,10 @@ h3 .section-title-ja {
     font-size: 0.8rem;
     padding-top: 1.5rem;
     line-height: 1.8;
-    border-top: 3px solid var(--color-black);
 }
-
+#credit-heading {
+    margin-bottom: 2rem;
+}
 .credit-row {
     display: grid;
     grid-template-columns: auto 1fr;

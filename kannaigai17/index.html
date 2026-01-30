@@ -100,7 +100,7 @@
                         <span class="section-title-ja">{{ data.about.titleJa }}</span>
                     </h2>
                 </div>
-                <div v-if="data.about.photos" class="about-photos scroll-fade-in">
+                <div v-if="data.about.photos" class="about-photos scroll-fade-in width-full">
                     <div class="about-photos-track">
                         <div v-for="(photo, index) in data.about.photos" :key="'a-' + index" class="about-photo">
                             <img :src="photo" :alt="'関内外OPEN! 写真' + (index + 1)">
@@ -129,7 +129,7 @@
                     <p v-for="(text, index) in data.exhibition.description" v-html="text"></p>
                 </div>
 
-                <div class="projects-grid">
+                <div class="projects-grid width-lg">
                     <article
                         v-for="(project, index) in data.exhibition.projects"
                         :key="project.id"
@@ -192,7 +192,7 @@
                     <h3>GUEST<span class="section-title-ja">ゲスト</span></h3>
                     <span class="section-title-ja">（敬称略）</span>
                 </div>
-                <div class="guests-grid">
+                <div class="guests-grid width-lg">
                     <div
                         v-for="(guest, index) in data.talkSession.guests"
                         :key="guest.id"
@@ -231,7 +231,7 @@
                     <h3>CREATOR<span class="section-title-ja">発表クリエイター</span></h3>
                     <span class="section-title-ja">（五十音順／敬称略／一部）</span>
                 </div>
-                <div class="guests-grid">
+                <div class="guests-grid width-lg">
                     <div
                             v-for="(guest, index) in data.designPitch.guests"
                             :key="guest.id"
@@ -295,6 +295,35 @@
                 </div>
             </section>
 
+
+            <!-- Credits Section -->
+            <section id="credit" class="credits-section fade-in-section" aria-labelledby="credit-heading">
+                <h2 id="credit-heading"> クレジット</h2>
+                <dl class="credit-content scroll-fade-in">
+                    <div v-for="(item, index) in data.credits" :key="index" class="credit-row">
+                        <dt v-if="item.label" class="credit-label">{{ item.label }}</dt>
+                        <dd class="credit-value" :class="{ 'credit-value--full': !item.label }">
+                            <span v-for="(val, vIndex) in item.values" :key="vIndex">{{ val }}</span>
+                        </dd>
+                    </div>
+                </dl>
+                <div class="executive-committee scroll-fade-in" style="transition-delay: 0.15s">
+                    <h3>{{ data.executiveCommittee.title }}</h3>
+                    <dl class="executive-committee-list">
+                        <div v-for="(role, index) in data.executiveCommittee.members" :key="index" class="executive-committee-row">
+                            <dt class="executive-committee-role">{{ role.role }}</dt>
+                            <dd class="executive-committee-members">
+                                <span v-for="(member, mIndex) in role.members" :key="mIndex" class="executive-committee-member">
+                                    <a v-if="member.link" :href="member.link" target="_blank" rel="noopener noreferrer">{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></a>
+                                    <template v-else>{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></template>
+                                </span>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </section>
+
+
             <!-- Archive Section -->
             <section id="archive" class="fade-in-section" aria-labelledby="archive-heading">
                 <h2 id="archive-heading">{{ data.archive.titleJa }}</h2>
@@ -319,45 +348,8 @@
                 </button>
             </section>
 
-            <!-- SNS Section -->
-            <section id="share" class="fade-in-section" aria-labelledby="share-heading">
-                <h2 id="share-heading" class="visually-hidden">SNS</h2>
-                <div class="share-buttons">
-                    <a :href="data.social.instagram" target="_blank" rel="noopener noreferrer" class="share-button share-button-instagram" aria-label="Instagram">
-                        <img src="./image/icon-ig.png" alt="Instagram" width="24" height="24">
-                    </a>
-                    <a :href="data.social.facebook" target="_blank" rel="noopener noreferrer" class="share-button share-button-facebook" aria-label="Facebook">
-                        <img src="./image/icon-fb.png" alt="Facebook" width="24" height="24">
-                    </a>
-                </div>
-            </section>
 
-            <!-- Credits Section -->
-            <section id="credit" class="credits-section fade-in-section" aria-labelledby="credit-heading">
-                <h2 id="credit-heading" class="visually-hidden">クレジット</h2>
-                <dl class="credit-content scroll-fade-in">
-                    <div v-for="(item, index) in data.credits" :key="index" class="credit-row">
-                        <dt v-if="item.label" class="credit-label">{{ item.label }}</dt>
-                        <dd class="credit-value" :class="{ 'credit-value--full': !item.label }">
-                            <span v-for="(val, vIndex) in item.values" :key="vIndex">{{ val }}</span>
-                        </dd>
-                    </div>
-                </dl>
-                <div class="executive-committee scroll-fade-in" style="transition-delay: 0.15s">
-                    <h3>{{ data.executiveCommittee.title }}</h3>
-                    <dl class="executive-committee-list">
-                        <div v-for="(role, index) in data.executiveCommittee.members" :key="index" class="executive-committee-row">
-                            <dt class="executive-committee-role">{{ role.role }}</dt>
-                            <dd class="executive-committee-members">
-                                <span v-for="(member, mIndex) in role.members" :key="mIndex" class="executive-committee-member">
-                                    <a v-if="member.link" :href="member.link" target="_blank" rel="noopener noreferrer">{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></a>
-                                    <template v-else>{{ member.name }}<span v-if="member.affiliation">（{{ member.affiliation }}）</span></template>
-                                </span>
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
-            </section>
+
             <nav class="nav" id="nav">
                 <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
                     <span class="nav-toggle-text">メニュー</span>
@@ -373,6 +365,15 @@
         </main>
 
         <footer role="contentinfo" v-if="data">
+            <h2 id="share-heading" class="visually-hidden">SNS</h2>
+            <div class="share-buttons">
+                <a :href="data.social.instagram" target="_blank" rel="noopener noreferrer" class="share-button share-button-instagram" aria-label="Instagram">
+                    <img src="./image/icon-ig.png" alt="Instagram" width="24" height="24">
+                </a>
+                <a :href="data.social.facebook" target="_blank" rel="noopener noreferrer" class="share-button share-button-facebook" aria-label="Facebook">
+                    <img src="./image/icon-fb.png" alt="Facebook" width="24" height="24">
+                </a>
+            </div>
             <p v-html="data.credit"></p>
         </footer>
         <!-- Photo Overlay (grid全体を覆う) -->
