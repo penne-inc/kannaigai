@@ -1642,7 +1642,9 @@ h3 .section-title-ja {
     height: 100%;
     border-radius: 8px;
 }
-
+#about {
+    overflow: visible;
+}
 /* About Photos */
 .about-photos {
     width: 100vw;
