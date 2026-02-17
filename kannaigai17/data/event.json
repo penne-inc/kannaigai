@@ -28,7 +28,7 @@
       "本展では、それぞれの現場で再発見した\"横浜の多面的な魅力\"を、<br class=\"br-pc-only\"/>展示とトークセッションを通して紹介します。"
     ],
     "photos": [
-      "image/discovery.webp",
+      "image/discovery.png",
       "image/cocreation.webp",
       "image/exchange.webp",
       "image/fermentation.webp"
@@ -48,8 +48,8 @@
         "category": "発見",
         "color": "#F5A0B8",
         "title": "びっクリ！ YOKOHAMA",
-        "description": "関内外のクリエイターが個人的に<br>\"びっくりした横浜\"の風景と、<br>クリエイタープロフィールを紹介する<br>Instagramアカウントを制作。",
-        "photo": "image/discovery.webp",
+        "description": "関内外のクリエイターが個人的に<br>\"びっくりした横浜\"の風景と、<br>クリエイタープロフィールを紹介する<br><a href=\"https://www.instagram.com/bikkuri_yokohama\" target=\"_blank\" Instagramアカウントを制作。",
+        "photo": "image/discovery.png",
         "shape":"image/color-discovery.svg",
         "caption": null,
         "creators": [
