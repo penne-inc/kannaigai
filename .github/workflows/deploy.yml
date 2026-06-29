@@ -5,9 +5,9 @@ on:
   push:
     branches: [main]
   # microCMS の webhook から（記事の公開・更新時）
+  # event type は限定せず、どんな repository_dispatch でもビルドする
   repository_dispatch:
-    types: [microcms-publish]
-  # 手動実行
+  # 手動実行 / microCMS の workflow_dispatch 方式にも対応
   workflow_dispatch:
 
 # GitHub Pages へのデプロイに必要な権限
