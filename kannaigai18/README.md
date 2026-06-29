@@ -168,3 +168,12 @@ python -m http.server 8000
 ## 補足：記事ごとのOGP画像
 
 現在 og:image は共通画像（`image/ogp.png`）です。記事ごとに画像を出すには、microCMS に画像フィールド（フィールドID `eyecatch`）を追加すれば、その画像が自動で og:image に使われます（`build/build.mjs` の `FIELDS.image` で変更可）。
+
+## 補足：将来 microCMS を切り離す（凍結）
+
+プロジェクト終了時に microCMS を解約し、リポジトリ内のHTML＋ローカル画像だけの純静的サイトに固定できます。画像（microCMS CDN）をローカル化する凍結スクリプトと手順を用意済み：
+
+- スクリプト：`build/freeze.mjs`
+- 手順：[`docs/microcms-detach.md`](docs/microcms-detach.md)
+
+普段は何もする必要はなく、終了時に一度だけ実行します。
