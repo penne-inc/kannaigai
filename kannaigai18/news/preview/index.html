@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>下書きプレビュー｜関内外OPEN!18</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/news.css">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../../config.js"></script>
+    <script src="../../js/news.js"></script>
+</head>
+<body>
+    <div id="preview-app" class="news-wrap">
+        <div v-if="isPreview" class="news-preview-banner">
+            <strong>プレビュー表示中</strong> ― これは microCMS の下書きプレビューです。一般公開はされていません。
+        </div>
+
+        <div v-if="loading" class="news-loading">読み込み中…</div>
+        <div v-else-if="notFound" class="news-error">
+            記事が見つかりませんでした。
+            <p>microCMS の編集画面の「プレビュー」ボタンから開いてください。</p>
+        </div>
+
+        <article v-else class="news-detail">
+            <div class="news-meta">
+                <span class="news-date">{{ item.dateDisplay }}</span>
+                <span class="news-category" :style="{ '--cat-color': item.category.color }">
+                    {{ item.category.label }}
+                    <span v-if="item.category.viewpoint" class="viewpoint">{{ item.category.viewpoint }}</span>
+                </span>
+                <span v-if="item.isDraft" class="news-draft-tag">下書き</span>
+            </div>
+            <h1 class="news-title">{{ item.title }}</h1>
+            <div class="news-body" v-html="item.body"></div>
+        </article>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return { item: null, isPreview: false, notFound: false, loading: true };
+            },
+            async mounted() {
+                try {
+                    const { item, isPreview, notFound } = await loadNewsDetail();
+                    this.item = item;
+                    this.isPreview = isPreview;
+                    this.notFound = notFound;
+                    if (item) document.title = `[プレビュー] ${item.title}｜関内外OPEN!18`;
+                } catch (e) {
+                    console.error(e);
+                    this.notFound = true;
+                } finally {
+                    this.loading = false;
+                }
+            }
+        }).mount('#preview-app');
+    </script>
+</body>
+</html>
