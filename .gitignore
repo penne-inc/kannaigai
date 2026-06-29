@@ -2,3 +2,29 @@
 .idea/*
 .DS_Store
 
+# Python仮想環境（ローカルサーバー用）
+.venv/
+
+# kannaigai18 ビルド生成物（GitHub Actionsで生成。手書きのpreviewは除外しない）
+/kannaigai18/index.html
+/kannaigai18/news/*/index.html
+!/kannaigai18/news/preview/index.html
+# ローカルビルド用の環境変数
+/kannaigai18/.env
+
+# 機密・内部資料（公開リポジトリへの誤コミット防止）
+# 表計算・文書ファイル（予算書・決算書・契約書・プレスリリース等）
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.pdf
+# ファイル名に機密キーワードを含むもの
+*予算*
+*決算*
+*収支*
+*見積*
+*契約*
+*個人情報*
+*機密*
+
