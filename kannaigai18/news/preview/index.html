@@ -3,40 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お知らせ｜関内外OPEN!18</title>
-    <meta name="description" content="関内外OPEN!18 のお知らせ">
+    <meta name="robots" content="noindex">
+    <title>下書きプレビュー｜関内外OPEN!18</title>
 
-    <!-- OGP（記事個別ではなく共通。記事ごとの画像が必要になったらビルド方式へ） -->
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="関内外OPEN!18">
-    <meta property="og:title" content="お知らせ｜関内外OPEN!18">
-    <meta property="og:image" content="https://kannaigai.com/kannaigai18/image/ogp.png">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/news.css">
 
-    <link rel="stylesheet" href="../css/news.css">
-
-    <!-- Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- 設定・カテゴリ定義・データ層（1つ上の階層） -->
-    <script src="../config.js"></script>
-    <script src="../js/news.js"></script>
+    <script src="../../config.js"></script>
+    <script src="../../js/news.js"></script>
 </head>
 <body>
-    <div id="news-app" class="news-wrap">
-        <!-- プレビュー中バナー -->
+    <div id="preview-app" class="news-wrap">
         <div v-if="isPreview" class="news-preview-banner">
             <strong>プレビュー表示中</strong> ― これは microCMS の下書きプレビューです。一般公開はされていません。
         </div>
 
         <div v-if="loading" class="news-loading">読み込み中…</div>
-
         <div v-else-if="notFound" class="news-error">
-            お知らせが見つかりませんでした。
-            <p><a class="news-back" href="../">関内外OPEN!18 トップへ</a></p>
+            記事が見つかりませんでした。
+            <p>microCMS の編集画面の「プレビュー」ボタンから開いてください。</p>
         </div>
 
         <article v-else class="news-detail">
@@ -50,24 +38,14 @@
             </div>
             <h1 class="news-title">{{ item.title }}</h1>
             <div class="news-body" v-html="item.body"></div>
-
-            <p class="news-back-wrap">
-                <a class="news-back" href="../">← 関内外OPEN!18 トップへ</a>
-            </p>
         </article>
     </div>
 
     <script>
         const { createApp } = Vue;
-
         createApp({
             data() {
-                return {
-                    item: null,
-                    isPreview: false,
-                    notFound: false,
-                    loading: true
-                };
+                return { item: null, isPreview: false, notFound: false, loading: true };
             },
             async mounted() {
                 try {
@@ -75,8 +53,7 @@
                     this.item = item;
                     this.isPreview = isPreview;
                     this.notFound = notFound;
-                    // ブラウザのタブ／履歴向けにタイトルを更新（クローラ向けではない）
-                    if (item) document.title = `${item.title}｜関内外OPEN!18`;
+                    if (item) document.title = `[プレビュー] ${item.title}｜関内外OPEN!18`;
                 } catch (e) {
                     console.error(e);
                     this.notFound = true;
@@ -84,7 +61,7 @@
                     this.loading = false;
                 }
             }
-        }).mount('#news-app');
+        }).mount('#preview-app');
     </script>
 </body>
 </html>

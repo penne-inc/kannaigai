@@ -1,0 +1,7 @@
+[
+  { "key": "redesign", "label": "つながるリデザイン",   "viewpoint": "共創", "color": "#2f80c4" },
+  { "key": "bikkuri",  "label": "びっくり！YOKOHAMA",   "viewpoint": "発見", "color": "#e0803a" },
+  { "key": "meet",     "label": "MEET KANNAIGAI",       "viewpoint": "交流", "color": "#3aa676" },
+  { "key": "compost",  "label": "アイデアコンポスト",     "viewpoint": "発酵", "color": "#9b59b6" },
+  { "key": "general",  "label": "お知らせ",             "viewpoint": "",    "color": "#555555" }
+]
