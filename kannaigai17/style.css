@@ -635,6 +635,36 @@ dt, dd {
     display: none;
 }
 
+.archive-page-link {
+    margin: 1rem auto 0;
+    text-align: center;
+}
+
+.archive-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.75rem 2rem;
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    @media screen and (max-width: 428px) {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.5rem;
+    }
+}
+
+.archive-page-button:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
 #share {
     margin-top: 3rem;
 }
