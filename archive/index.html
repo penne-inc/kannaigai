@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>関内外OPEN! アーカイブ</title>
+    <meta name="description" content="関内外OPEN!の過去回を一覧できるアーカイブページです。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kannaigai.com/archive/">
+    <meta property="og:title" content="関内外OPEN! アーカイブ">
+    <meta property="og:description" content="関内外OPEN!の過去回を一覧できるアーカイブページです。">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="関内外OPEN!">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="archive-header">
+        <a class="back-link" href="/kannaigai17/">関内外OPEN!17</a>
+        <div class="archive-header__inner">
+            <p class="archive-kicker">KANNAIGAI OPEN! ARCHIVE</p>
+            <h1>関内外OPEN! アーカイブ</h1>
+            <p class="archive-lead">過去回の開催情報、出典、確認状態を整理するための初期アーカイブです。本文や外部画像は転載せず、確認済みの情報から段階的に更新します。</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="archive-summary" aria-labelledby="summary-heading">
+            <div>
+                <h2 id="summary-heading">収録状況</h2>
+                <p id="archiveSummary">読み込み中です。</p>
+            </div>
+            <dl class="policy-list">
+                <div>
+                    <dt>公開方針</dt>
+                    <dd>外部本文・画像・PDFは権利確認前に転載しません。</dd>
+                </div>
+                <div>
+                    <dt>確認状態</dt>
+                    <dd>各回のメタデータと素材権利を個別に確認します。</dd>
+                </div>
+            </dl>
+        </section>
+
+        <section class="archive-controls" aria-label="アーカイブ絞り込み">
+            <label class="search-field">
+                <span>検索</span>
+                <input id="archiveSearch" type="search" placeholder="回数・年・タイトルで検索">
+            </label>
+            <div class="view-filter" role="group" aria-label="表示切り替え">
+                <button type="button" class="filter-button is-active" data-filter="all">すべて</button>
+                <button type="button" class="filter-button" data-filter="with-image">画像あり</button>
+                <button type="button" class="filter-button" data-filter="needs-review">確認中</button>
+            </div>
+        </section>
+
+        <section class="archive-list-section" aria-labelledby="list-heading">
+            <h2 id="list-heading">過去の関内外OPEN!</h2>
+            <div id="archiveList" class="archive-grid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="archive-footer">
+        <p>&copy; kannaigai. All rights reserved.</p>
+    </footer>
+
+    <template id="archiveCardTemplate">
+        <article class="archive-card">
+            <a class="archive-card__media-link" target="_blank" rel="noopener noreferrer">
+                <div class="archive-card__media"></div>
+            </a>
+            <div class="archive-card__body">
+                <div class="archive-card__meta">
+                    <span class="archive-card__id"></span>
+                    <span class="archive-card__status"></span>
+                </div>
+                <h3 class="archive-card__title"></h3>
+                <dl class="archive-card__facts">
+                    <div>
+                        <dt>開催日</dt>
+                        <dd class="archive-card__date"></dd>
+                    </div>
+                    <div>
+                        <dt>会場</dt>
+                        <dd class="archive-card__venue"></dd>
+                    </div>
+                    <div>
+                        <dt>テーマ</dt>
+                        <dd class="archive-card__theme"></dd>
+                    </div>
+                </dl>
+                <p class="archive-card__summary"></p>
+                <div class="archive-card__links"></div>
+            </div>
+        </article>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
