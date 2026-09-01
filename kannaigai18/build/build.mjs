@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');            // kannaigai18/
 const SITE = 'https://kannaigai.com/kannaigai18';
-const DEFAULT_OGP = `${SITE}/image/ogp.png`;
+const DEFAULT_OGP = `${SITE}/image/ogp.jpg`;
 
 const SERVICE = process.env.MICROCMS_SERVICE_DOMAIN || '';
 const APIKEY = process.env.MICROCMS_API_KEY || '';
@@ -27,6 +27,7 @@ const FIELDS = { title: 'title', body: 'content', date: 'date', category: 'categ
 
 // ---- ユーティリティ ----
 const categories = JSON.parse(await readFile(path.join(ROOT, 'data/categories.json'), 'utf8'));
+const projects = JSON.parse(await readFile(path.join(ROOT, 'data/projects.json'), 'utf8'));
 
 function resolveCategory(raw) {
     const fallback = categories.find(c => c.key === 'general')
@@ -97,6 +98,8 @@ function normalize(raw, source) {
 
 // ---- テンプレート ----
 function head({ title, description, url, image, noindex = false, cssPath }) {
+    const cssLinks = (Array.isArray(cssPath) ? cssPath : [cssPath])
+        .map(p => `<link rel="stylesheet" href="${p}">`).join('\n    ');
     return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -121,7 +124,7 @@ function head({ title, description, url, image, noindex = false, cssPath }) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${cssPath}">
+    ${cssLinks}
 </head>`;
 }
 
@@ -152,45 +155,190 @@ function detailHtml(item) {
 `;
 }
 
+// ---- メインビジュアル（PSDレイヤー分解アニメーション）----
+// 座標は ito_kv_idea_18_0831_ol-03.psd の 1920x1080 キャンバス基準。
+// PSDの実数値をそのまま持ち、% 変換はビルド時に行う（差し替え時の照合を容易にするため）。
+const KV_W = 1920, KV_H = 1080;
+const KV_PARTS = [
+    { f: 'circle-l', x: 2,    y: 122,  w: 955, h: 955, cls: 'kv-circle', delay: 0.15 },
+    { f: 'circle-r', x: 962,  y: 122,  w: 955, h: 955, cls: 'kv-circle', delay: 0.30 },
+    { f: 'core-l',   x: 450,  y: 570,  w: 60,  h: 60,  cls: 'kv-pop',    delay: 0.85 },
+    { f: 'core-r',   x: 1410, y: 570,  w: 60,  h: 60,  cls: 'kv-pop',    delay: 0.90 },
+    { f: 'logo',     x: 16,   y: 16,   w: 547, h: 59,  cls: 'kv-rise',   delay: 1.00 },
+    { f: 'year',     x: 15,   y: 83,   w: 63,  h: 15,  cls: 'kv-fade',   delay: 1.15 },
+    { f: 'mark',     x: 1847, y: 13,   w: 61,  h: 59,  cls: 'kv-fade',   delay: 1.15 },
+    // 「発見・共創・交流・発酵」— 読み順に 0.09s 間隔で出す
+    { f: 'ch-01',    x: 1127, y: 227,  w: 105, h: 92,  cls: 'kv-pop',    delay: 1.25 },
+    { f: 'ch-02',    x: 1389, y: 230,  w: 103, h: 90,  cls: 'kv-pop',    delay: 1.34 },
+    { f: 'ch-03',    x: 1388, y: 393,  w: 101, h: 93,  cls: 'kv-pop',    delay: 1.43 },
+    { f: 'ch-04',    x: 1645, y: 392,  w: 105, h: 93,  cls: 'kv-pop',    delay: 1.52 },
+    { f: 'ch-05',    x: 1128, y: 714,  w: 103, h: 93,  cls: 'kv-pop',    delay: 1.61 },
+    { f: 'ch-06',    x: 1387, y: 714,  w: 105, h: 93,  cls: 'kv-pop',    delay: 1.70 },
+    { f: 'ch-07',    x: 1387, y: 881,  w: 105, h: 92,  cls: 'kv-pop',    delay: 1.79 },
+    { f: 'ch-08',    x: 1648, y: 880,  w: 104, h: 93,  cls: 'kv-pop',    delay: 1.88 },
+    { f: 'copy',     x: 63,   y: 529,  w: 292, h: 140, cls: 'kv-rise',   delay: 2.10 },
+    { f: 'url',      x: 121,  y: 1051, w: 157, h: 10,  cls: 'kv-fade',   delay: 2.30 }
+];
+
+const pct = (v, total) => `${(v / total * 100).toFixed(4)}%`;
+
+function kvStage() {
+    const parts = KV_PARTS.map(p => {
+        const style = `left:${pct(p.x, KV_W)};top:${pct(p.y, KV_H)};width:${pct(p.w, KV_W)};animation-delay:${p.delay}s`;
+        // 円だけは内側の img を無限にゆっくり回す（登場アニメとtransformが競合しないよう二重化）
+        const inner = `<img src="image/kv/${p.f}.webp" width="${p.w}" height="${p.h}" alt="" decoding="async">`;
+        return `            <div class="kv-part ${p.cls}" style="${style}">${inner}</div>`;
+    }).join('\n');
+
+    return `        <div class="kv-stage" role="img"
+             aria-label="関内外OPEN!18 みなれた街の、視点を変える。発見・共創・交流・発酵">
+${parts}
+        </div>
+        <img class="kv-sp" src="image/kv-sp.webp" width="1080" height="1920"
+             alt="関内外OPEN!18 みなれた街の、視点を変える。発見・共創・交流・発酵" fetchpriority="high">`;
+}
+
+// 未確定フィールドは「情報をお寄せください」プレースホルダで表示する。
+// data/projects.json の null をそのまま可視化し、担当者への情報請求リストを兼ねる。
+function factRow(label, value, placeholder = '情報をお寄せください') {
+    const v = value
+        ? esc(value)
+        : `<span class="tbd">${esc(placeholder)}</span>`;
+    return `                    <dt>${esc(label)}</dt><dd>${v}</dd>`;
+}
+
+function projectCard(p) {
+    const cat = categories.find(c => c.key === p.key) || {};
+    const color = cat.color || '#555555';
+    const vivid = cat.vivid || color;
+
+    const links = p.links && p.links.length
+        ? p.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join(' ／ ')
+        : `<span class="tbd">情報をお寄せください</span>`;
+
+    const facts = [
+        factRow('協働パートナー', p.partners, '調整中／情報をお寄せください'),
+        factRow('スケジュール', p.schedule),
+        factRow('会場', p.venue, '調整中／情報をお寄せください'),
+        factRow('広報開始', p.prBegin),
+        factRow('担当', p.lead),
+        `                    <dt>関連リンク</dt><dd>${links}</dd>`
+    ].join('\n');
+
+    return `            <article class="project reveal" style="--p-color:${esc(color)};--p-vivid:${esc(vivid)}">
+                <div class="project-head">
+                    <span class="project-no">PROJECT ${esc(p.no)}</span>
+                    <span class="project-viewpoint">${esc(p.viewpoint)}</span>
+                </div>
+                <h3 class="project-title">${esc(p.title)}</h3>
+                <p class="project-subtitle">${esc(p.subtitle)}</p>
+                <p class="project-body">${esc(p.body)}</p>
+                <dl class="project-facts">
+${facts}
+                </dl>
+            </article>`;
+}
+
+const SCHEDULE = [
+    ['6月末', '各プロジェクトで連携先等の調整／全体リリース'],
+    ['7月', 'プロジェクト始動（〜2月 適宜広報）／アイデアコンポスト ① 開催'],
+    ['8月', '持続可能な事業および体制の構築について検討を開始'],
+    ['10月', 'MEET KANNAIGAI 広報開始／アイデアコンポスト ② 開催'],
+    ['11月', 'MEET KANNAIGAI 開催'],
+    ['12月', 'つながるリデザイン 広報開始／アイデアコンポスト ③ 開催'],
+    ['1月中旬', '関内外OPEN!18 報告会の広報開始'],
+    ['2月下旬', '関内外OPEN!18 報告会'],
+    ['3月下旬', 'レポート記事公開']
+];
+
 function topHtml(items) {
-    const listItems = items.map(item => `            <li class="news-list-item">
-                <a href="news/${esc(item.slug)}/" class="news-list-link">
-                    <span class="news-date">${esc(item.dateDisplay)}</span>
-                    ${categoryBadge(item.category)}
-                    <span class="news-list-title">${esc(item.title)}</span>
-                </a>
-            </li>`).join('\n');
+    const listItems = items.map(item => `                <li class="news-list-item">
+                    <a href="news/${esc(item.slug)}/" class="news-list-link">
+                        <span class="news-date">${esc(item.dateDisplay)}</span>
+                        ${categoryBadge(item.category)}
+                        <span class="news-list-title">${esc(item.title)}</span>
+                    </a>
+                </li>`).join('\n');
 
     const list = items.length
-        ? `<ul class="news-list">\n${listItems}\n        </ul>`
+        ? `<ul class="news-list">\n${listItems}\n            </ul>`
         : `<div class="news-empty">現在お知らせはありません。</div>`;
+
+    const viewpoints = categories
+        .filter(c => c.viewpoint)
+        .map(c => `<li style="--vp-color:${esc(c.color)}">${esc(c.viewpoint)}</li>`)
+        .join('\n                ');
+
+    const scheduleRows = SCHEDULE
+        .map(([when, what]) => `                <li><span class="when">${esc(when)}</span><span class="what">${esc(what)}</span></li>`)
+        .join('\n');
 
     return `${head({
         title: '関内外OPEN!18',
         description: 'みなれたまちの、視点を変える。2026年7月〜2027年2月',
         url: `${SITE}/`,
         image: DEFAULT_OGP,
-        cssPath: 'css/news.css'
+        cssPath: ['css/news.css', 'css/top.css']
     })}
 <body>
-    <style>
-        body { font-family: 'Noto Sans JP', sans-serif; margin: 0; color: #1a1a1a; }
-        .top-hero { text-align: center; padding: 80px 24px 48px; }
-        .top-hero h1 { font-size: 2rem; letter-spacing: 0.06em; margin: 0 0 12px; }
-        .top-hero .sub { color: #777; font-size: 1rem; margin: 0 0 8px; }
-        .top-hero .period { color: #999; font-size: 0.85rem; margin: 0; }
-        .top-note { text-align: center; font-size: 0.8rem; color: #bbb; padding: 32px 0 64px; }
-    </style>
-    <header class="top-hero">
-        <h1>関内外OPEN!18</h1>
-        <p class="sub">みなれたまちの、視点を変える。</p>
-        <p class="period">2026年7月 〜 2027年2月</p>
+    <header class="kv">
+        <h1 class="sr-only">関内外OPEN!18 ｜ みなれたまちの、視点を変える。</h1>
+${kvStage()}
     </header>
-    <main class="news-wrap">
-        <div class="news-heading"><span class="en">NEWS</span><span class="ja">お知らせ</span></div>
-        ${list}
+
+    <main>
+        <section class="intro reveal">
+            <p class="lead">クリエイターとまちと市民をつなぎ、<br>創造的活動を展開する。</p>
+            <p>18年目を迎える「関内外OPEN!」は、活動の舞台を関内エリアから横浜全域へと広げます。テーマは「みなれたまちの、視点を変える。」。<strong>発見・共創・交流・発酵</strong> の4つの視点から、継続的な価値創出とコミュニティ形成に取り組みます。あわせて、持続可能な事業および体制の構築についても検討を進めます。</p>
+            <ul class="viewpoints">
+                ${viewpoints}
+            </ul>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="section-head reveal"><h2 class="en">PROJECTS</h2><span class="ja">4つのプロジェクト</span></div>
+            <div class="projects">
+${projects.map(projectCard).join('\n')}
+            </div>
+        </section>
+
+        <section class="section reveal" id="schedule">
+            <div class="section-head"><h2 class="en">SCHEDULE</h2><span class="ja">年間スケジュール</span></div>
+            <ul class="schedule">
+${scheduleRows}
+            </ul>
+        </section>
+
+        <section class="section reveal" id="news">
+            <div class="section-head"><h2 class="en">NEWS</h2><span class="ja">お知らせ</span></div>
+            <div class="news-wrap">
+                ${list}
+            </div>
+        </section>
+
+        <section class="section reveal" id="about">
+            <div class="section-head"><h2 class="en">ABOUT</h2><span class="ja">開催概要</span></div>
+            <dl class="overview">
+                <dt>名称</dt><dd>関内外OPEN!18</dd>
+                <dt>実施期間</dt><dd>2026年7月 〜 2027年2月</dd>
+                <dt>報告会</dt><dd>2027年2月27日(土)／オンライン開催</dd>
+                <dt>会場</dt><dd>各プロジェクトごとに調整（報告会はオンライン）</dd>
+                <dt>主催</dt><dd>関内外クリエイターズ、アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団）</dd>
+                <dt>共催</dt><dd>横浜市にぎわいスポーツ文化局（予定）</dd>
+            </dl>
+        </section>
     </main>
-    <p class="top-note">サイト準備中</p>
+
+    <footer class="site-footer">
+        <ul class="sns">
+            <li><a href="https://kannaigai.com/" target="_blank" rel="noopener">HP</a></li>
+            <li><a href="https://www.instagram.com/kannaigaiopen/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/kannaigaiopen/" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+        <p class="copy">&copy; 関内外OPEN! ／ 関内外クリエイターズ</p>
+    </footer>
+
+    <script src="js/top.js" defer></script>
 </body>
 </html>
 `;
