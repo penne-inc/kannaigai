@@ -3,7 +3,9 @@
    メインビジュアル（ito_kv_idea_18_0831_ol-03）由来の配色で統一
    ============================================================ */
 :root {
-    /* KVから抽出したブランドカラー */
+    /* KVから抽出したブランドカラー（PSDの原色そのまま）。
+       テクスチャは平均0.5に正規化してあり hard-light で合成するため、
+       ここで指定した色がそのまま発色する。 */
     --kv-pink:  #ff84a8;
     --kv-yellow:#fdd032;
     --kv-blue:  #00a3e1;
@@ -70,10 +72,35 @@ body {
     height: auto;
 }
 
+/* --- 円 ---
+   PSDの円をそのまま1枚絵として使う（切り抜き・ブレンド一切なし）。
+   8種類の配色バリエーションを重ね、順に1枚ずつ表に出して巡回させる。 */
+.kv-circle {
+    position: absolute;
+    will-change: transform;
+
+    animation-name: kvRingIn, kvSpinCW;
+    animation-duration: 1s, var(--spin);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.34, 1), linear;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
+}
+.kv-circle--ccw { animation-name: kvRingIn, kvSpinCCW; }
+
+.kv-face {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: kvFaceSwap 32s linear infinite;
+}
+
 /* --- 登場アニメーション --- */
-@keyframes kvCircleIn {
-    from { opacity: 0; transform: scale(0.34) rotate(-100deg); }
-    to   { opacity: 1; transform: scale(1)    rotate(0deg); }
+@keyframes kvRingIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 @keyframes kvPopIn {
     0%   { opacity: 0; transform: scale(0.4); }
@@ -88,25 +115,29 @@ body {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-/* 円の内側だけを無限に回す（登場アニメのtransformと競合させない） */
-@keyframes kvSpin {
-    to { transform: rotate(360deg); }
+
+/* --- 回転（奇数リング=順／偶数リング=逆） --- */
+@keyframes kvSpinCW  { from { rotate: 0deg; } to { rotate: 360deg; } }
+@keyframes kvSpinCCW { from { rotate: 0deg; } to { rotate: -360deg; } }
+
+/* --- 配色バリエーションの巡回（32秒で8種類＝1枚4秒） ---
+   8枚のうち1枚だけを表に出す。切替は周期の0.5%（約0.16秒）で溶かす。 */
+@keyframes kvFaceSwap {
+    0%,   12%   { opacity: 1; }
+    12.5%, 99.5% { opacity: 0; }
+    100%        { opacity: 1; }
 }
 
-.kv-circle,
 .kv-pop,
 .kv-rise,
-.kv-fade { opacity: 0; animation-fill-mode: forwards; }
+.kv-fade { opacity: 0; }
 
-.kv-circle {
-    animation: kvCircleIn 1s cubic-bezier(0.16, 0.84, 0.34, 1) both;
-}
-.kv-circle img {
-    animation: kvSpin 90s linear infinite;
-}
 .kv-pop  { animation: kvPopIn  0.55s cubic-bezier(0.34, 1.3, 0.5, 1) both; }
 .kv-rise { animation: kvRiseIn 0.7s  ease-out both; }
 .kv-fade { animation: kvFadeIn 0.8s  ease-out both; }
+
+/* 中心の花マーク・文字はリングより前面に */
+.kv-part { z-index: 10; }
 
 /* スマホは縦型KV（ol-04）の静止画 */
 .kv-sp { display: none; }
@@ -121,13 +152,18 @@ body {
     }
 }
 
-/* 動きを抑える設定の利用者には最終状態を静止表示 */
+/* 動きを抑える設定の利用者には静止表示。
+   色サイクルも止まるため、PSD本来の配色を割り当て直す。 */
 @media (prefers-reduced-motion: reduce) {
-    .kv-circle, .kv-pop, .kv-rise, .kv-fade, .kv-sp {
+    .kv-circle, .kv-face, .kv-pop, .kv-rise, .kv-fade, .kv-sp {
         animation: none;
-        opacity: 1;
     }
-    .kv-circle img { animation: none; }
+    .kv-circle, .kv-pop, .kv-rise, .kv-fade, .kv-sp { opacity: 1; }
+    /* 巡回も止まるので、PSD本来の組み合わせ（ol-03 の左右）だけを残す。
+       画像の並びは 05 / 06 / 07 / 08 / 01 / 02 / 03 / 04 */
+    .kv-face { opacity: 0; }
+    .kv-circle[data-side="l"] .kv-face:nth-child(1),
+    .kv-circle[data-side="r"] .kv-face:nth-child(2) { opacity: 1; }
     html { scroll-behavior: auto; }
 }
 
@@ -220,7 +256,7 @@ body {
     letter-spacing: 0.1em;
     padding: 8px 22px;
     border-radius: 999px;
-    color: #fff;
+    color: var(--ink);          /* KVの色は明度が高いので黒文字（コントラスト6:1以上） */
     background: var(--vp-color);
 }
 
@@ -244,13 +280,19 @@ body {
     top: -70px; right: -70px;
     width: 190px; height: 190px;
     border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        var(--p-vivid) 0 22%,
-        color-mix(in srgb, var(--p-vivid) 45%, #fff) 22% 52%,
-        color-mix(in srgb, var(--p-vivid) 18%, #fff) 52% 100%
-    );
-    opacity: 0.5;
+    /* KVと同じ絵の具のテクスチャを、同心円グラデーションに multiply で重ねる */
+    background-image:
+        url(../image/kv/tex-circle.webp),
+        radial-gradient(
+            circle,
+            var(--p-color) 0 22%,
+            color-mix(in srgb, var(--p-color) 45%, #fff) 22% 52%,
+            color-mix(in srgb, var(--p-color) 18%, #fff) 52% 100%
+        );
+    background-size: cover, cover;
+    background-position: center, center;
+    background-blend-mode: hard-light, normal;
+    opacity: 0.62;
     pointer-events: none;
 }
 
@@ -273,7 +315,7 @@ body {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #fff;
+    color: var(--ink);
     background: var(--p-color);
     padding: 4px 14px;
     border-radius: 999px;
@@ -288,7 +330,7 @@ body {
 .project-subtitle {
     font-size: 0.98rem;
     font-weight: 500;
-    color: var(--p-color);
+    color: var(--p-ink);
     margin: 8px 0 18px;
     position: relative;
 }
@@ -316,7 +358,7 @@ body {
     white-space: nowrap;
 }
 .project-facts dd { margin: 0; }
-.project-facts a { color: var(--p-color); }
+.project-facts a { color: var(--p-ink); }
 
 /* 未確定フィールド：担当者に情報をもらう箇所 */
 .tbd {

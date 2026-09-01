@@ -31,14 +31,14 @@ const projects = JSON.parse(await readFile(path.join(ROOT, 'data/projects.json')
 
 function resolveCategory(raw) {
     const fallback = categories.find(c => c.key === 'general')
-        || { key: 'general', label: 'お知らせ', viewpoint: '', color: '#555555' };
+        || { key: 'general', label: 'お知らせ', viewpoint: '', color: '#dde5e8', ink: '#4a5a62' };
     let value = Array.isArray(raw) ? raw[0] : raw;
     if (value && typeof value === 'object') value = value.name || value.label || value.key || value.id;
     if (value === undefined || value === null || value === '') return fallback;
     const display = String(value).trim();
     const lc = display.toLowerCase();
     const matched = categories.find(c => c.key.toLowerCase() === lc || c.label.toLowerCase() === lc);
-    return matched || { key: 'other', label: display, viewpoint: '', color: '#555555' };
+    return matched || { key: 'other', label: display, viewpoint: '', color: '#dde5e8', ink: '#4a5a62' };
 }
 
 function esc(s) {
@@ -159,9 +159,29 @@ function detailHtml(item) {
 // 座標は ito_kv_idea_18_0831_ol-03.psd の 1920x1080 キャンバス基準。
 // PSDの実数値をそのまま持ち、% 変換はビルド時に行う（差し替え時の照合を容易にするため）。
 const KV_W = 1920, KV_H = 1080;
+
+// 円は切り抜かず1枚絵のまま使う。
+// 4つのPSD（ol-01〜04）にはそれぞれ完全な円が2つ入っており、合計8種類。
+// 配色は「黄→水色→緑→ピンク」の回転順列4パターン × ラフ/クリーンの2系統で、
+// 順に切り替えるだけで色が1段ずつずれる巡回演出になる。
+//
+// 以前は円を同心4リングに切り分けて個別に逆回転させていたが、
+// 切断面に隣接色が混ざって境界に濁った縁が出た。またテクスチャを
+// グレースケール化して再着色すると、絵の具の色相・彩度の変化が失われて
+// 質感がフラットになった。1枚絵ならどちらも起きない。
+const KV_CIRCLE_BOX = { w: 955, h: 955 };
+const KV_CIRCLES = [
+    { side: 'l', x: 2,   y: 122, dir: 'cw',  spin: 96,  delay: 0.15, phase: 0 },
+    { side: 'r', x: 962, y: 122, dir: 'ccw', spin: 124, delay: 0.30, phase: -8 }
+];
+// 8種類を32秒周期で巡回（1枚あたり4秒）。
+// 配色パターンは4種（色の回転順列）しかないため、右円の位相は2枚分だけずらす。
+// 4枚分ずらすと一周して左右が同じ配色になってしまう。
+// 並びは クリーン系(ol-03/04) → ラフ系(ol-01/02) の順。
+const KV_VARIANTS = ['05', '06', '07', '08', '01', '02', '03', '04'];
+const KV_CYCLE = 32;
+
 const KV_PARTS = [
-    { f: 'circle-l', x: 2,    y: 122,  w: 955, h: 955, cls: 'kv-circle', delay: 0.15 },
-    { f: 'circle-r', x: 962,  y: 122,  w: 955, h: 955, cls: 'kv-circle', delay: 0.30 },
     { f: 'core-l',   x: 450,  y: 570,  w: 60,  h: 60,  cls: 'kv-pop',    delay: 0.85 },
     { f: 'core-r',   x: 1410, y: 570,  w: 60,  h: 60,  cls: 'kv-pop',    delay: 0.90 },
     { f: 'logo',     x: 16,   y: 16,   w: 547, h: 59,  cls: 'kv-rise',   delay: 1.00 },
@@ -182,16 +202,39 @@ const KV_PARTS = [
 
 const pct = (v, total) => `${(v / total * 100).toFixed(4)}%`;
 
+// 円1つ = 8種類の画像を重ね、順に1枚ずつ表に出す。
+function kvCircle(c) {
+    const box = `left:${pct(c.x, KV_W)};top:${pct(c.y, KV_H)};`
+        + `width:${pct(KV_CIRCLE_BOX.w, KV_W)};height:${pct(KV_CIRCLE_BOX.h, KV_H)}`;
+
+    const step = KV_CYCLE / KV_VARIANTS.length;
+    const imgs = KV_VARIANTS.map((v, n) => {
+        // 負のdelayは「アニメーションが進んだ状態」で始まる。n枚目を n*step 秒後に
+        // 出したいので、加算する（phase で左右をずらす）。
+        const delay = n * step + c.phase;
+        return `                <img class="kv-face" src="image/kv/circle-${v}.webp"`
+            + ` width="720" height="720" alt="" decoding="async"`
+            + ` style="animation-delay:${delay}s">`;
+    }).join('\n');
+
+    return `            <div class="kv-circle kv-circle--${c.dir}" data-side="${c.side}"`
+        + ` style="${box};--spin:${c.spin}s;animation-delay:${c.delay}s, ${c.delay}s">
+${imgs}
+            </div>`;
+}
+
 function kvStage() {
+    const circles = KV_CIRCLES.map(kvCircle).join('\n');
+
     const parts = KV_PARTS.map(p => {
         const style = `left:${pct(p.x, KV_W)};top:${pct(p.y, KV_H)};width:${pct(p.w, KV_W)};animation-delay:${p.delay}s`;
-        // 円だけは内側の img を無限にゆっくり回す（登場アニメとtransformが競合しないよう二重化）
         const inner = `<img src="image/kv/${p.f}.webp" width="${p.w}" height="${p.h}" alt="" decoding="async">`;
         return `            <div class="kv-part ${p.cls}" style="${style}">${inner}</div>`;
     }).join('\n');
 
     return `        <div class="kv-stage" role="img"
              aria-label="関内外OPEN!18 みなれた街の、視点を変える。発見・共創・交流・発酵">
+${circles}
 ${parts}
         </div>
         <img class="kv-sp" src="image/kv-sp.webp" width="1080" height="1920"
@@ -209,8 +252,8 @@ function factRow(label, value, placeholder = '情報をお寄せください') {
 
 function projectCard(p) {
     const cat = categories.find(c => c.key === p.key) || {};
-    const color = cat.color || '#555555';
-    const vivid = cat.vivid || color;
+    const color = cat.color || '#dde5e8';   // 面（バッジ背景・装飾円）＝KVの鮮やかな色
+    const ink = cat.ink || '#4a5a62';       // 文字（サブタイトル・リンク）＝濃色
 
     const links = p.links && p.links.length
         ? p.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join(' ／ ')
@@ -225,7 +268,7 @@ function projectCard(p) {
         `                    <dt>関連リンク</dt><dd>${links}</dd>`
     ].join('\n');
 
-    return `            <article class="project reveal" style="--p-color:${esc(color)};--p-vivid:${esc(vivid)}">
+    return `            <article class="project reveal" style="--p-color:${esc(color)};--p-ink:${esc(ink)}">
                 <div class="project-head">
                     <span class="project-no">PROJECT ${esc(p.no)}</span>
                     <span class="project-viewpoint">${esc(p.viewpoint)}</span>
