@@ -11,7 +11,7 @@
     "venue": null,
     "lead": null,
     "contact": null,
-    "image": null,
+    "image": "image/projects/redesign.webp",
     "links": [],
     "needs": [
       "プロジェクト担当者名・所属",
@@ -21,7 +21,7 @@
       "成果物の公開時期と公開方法",
       "参加クリエイターの募集有無・募集要項"
     ],
-    "imageAlt": null,
+    "imageAlt": "つながるリデザインの制作の様子",
     "credit": null
   },
   {

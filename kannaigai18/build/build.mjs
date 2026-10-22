@@ -142,19 +142,25 @@ function detailHtml(item) {
     const url = `${SITE}/news/${item.slug}/`;
     const description = excerpt(item.body) || item.title;
     const image = item.image || DEFAULT_OGP;
-    return `${head({ title: `${item.title}｜関内外OPEN!18`, description, url, image, cssPath: '../../css/news.css' })}
-<body>
-    <div class="news-wrap">
+    return `${head({ title: `${item.title}｜関内外OPEN!18`, description, url, image, cssPath: ['../../css/news.css', '../../css/top.css'] })}
+<body class="page-news">
+    <nav class="page-nav"><a href="../../">← 関内外OPEN!18</a></nav>
+
+    <main class="news-page">
         <article class="news-detail">
             <div class="news-meta">
                 <span class="news-date">${esc(item.dateDisplay)}</span>
                 ${categoryBadge(item.category)}
             </div>
-            <h1 class="news-title">${esc(item.title)}</h1>
-            <div class="news-body">${item.body}</div>
-            <p class="news-back-wrap"><a class="news-back" href="../../">← 関内外OPEN!18 トップへ</a></p>
+            <div class="news-main">
+                <h1 class="news-title">${esc(item.title)}</h1>
+                <div class="news-body">${item.body}</div>
+                <p class="news-back-wrap"><a class="news-back" href="../../#news">← お知らせ一覧へ</a></p>
+            </div>
         </article>
-    </div>
+    </main>
+
+${siteFooter()}
 </body>
 </html>
 `;
@@ -177,14 +183,14 @@ const KV_W = 1920, KV_H = 1080;
 const KV_CIRCLE_BOX = { w: 955, h: 955 };
 const KV_CIRCLES = [
     { side: 'l', x: 2,   y: 122, dir: 'cw',  spin: 96,  delay: 0.15, phase: 0 },
-    { side: 'r', x: 962, y: 122, dir: 'ccw', spin: 124, delay: 0.30, phase: -8 }
+    { side: 'r', x: 962, y: 122, dir: 'ccw', spin: 124, delay: 0.30, phase: -12 }
 ];
-// 8種類を32秒周期で巡回（1枚あたり4秒）。
+// 8種類を48秒周期で巡回（1枚あたり6秒、うち3秒でゆっくり重ねて切り替える）。
 // 配色パターンは4種（色の回転順列）しかないため、右円の位相は2枚分だけずらす。
 // 4枚分ずらすと一周して左右が同じ配色になってしまう。
 // 並びは クリーン系(ol-03/04) → ラフ系(ol-01/02) の順。
 const KV_VARIANTS = ['05', '06', '07', '08', '01', '02', '03', '04'];
-const KV_CYCLE = 32;
+const KV_CYCLE = 48;   // 1枚6秒 × 8種類。css/top.css の kvFaceSwap の周期と揃えること
 
 const KV_PARTS = [
     { f: 'core-l',   x: 450,  y: 570,  w: 60,  h: 60,  cls: 'kv-pop',    delay: 0.85 },
