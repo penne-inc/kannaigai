@@ -1,7 +1,7 @@
 [
-  { "key": "redesign", "label": "つながるリデザイン",   "viewpoint": "共創", "color": "#2f80c4" },
-  { "key": "bikkuri",  "label": "びっくり！YOKOHAMA",   "viewpoint": "発見", "color": "#e0803a" },
-  { "key": "meet",     "label": "MEET KANNAIGAI",       "viewpoint": "交流", "color": "#3aa676" },
-  { "key": "compost",  "label": "アイデアコンポスト",     "viewpoint": "発酵", "color": "#9b59b6" },
-  { "key": "general",  "label": "お知らせ",             "viewpoint": "",    "color": "#555555" }
+  { "key": "redesign", "label": "つながるリデザイン",   "viewpoint": "共創", "color": "#00a3e1", "ink": "#0077a8" },
+  { "key": "bikkuri",  "label": "びっくり！YOKOHAMA",   "viewpoint": "発見", "color": "#fdd032", "ink": "#8a6200" },
+  { "key": "meet",     "label": "MEET KANNAIGAI",       "viewpoint": "交流", "color": "#2ade05", "ink": "#1a7a00" },
+  { "key": "compost",  "label": "アイデアコンポスト",     "viewpoint": "発酵", "color": "#ff84a8", "ink": "#c62a58" },
+  { "key": "general",  "label": "お知らせ",             "viewpoint": "",    "color": "#dde5e8", "ink": "#4a5a62" }
 ]

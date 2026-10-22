@@ -1,0 +1,654 @@
+/* ============================================================
+   関内外OPEN!18 トップページ
+   メインビジュアル（ito_kv_idea_18_0831_ol-03）由来の配色で統一
+   ============================================================ */
+:root {
+    /* KVから抽出したブランドカラー（PSDの原色そのまま）。
+       テクスチャは平均0.5に正規化してあり hard-light で合成するため、
+       ここで指定した色がそのまま発色する。 */
+    --kv-pink:  #ff84a8;
+    --kv-yellow:#fdd032;
+    --kv-blue:  #00a3e1;
+    --kv-green: #2ade05;
+    --kv-bg:    #f5f9fa;
+
+    --ink:      #111;
+    --ink-sub:  #5f666b;
+    --ink-thin: #98a0a5;
+    --rule:     #d5dcdf;
+    --rule-ink: #111;
+    --max:      1080px;
+    --col:      200px;   /* 左カラム幅（見出し・ラベル）。全セクションで揃える */
+
+    /* チラシの極太ゴシックと、幅広の欧文ボールドに寄せる */
+    --font-ja:    'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-latin: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-ja);
+    margin: 0;
+    color: var(--ink);
+    background: var(--kv-bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 視覚的に隠すがスクリーンリーダー・検索エンジンには残す
+   （見出しテキストはKV画像に焼き込まれているため） */
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ------------------------------------------------------------
+   メインビジュアル
+   PSDのレイヤーを分解し、1920x1080キャンバス上の座標を % で再現。
+   登場アニメーション → 円はゆっくり回転し続ける。
+   ------------------------------------------------------------ */
+.kv {
+    background: var(--kv-bg);
+    line-height: 0;
+    overflow: hidden;
+}
+
+/* ステージ：幅は「画面幅」と「94vhに収まる幅」の小さい方 */
+.kv-stage {
+    position: relative;
+    width: min(100%, calc(94vh * 16 / 9));
+    aspect-ratio: 1920 / 1080;
+    margin: 0 auto;
+}
+
+.kv-part {
+    position: absolute;
+    line-height: 0;
+    will-change: transform, opacity;
+}
+.kv-part img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* --- 円 ---
+   PSDの円をそのまま1枚絵として使う（切り抜き・ブレンド一切なし）。
+   8種類の配色バリエーションを重ね、順に1枚ずつ表に出して巡回させる。 */
+.kv-circle {
+    position: absolute;
+    will-change: transform;
+
+    animation-name: kvRingIn, kvSpinCW;
+    animation-duration: 1s, var(--spin);
+    animation-timing-function: cubic-bezier(0.16, 0.84, 0.34, 1), linear;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
+}
+.kv-circle--ccw { animation-name: kvRingIn, kvSpinCCW; }
+
+.kv-face {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: kvFaceSwap 32s linear infinite;
+}
+
+/* --- 登場アニメーション --- */
+@keyframes kvRingIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes kvPopIn {
+    0%   { opacity: 0; transform: scale(0.4); }
+    62%  { opacity: 1; transform: scale(1.09); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes kvRiseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kvFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* --- 回転（奇数リング=順／偶数リング=逆） --- */
+@keyframes kvSpinCW  { from { rotate: 0deg; } to { rotate: 360deg; } }
+@keyframes kvSpinCCW { from { rotate: 0deg; } to { rotate: -360deg; } }
+
+/* --- 配色バリエーションの巡回（32秒で8種類＝1枚4秒） ---
+   8枚のうち1枚だけを表に出す。切替は周期の0.5%（約0.16秒）で溶かす。 */
+@keyframes kvFaceSwap {
+    0%,   12%   { opacity: 1; }
+    12.5%, 99.5% { opacity: 0; }
+    100%        { opacity: 1; }
+}
+
+.kv-pop,
+.kv-rise,
+.kv-fade { opacity: 0; }
+
+.kv-pop  { animation: kvPopIn  0.55s cubic-bezier(0.34, 1.3, 0.5, 1) both; }
+.kv-rise { animation: kvRiseIn 0.7s  ease-out both; }
+.kv-fade { animation: kvFadeIn 0.8s  ease-out both; }
+
+/* 中心の花マーク・文字はリングより前面に */
+.kv-part { z-index: 10; }
+
+/* スマホは縦型KV（ol-04）の静止画 */
+.kv-sp { display: none; }
+
+@media (max-width: 700px) {
+    .kv-stage { display: none; }
+    .kv-sp {
+        display: block;
+        width: 100%;
+        height: auto;
+        animation: kvFadeIn 0.9s ease-out both;
+    }
+}
+
+/* 動きを抑える設定の利用者には静止表示。
+   色サイクルも止まるため、PSD本来の配色を割り当て直す。 */
+@media (prefers-reduced-motion: reduce) {
+    .kv-circle, .kv-face, .kv-pop, .kv-rise, .kv-fade, .kv-sp {
+        animation: none;
+    }
+    .kv-circle, .kv-pop, .kv-rise, .kv-fade, .kv-sp { opacity: 1; }
+    /* 巡回も止まるので、PSD本来の組み合わせ（ol-03 の左右）だけを残す。
+       画像の並びは 05 / 06 / 07 / 08 / 01 / 02 / 03 / 04 */
+    .kv-face { opacity: 0; }
+    .kv-circle[data-side="l"] .kv-face:nth-child(1),
+    .kv-circle[data-side="r"] .kv-face:nth-child(2) { opacity: 1; }
+    html { scroll-behavior: auto; }
+}
+
+/* ------------------------------------------------------------
+   スクロール登場演出
+   js/top.js が html に .js-reveal を付けたときだけ隠す
+   （JS無効・エラー時は最初から表示される）
+   ------------------------------------------------------------ */
+.js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .75s ease-out, transform .75s cubic-bezier(0.16, 0.84, 0.34, 1);
+}
+.js-reveal .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+/* プロジェクトカードは少しずつ遅らせて並ぶように */
+.js-reveal .projects .reveal:nth-child(2) { transition-delay: .08s; }
+.js-reveal .projects .reveal:nth-child(3) { transition-delay: .16s; }
+.js-reveal .projects .reveal:nth-child(4) { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ------------------------------------------------------------
+   共通レイアウト
+   チラシ同様、面や角丸は使わず「黒インク・細い罫線・大きな余白」で組む。
+   色は KV の円に任せ、UI 側は小さな丸（ドット）にだけ薄めて使う。
+   ------------------------------------------------------------ */
+.section {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 360px 32px 0;
+}
+
+.section-head {
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    align-items: baseline;
+    margin: 0 0 168px;
+    padding-top: 42px;
+    border-top: 1px solid var(--ink);
+}
+.section-head .en {
+    font-family: var(--font-latin);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    margin: 0;
+}
+.section-head .ja {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+}
+
+/* 視点ドット：KVの円を小さく写したもの */
+.dot {
+    display: inline-block;
+    width: 0.62em; height: 0.62em;
+    border-radius: 50%;
+    background: var(--dot);
+    margin-right: 0.55em;
+    vertical-align: 0.04em;
+}
+
+/* ------------------------------------------------------------
+   イントロ
+   ------------------------------------------------------------ */
+.intro {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 96px 32px 0;
+}
+.intro .lead {
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.7;
+    letter-spacing: 0.1em;
+    margin: 0 0 64px;
+}
+.intro p:not(.lead) {
+    font-size: 0.98rem;
+    line-height: 2.1;
+    letter-spacing: 0.04em;
+    margin: 0 0 1.2em;
+}
+.intro strong { font-weight: 700; }
+.intro .viewpoints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.intro .viewpoints li {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+.intro .viewpoints li::before {
+    content: "";
+    display: inline-block;
+    width: 0.62em; height: 0.62em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--vp-color) 62%, #fff);
+    margin-right: 0.6em;
+}
+
+/* ------------------------------------------------------------
+   プロジェクト
+   カードをやめ、罫線で区切った行にする。
+   左：番号・視点・タイトル　右：説明と詳細
+   ------------------------------------------------------------ */
+.projects { display: block; }
+
+.project {
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    padding: 32px 0 56px;
+    border-top: 1px solid var(--rule-ink);
+}
+.project:first-child { border-top: 0; padding-top: 0; }
+
+.project-head {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+.project-no {
+    font-family: var(--font-latin);
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+.project-viewpoint {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+}
+.project-viewpoint::before {
+    content: "";
+    display: inline-block;
+    width: 0.7em; height: 0.7em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--p-color) 62%, #fff);
+    margin-right: 0.6em;
+}
+/* 写真枠：チラシの「ピンクの輪で丸く切り抜いた写真」に合わせた円形。
+   輪の色は各プロジェクトの色を薄めたもの。左カラムの余白に置く */
+.project-photo {
+    --ring: color-mix(in srgb, var(--p-color) 62%, #fff);
+    width: 100%;
+    max-width: var(--col);
+    margin: 22px 0 0;
+}
+.project-photo-frame {
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 10px solid var(--ring);
+    overflow: hidden;
+    background: #fff;
+}
+.project-photo figcaption {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--ink-sub);
+}
+.project-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.project-photo-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; height: 100%;
+    font-family: var(--font-latin);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ink-thin);
+}
+
+.project-title {
+    grid-column: 2;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin: 0;
+}
+.project-subtitle {
+    grid-column: 2;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-sub);
+    margin: 6px 0 24px;
+}
+.project-body {
+    grid-column: 2;
+    font-size: 0.95rem;
+    line-height: 2.05;
+    letter-spacing: 0.03em;
+    margin: 0 0 28px;
+}
+
+.project-facts {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.8;
+}
+.project-facts dt,
+.project-facts dd {
+    padding: 9px 0;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+}
+.project-facts dt {
+    color: var(--ink-sub);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+.project-facts a { color: var(--ink); text-underline-offset: 3px; }
+
+/* 複数項目の値（参加者・会場など）は1行ずつ */
+.project-facts .fact-item { display: block; }
+
+/* 未確定フィールド：枠や黄色をやめ、目立たない注記に */
+.tbd {
+    font-size: 0.82rem;
+    color: var(--ink-thin);
+}
+
+/* ------------------------------------------------------------
+   スケジュール
+   ------------------------------------------------------------ */
+.schedule {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.schedule li {
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    font-size: 0.93rem;
+}
+.schedule li:last-child { border-bottom: 1px solid var(--rule); }
+.schedule .when {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+.schedule .what { letter-spacing: 0.03em; }
+
+/* ------------------------------------------------------------
+   開催概要
+   ------------------------------------------------------------ */
+.overview {
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    margin: 0;
+    font-size: 0.93rem;
+}
+.overview dt,
+.overview dd {
+    padding: 14px 0;
+    margin: 0;
+}
+.overview dt {
+    color: var(--ink-sub);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+.overview a { color: var(--ink); }
+
+/* ------------------------------------------------------------
+   お知らせ（news.css の .news-wrap を上書き）
+   ------------------------------------------------------------ */
+.section .news-wrap {
+    max-width: none;
+    padding: 0;
+}
+
+/* ------------------------------------------------------------
+   フッター
+   ------------------------------------------------------------ */
+.site-footer {
+    max-width: var(--max);
+    margin: 120px auto 0;
+    padding: 20px 32px 56px;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    font-size: 0.8rem;
+    color: var(--ink-sub);
+}
+.site-footer .sns {
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.site-footer .sns a {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-latin);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+.site-footer .sns { order: 1; }
+.site-footer .credits {
+    order: 2;
+    flex: 1 0 100%;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.75rem;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+}
+.site-footer .credits p { margin: 0; }
+.site-footer .copy { order: 3; }
+.site-footer .sns a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.site-footer .copy { margin: 0; font-size: 0.75rem; color: var(--ink-thin); }
+
+/* ------------------------------------------------------------
+   レスポンシブ
+   ------------------------------------------------------------ */
+@media (max-width: 700px) {
+    .section { padding: 160px 20px 0; }
+    .intro { padding: 64px 20px 0; }
+    .intro .lead { margin-bottom: 36px; letter-spacing: 0.06em; }
+    .section-head { display: block; margin-bottom: 72px; padding-top: 28px; }
+    .section-head .ja { display: block; margin-top: 6px; font-size: 1.3rem; }
+    .project { display: block; padding-bottom: 44px; }
+    .project-head { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+    .project-photo { flex-basis: 100%; max-width: 220px; margin: 8px 0 0; }
+    .project-no { font-size: 1.8rem; }
+    .project-facts { grid-template-columns: 1fr; }
+    .project-facts dt { border-top: 1px solid var(--rule); padding-bottom: 0; font-size: 0.8rem; }
+    .project-facts dd { border-top: 0; padding-top: 2px; }
+    .schedule li { display: block; }
+    .schedule .what { display: block; margin-top: 2px; }
+    .overview { display: block; }
+    .overview dt { border-bottom: 0; padding-bottom: 0; font-size: 0.8rem; }
+    .overview dd { border-top: 0; padding-top: 2px; }
+    .site-footer { margin-top: 80px; padding: 20px 20px 44px; }
+}
+
+/* ============================================================
+   MEET関内外 概要（プロジェクト03の枠内）
+   チラシの構成：大きな日付 → スタジオツアーのコース
+   ============================================================ */
+.meet-detail { grid-column: 2; margin-top: 36px; }
+
+.meet-date {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 0.18em;
+    font-family: var(--font-latin);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.4vw, 2.8rem);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    margin: 0 0 32px;
+}
+.meet-date .time { margin-left: 0.5em; }
+/* 「火・祝」は丸囲み（チラシの ㊋・㊗）。KVの円と同じ形で揃える */
+.maru {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.05em; height: 1.05em;
+    border: 0.07em solid var(--ink);
+    border-radius: 50%;
+    font-family: var(--font-ja);
+    font-size: 0.62em;
+    font-weight: 900;
+    line-height: 1;
+}
+.dot-sep { font-family: var(--font-ja); }
+
+.meet-sub {
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+}
+.meet-lead { font-size: 0.93rem; line-height: 2; letter-spacing: 0.03em; margin: 0 0 8px; }
+
+.courses { margin: 20px 0 28px; }
+.course {
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    column-gap: 20px;
+    padding: 20px 0 24px;
+    border-top: 1px solid var(--rule-ink);
+}
+.course-time { display: flex; flex-direction: column; gap: 4px; }
+.course-label {
+    font-family: var(--font-latin);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+}
+.course-hours {
+    font-family: var(--font-latin);
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.course-place { font-size: 1.05rem; font-weight: 900; letter-spacing: 0.05em; margin: 0 0 12px; }
+.course-visits { margin: 0 0 14px; padding: 0; list-style: none; font-size: 0.9rem; }
+.course-visits li { padding: 6px 0; border-top: 1px solid var(--rule); }
+.course-visits li:last-child { border-bottom: 1px solid var(--rule); }
+.course-visits a { color: var(--ink); text-underline-offset: 3px; }
+.course-conductor { margin: 0; font-size: 0.84rem; line-height: 1.9; }
+.course-conductor span {
+    display: inline-block;
+    margin-right: 1.2em;
+    color: var(--ink-sub);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.meet-cta { margin: 28px 0 0; }
+.cta {
+    display: inline-block;
+    padding: 14px 28px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+}
+.cta::after { content: " →"; }
+.cta:hover { background: var(--ink); color: var(--kv-bg); }
+
+.notes-box { margin-top: 28px; font-size: 0.85rem; }
+.notes-box summary { cursor: pointer; font-weight: 700; letter-spacing: 0.1em; }
+.notes { margin: 12px 0 0; padding: 0; list-style: none; line-height: 1.95; color: var(--ink-sub); }
+.notes li { padding-left: 1.2em; text-indent: -1.2em; }
+.notes li::before { content: "※"; margin-right: 0.2em; }
+
+@media (max-width: 700px) {
+    .meet-detail { margin-top: 28px; }
+    .course { display: block; }
+    .course-time { flex-direction: row; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+}

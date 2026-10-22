@@ -1,0 +1,314 @@
+{
+  "updatedAt": "2026-07-02",
+  "sourcePolicy": "初期MVPでは外部本文・画像・PDFを転載せず、確認済みメタデータ、短い独自要約、出典リンク、既存または許諾確認済み画像のみを掲載する。",
+  "items": [
+    {
+      "id": 17,
+      "title": "関内外OPEN!17",
+      "year": 2026,
+      "date": "2026年2月23日",
+      "venue": "象の鼻テラス",
+      "theme": "見慣れたまちの、視点を変える。",
+      "summary": "発見・共創・交流・発酵の4つの実験的プロジェクトを展示とトークで紹介した回。",
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://kannaigai.com/kannaigai17/",
+        "https://acy.yafjp.org/projects/2026/134793/"
+      ],
+      "images": []
+    },
+    {
+      "id": 16,
+      "title": "関内外OPEN!16",
+      "year": 2024,
+      "date": "2024年11月3日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "http://kannaigai.yafjp.org/kannaigai16/",
+        "https://acy.yafjp.org/projects/2024/123711/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive16.jpg",
+          "credit": null,
+          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai16/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "関内外OPEN!15",
+      "year": 2023,
+      "date": "2023年10月14日〜15日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "http://kannaigai.yafjp.org/kannaigai15/",
+        "https://acy.yafjp.org/projects/2023/67024/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive15.jpg",
+          "credit": null,
+          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai15/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "関内外OPEN!14",
+      "year": 2022,
+      "date": "2022年10月1日〜2日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "http://kannaigai.yafjp.org/kannaigai14/",
+        "https://acy.yafjp.org/projects/2022/90444/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive14.jpg",
+          "credit": null,
+          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai14/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "関内外OPEN!13",
+      "year": 2021,
+      "date": "2021年11月3日〜7日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "http://kannaigai.yafjp.org/kannaigai13/",
+        "https://acy.yafjp.org/projects/2022/73693/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive13.jpg",
+          "credit": null,
+          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai13/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "関内外OPEN!12",
+      "year": 2020,
+      "date": "2020年11月3日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/projects/2020/18288/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive12.jpg",
+          "credit": null,
+          "sourceUrl": "https://acy.yafjp.org/projects/2020/18288/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "関内外OPEN!11",
+      "year": 2019,
+      "date": "2019年11月2日〜3日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "http://kannaigai.yafjp.org/kannaigai11/"
+      ],
+      "images": [
+        {
+          "localPath": "../kannaigai17/image/archive11.jpg",
+          "credit": null,
+          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai11/",
+          "licenseStatus": "needs_review",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "関内外OPEN!10",
+      "year": 2018,
+      "date": "2018年11月3日〜4日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/projects/2018/60666/"
+      ],
+      "images": []
+    },
+    {
+      "id": 9,
+      "title": "関内外OPEN!9",
+      "year": 2017,
+      "date": "2017年11月3日〜4日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/projects/2017/60756/"
+      ],
+      "images": []
+    },
+    {
+      "id": 8,
+      "title": "関内外OPEN!8",
+      "year": 2016,
+      "date": "2016年11月5日〜6日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/projects/2016/60831/"
+      ],
+      "images": []
+    },
+    {
+      "id": 7,
+      "title": "関内外OPEN!7",
+      "year": 2015,
+      "date": "2015年11月7日〜8日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://www.hamakei.com/headline/9630/"
+      ],
+      "images": []
+    },
+    {
+      "id": 6,
+      "title": "関内外OPEN!6",
+      "year": 2014,
+      "date": "2014年10月17日〜19日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/news/2014/96495/"
+      ],
+      "images": []
+    },
+    {
+      "id": 5,
+      "title": "関内外OPEN!5",
+      "year": 2013,
+      "date": "2013年11月1日〜2日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/news/2013/95418/"
+      ],
+      "images": []
+    },
+    {
+      "id": 4,
+      "title": "関内外OPEN!4",
+      "year": 2012,
+      "date": "2012年10月26日〜28日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://acy.yafjp.org/projects/2012/61058/"
+      ],
+      "images": []
+    },
+    {
+      "id": 3,
+      "title": "関内外OPEN!3",
+      "year": 2011,
+      "date": "2011年11月1日〜2日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://www.hamakei.com/headline/6364/"
+      ],
+      "images": []
+    },
+    {
+      "id": 2,
+      "title": "関内外OPEN!2",
+      "year": 2010,
+      "date": "2010年9月11日〜12日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://www.hamakei.com/headline/5439/"
+      ],
+      "images": []
+    },
+    {
+      "id": 1,
+      "title": "関内外OPEN!",
+      "year": 2009,
+      "date": "2009年9月4日〜6日",
+      "venue": null,
+      "theme": null,
+      "summary": null,
+      "status": "needs_review",
+      "statusLabel": "確認中",
+      "sourceUrls": [
+        "https://www.hamakei.com/headline/4299/"
+      ],
+      "images": []
+    }
+  ]
+}

@@ -95,17 +95,23 @@
     align-items: center;
     gap: 6px;
     font-size: 0.75rem;
-    font-weight: 500;
-    color: #fff;
-    background: var(--cat-color, #555);
-    padding: 3px 10px;
-    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--news-text);
     white-space: nowrap;
+}
+/* 色は小さな丸だけに（面で塗らない）。トップ・プロジェクトの視点ドットと揃える */
+.news-category::before {
+    content: "";
+    width: 0.7em; height: 0.7em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--cat-color, #dde5e8) 62%, #fff);
 }
 .news-category .viewpoint {
     font-size: 0.68rem;
-    opacity: 0.85;
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    opacity: 0.72;
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 6px;
 }
 
