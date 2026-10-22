@@ -95,16 +95,21 @@
     align-items: center;
     gap: 6px;
     font-size: 0.75rem;
-    font-weight: 500;
-    /* 背景はメインビジュアル由来の明るい色なので文字は黒 */
+    font-weight: 700;
+    letter-spacing: 0.06em;
     color: var(--news-text);
-    background: var(--cat-color, #dde5e8);
-    padding: 3px 10px;
-    border-radius: 999px;
     white-space: nowrap;
+}
+/* 色は小さな丸だけに（面で塗らない）。トップ・プロジェクトの視点ドットと揃える */
+.news-category::before {
+    content: "";
+    width: 0.7em; height: 0.7em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--cat-color, #dde5e8) 62%, #fff);
 }
 .news-category .viewpoint {
     font-size: 0.68rem;
+    font-weight: 500;
     opacity: 0.72;
     border-left: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 6px;

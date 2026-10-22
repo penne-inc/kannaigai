@@ -7,9 +7,8 @@
     "subtitle": "デザインを通じて、地域と人がつながる",
     "body": "地域で課題を感じているパートナーを起点に、クリエイターと地域が主体となって協働し、課題解決に向けたリデザインを行います。単なる制作ではなく、対話や試作を重ねる共創プロセスを重視し、多様な主体がつながる構造をつくります。完成した成果物を地域にひらくことで、新たな交流や関係性の創出につなげます。",
     "partners": "就労継続支援B型 一天 ／ 横浜市障害者共同受注センター わーくる",
-    "schedule": "成果物完成予定：2026年10月",
+    "schedule": "随時実施",
     "venue": null,
-    "prBegin": "2026年12月",
     "lead": null,
     "contact": null,
     "image": null,
@@ -21,7 +20,9 @@
       "協働パートナーの正式名称・ロゴ使用可否",
       "成果物の公開時期と公開方法",
       "参加クリエイターの募集有無・募集要項"
-    ]
+    ],
+    "imageAlt": null,
+    "credit": null
   },
   {
     "key": "bikkuri",
@@ -33,12 +34,14 @@
     "partners": null,
     "schedule": "年間継続投稿 ＋ 企画特集（例：夏休み横浜冒険MAP）",
     "venue": null,
-    "prBegin": "2026年7月〜（投稿者向け）",
     "lead": null,
     "contact": null,
-    "image": null,
+    "image": "image/projects/bikkuri.webp",
     "links": [
-      { "label": "Instagram", "url": "https://www.instagram.com/kannaigaiopen/" }
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/kannaigaiopen/"
+      }
     ],
     "needs": [
       "プロジェクト担当者名・所属",
@@ -48,7 +51,9 @@
       "特集企画（11月）の詳細と日程",
       "観光MAP（2月発行）の配布場所・入手方法",
       "紹介用の投稿サンプル画像 3〜5点（掲載許諾込み）"
-    ]
+    ],
+    "imageAlt": "びっくり！YOKOHAMA のロゴ",
+    "credit": null
   },
   {
     "key": "meet",
@@ -58,13 +63,21 @@
     "subtitle": "関内外OPEN!の原点をひらく",
     "body": "関内エリアのクリエイターや拠点を「見て・知る」イベントです。オフィスや制作拠点を巡る「スタジオツアー」と、関内外OPEN!に関わる人々が道路空間に集う交流プログラムを開催します。改めて関内外エリア自体の魅力やクリエイターとの接点を可視化し、新たな関係人口創出の入口をつくります。",
     "partners": null,
-    "schedule": "2026年11月3日(火)",
-    "venue": "関内外エリア／関内桜通り周辺",
-    "prBegin": "2026年10月3日",
+    "schedule": "2026年11月3日(火・祝) 11:00–17:00",
+    "venue": "関内さくら通り（神奈川県横浜市中区相生町3-60付近）",
     "lead": null,
     "contact": null,
-    "image": null,
-    "links": [],
+    "image": "image/projects/meet.webp",
+    "links": [
+      {
+        "label": "Peatix",
+        "url": "https://peatix.com/event/5230861"
+      },
+      {
+        "label": "関内外OPEN!18（アーツコミッション・ヨコハマ）",
+        "url": "https://acy.yafjp.org/projects/2026/135534/"
+      }
+    ],
     "needs": [
       "プロジェクト担当者名・所属",
       "連絡先（メール／担当窓口）",
@@ -73,7 +86,15 @@
       "参加申込方法・申込フォームURL・定員",
       "雨天時の対応",
       "紹介用の写真 3〜5点（前回開催時のものも可・掲載許諾込み）"
-    ]
+    ],
+    "programs": [
+      "MARKET",
+      "STUDIO TOUR",
+      "WORKSHOP",
+      "クリエイターがつくるPARK"
+    ],
+    "imageAlt": "スタジオツアーの様子",
+    "credit": "Photo：森本聡（カラーコーディネーション）"
   },
   {
     "key": "compost",
@@ -85,10 +106,9 @@
     "partners": null,
     "schedule": "① 2026年7月15日 ／ ② 2026年10月下旬 ／ ③ 2026年12月上旬",
     "venue": "オンデザインイッカイ",
-    "prBegin": "各回開催の1か月前",
     "lead": null,
     "contact": null,
-    "image": null,
+    "image": "image/projects/compost.webp",
     "links": [],
     "needs": [
       "プロジェクト担当者名・所属",
@@ -98,6 +118,8 @@
       "参加申込方法・申込フォームURL・定員・参加費",
       "会場の住所とアクセス情報",
       "紹介用の写真 3〜5点（掲載許諾込み）"
-    ]
+    ],
+    "imageAlt": "アイデアコンポストの様子",
+    "credit": "Photo：前谷開"
   }
 ]

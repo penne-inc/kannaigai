@@ -18,6 +18,10 @@ const ROOT = path.resolve(__dirname, '..');            // kannaigai18/
 const SITE = 'https://kannaigai.com/kannaigai18';
 const DEFAULT_OGP = `${SITE}/image/ogp.jpg`;
 
+// ローカル用：kannaigai18/.env があれば読み込む（.gitignore 済み）。
+// CI では .env がなく Secrets の環境変数が使われるので、読み込みは失敗しても無視する。
+try { process.loadEnvFile(path.join(ROOT, '.env')); } catch { /* .env なし */ }
+
 const SERVICE = process.env.MICROCMS_SERVICE_DOMAIN || '';
 const APIKEY = process.env.MICROCMS_API_KEY || '';
 const ENDPOINT = process.env.MICROCMS_ENDPOINT || 'news';
@@ -28,6 +32,7 @@ const FIELDS = { title: 'title', body: 'content', date: 'date', category: 'categ
 // ---- ユーティリティ ----
 const categories = JSON.parse(await readFile(path.join(ROOT, 'data/categories.json'), 'utf8'));
 const projects = JSON.parse(await readFile(path.join(ROOT, 'data/projects.json'), 'utf8'));
+const meet = JSON.parse(await readFile(path.join(ROOT, 'data/meet.json'), 'utf8'));
 
 function resolveCategory(raw) {
     const fallback = categories.find(c => c.key === 'general')
@@ -97,7 +102,7 @@ function normalize(raw, source) {
 }
 
 // ---- テンプレート ----
-function head({ title, description, url, image, noindex = false, cssPath }) {
+function head({ title, description, url, image, noindex = false, cssPath, ogType = 'article' }) {
     const cssLinks = (Array.isArray(cssPath) ? cssPath : [cssPath])
         .map(p => `<link rel="stylesheet" href="${p}">`).join('\n    ');
     return `<!DOCTYPE html>
@@ -110,7 +115,7 @@ function head({ title, description, url, image, noindex = false, cssPath }) {
     ${noindex ? '<meta name="robots" content="noindex">' : ''}
     <link rel="canonical" href="${esc(url)}">
 
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="${ogType}">
     <meta property="og:site_name" content="関内外OPEN!18">
     <meta property="og:url" content="${esc(url)}">
     <meta property="og:title" content="${esc(title)}">
@@ -123,7 +128,7 @@ function head({ title, description, url, image, noindex = false, cssPath }) {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
     ${cssLinks}
 </head>`;
 }
@@ -241,13 +246,17 @@ ${parts}
              alt="関内外OPEN!18 みなれた街の、視点を変える。発見・共創・交流・発酵" fetchpriority="high">`;
 }
 
-// 未確定フィールドは「情報をお寄せください」プレースホルダで表示する。
-// data/projects.json の null をそのまま可視化し、担当者への情報請求リストを兼ねる。
-function factRow(label, value, placeholder = '情報をお寄せください') {
-    const v = value
-        ? esc(value)
-        : `<span class="tbd">${esc(placeholder)}</span>`;
-    return `                    <dt>${esc(label)}</dt><dd>${v}</dd>`;
+// 未確定（null）のフィールドは行ごと省く。確定したら data/projects.json に値を入れれば現れる。
+function factRow(label, value) {
+    if (!value) return '';
+    return `                    <dt>${esc(label)}</dt><dd>${esc(value)}</dd>`;
+}
+
+// 配列・複数行の値（改行区切りで表示）
+function factList(label, list, tag = 'span') {
+    if (!list || !list.length) return '';
+    const items = list.map(t => `<${tag} class="fact-item">${esc(t)}</${tag}>`).join('');
+    return `                    <dt>${esc(label)}</dt><dd class="fact-list">${items}</dd>`;
 }
 
 function projectCard(p) {
@@ -256,31 +265,68 @@ function projectCard(p) {
     const ink = cat.ink || '#4a5a62';       // 文字（サブタイトル・リンク）＝濃色
 
     const links = p.links && p.links.length
-        ? p.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join(' ／ ')
-        : `<span class="tbd">情報をお寄せください</span>`;
+        ? `                    <dt>関連リンク</dt><dd>${p.links.map(l => /^https?:/.test(l.url)
+            ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`
+            : `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join(' ／ ')}</dd>`
+        : '';
 
     const facts = [
-        factRow('協働パートナー', p.partners, '調整中／情報をお寄せください'),
-        factRow('スケジュール', p.schedule),
-        factRow('会場', p.venue, '調整中／情報をお寄せください'),
-        factRow('広報開始', p.prBegin),
+        factRow('日時', p.schedule),
+        factRow('協働パートナー', p.partners),
+        factList('内容', p.programs),
+        factRow('会場', p.venue),
+        factList('ツアー会場', p.tourVenues),
+        factList('参加', p.participants),
         factRow('担当', p.lead),
-        `                    <dt>関連リンク</dt><dd>${links}</dd>`
-    ].join('\n');
+        links
+    ].filter(Boolean).join('\n');
+
+    // 写真枠：data/projects.json の image（例: "image/projects/meet.webp"）を入れると差し替わる。
+    // 未設定の間は「PHOTO」と表示した空の枠を出す。
+    const photoInner = p.image
+        ? `<img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.title)}" loading="lazy" decoding="async">`
+        : `<span class="project-photo-empty">PHOTO</span>`;
+    const photo = `<figure class="project-photo${p.image ? '' : ' is-empty'}">`
+        + `<div class="project-photo-frame">${photoInner}</div>`
+        + (p.credit ? `<figcaption>${esc(p.credit)}</figcaption>` : '')
+        + `</figure>`;
 
     return `            <article class="project reveal" style="--p-color:${esc(color)};--p-ink:${esc(ink)}">
                 <div class="project-head">
                     <span class="project-no">PROJECT ${esc(p.no)}</span>
                     <span class="project-viewpoint">${esc(p.viewpoint)}</span>
+                    ${photo}
                 </div>
                 <h3 class="project-title">${esc(p.title)}</h3>
                 <p class="project-subtitle">${esc(p.subtitle)}</p>
                 <p class="project-body">${esc(p.body)}</p>
-                <dl class="project-facts">
-${facts}
-                </dl>
-            </article>`;
+${facts ? `                <dl class="project-facts">\n${facts}\n                </dl>\n` : ''}${p.key === 'meet' ? meetDetail(meet) + '\n' : ''}            </article>`;
 }
+
+// クレジット表記（フッター・開催概要で共通）。文言は主催者指定のものをそのまま使う
+const CREDITS = [
+    ['主催', '関内外OPEN!18事務局（関内外クリエイターズ、アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団））'],
+    ['共催', '横浜市にぎわいスポーツ文化局']
+];
+const GRANT = '令和８年度　文化庁　文化芸術創造拠点形成事業';
+
+function siteFooter() {
+    return `    <footer class="site-footer">
+        <ul class="sns">
+            <li><a href="https://kannaigai.com/" target="_blank" rel="noopener">HP</a></li>
+            <li><a href="https://www.instagram.com/kannaigaiopen/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/kannaigaiopen/" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+        <div class="credits">
+            ${CREDITS.map(([k, v]) => `<p>${esc(k)}：${esc(v)}</p>`).join('\n            ')}
+            <p>${esc(GRANT)}</p>
+        </div>
+        <p class="copy">&copy; 関内外OPEN! ／ 関内外クリエイターズ</p>
+    </footer>`;
+}
+
+// 年間スケジュールのセクションは非表示中。true にすると再表示される。
+const SHOW_SCHEDULE = false;
 
 const SCHEDULE = [
     ['6月末', '各プロジェクトで連携先等の調整／全体リリース'],
@@ -321,6 +367,7 @@ function topHtml(items) {
         description: 'みなれたまちの、視点を変える。2026年7月〜2027年2月',
         url: `${SITE}/`,
         image: DEFAULT_OGP,
+        ogType: 'website',
         cssPath: ['css/news.css', 'css/top.css']
     })}
 <body>
@@ -345,12 +392,12 @@ ${projects.map(projectCard).join('\n')}
             </div>
         </section>
 
-        <section class="section reveal" id="schedule">
+${SHOW_SCHEDULE ? `        <section class="section reveal" id="schedule">
             <div class="section-head"><h2 class="en">SCHEDULE</h2><span class="ja">年間スケジュール</span></div>
             <ul class="schedule">
 ${scheduleRows}
             </ul>
-        </section>
+        </section>` : ''}
 
         <section class="section reveal" id="news">
             <div class="section-head"><h2 class="en">NEWS</h2><span class="ja">お知らせ</span></div>
@@ -366,25 +413,59 @@ ${scheduleRows}
                 <dt>実施期間</dt><dd>2026年7月 〜 2027年2月</dd>
                 <dt>報告会</dt><dd>2027年2月27日(土)／オンライン開催</dd>
                 <dt>会場</dt><dd>各プロジェクトごとに調整（報告会はオンライン）</dd>
-                <dt>主催</dt><dd>関内外クリエイターズ、アーツコミッション・ヨコハマ（公益財団法人横浜市芸術文化振興財団）</dd>
-                <dt>共催</dt><dd>横浜市にぎわいスポーツ文化局（予定）</dd>
+                ${CREDITS.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('\n                ')}
+                <dt>助成</dt><dd>${esc(GRANT)}</dd>
             </dl>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <ul class="sns">
-            <li><a href="https://kannaigai.com/" target="_blank" rel="noopener">HP</a></li>
-            <li><a href="https://www.instagram.com/kannaigaiopen/" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://www.facebook.com/kannaigaiopen/" target="_blank" rel="noopener">Facebook</a></li>
-        </ul>
-        <p class="copy">&copy; 関内外OPEN! ／ 関内外クリエイターズ</p>
-    </footer>
+${siteFooter()}
 
     <script src="js/top.js" defer></script>
 </body>
 </html>
 `;
+}
+
+// ---- MEET関内外 概要（data/meet.json）：プロジェクト03の枠に差し込む ----
+const linkOrText = v => v.url
+    ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)}</a>`
+    : esc(v.name);
+
+function meetDetail(m) {
+    const wd = m.date.weekday.map(w => `<span class="maru">${esc(w)}</span>`).join('<span class="dot-sep">・</span>');
+    const courses = m.tour.courses.map(c => `                <article class="course">
+                    <div class="course-time">
+                        <span class="course-label">COURSE ${esc(c.label)}</span>
+                        <span class="course-hours">${esc(c.time)}</span>
+                    </div>
+                    <div class="course-body">
+                        <h4 class="course-place">${esc(c.place)}</h4>
+                        <ul class="course-visits">${c.visits.map(v => `<li>${linkOrText(v)}</li>`).join('')}</ul>
+                        <p class="course-conductor"><span>コンダクター</span>${c.conductors.map(esc).join(' ＋ ')}</p>
+                    </div>
+                </article>`).join('\n');
+    const notes = m.notes.map(n => `                    <li>${esc(n)}</li>`).join('\n');
+
+    return `                <div class="meet-detail">
+                <p class="meet-date"><span class="md">${esc(m.date.md)}</span>${wd}<span class="time">${esc(m.date.time)}</span></p>
+                <h4 class="meet-sub">${esc(m.tour.heading)}</h4>
+                <p class="meet-lead">${esc(m.tour.lead)}</p>
+                <div class="courses">
+${courses}
+                </div>
+                <dl class="project-facts">
+                    <dt>集合場所</dt><dd>${esc(m.tour.meeting)}</dd>
+                    <dt>定員</dt><dd>${esc(m.tour.capacity)}</dd>
+                </dl>
+                <p class="meet-cta"><a class="cta" href="${esc(m.applyUrl)}" target="_blank" rel="noopener">スタジオツアーの申し込み（Peatix）</a></p>
+                <details class="notes-box">
+                    <summary>注意事項</summary>
+                    <ul class="notes">
+${notes}
+                    </ul>
+                </details>
+                </div>`;
 }
 
 // ---- 既存の生成物を掃除（preview は残す）----

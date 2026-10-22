@@ -12,17 +12,23 @@
     --kv-green: #2ade05;
     --kv-bg:    #f5f9fa;
 
-    --ink:      #1a1a1a;
-    --ink-sub:  #6b7280;
-    --ink-thin: #9aa3ab;
-    --rule:     #e3e8ea;
+    --ink:      #111;
+    --ink-sub:  #5f666b;
+    --ink-thin: #98a0a5;
+    --rule:     #d5dcdf;
+    --rule-ink: #111;
     --max:      1080px;
+    --col:      200px;   /* 左カラム幅（見出し・ラベル）。全セクションで揃える */
+
+    /* チラシの極太ゴシックと、幅広の欧文ボールドに寄せる */
+    --font-ja:    'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-latin: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: var(--font-ja);
     margin: 0;
     color: var(--ink);
     background: var(--kv-bg);
@@ -192,184 +198,231 @@ body {
 
 /* ------------------------------------------------------------
    共通レイアウト
+   チラシ同様、面や角丸は使わず「黒インク・細い罫線・大きな余白」で組む。
+   色は KV の円に任せ、UI 側は小さな丸（ドット）にだけ薄めて使う。
    ------------------------------------------------------------ */
 .section {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 88px 24px;
+    padding: 360px 32px 0;
 }
-.section + .section { padding-top: 0; }
 
 .section-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
     align-items: baseline;
-    gap: 14px;
-    margin: 0 0 40px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid var(--ink);
+    margin: 0 0 168px;
+    padding-top: 42px;
+    border-top: 1px solid var(--ink);
 }
 .section-head .en {
-    font-size: 1.6rem;
+    font-family: var(--font-latin);
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.16em;
     margin: 0;
 }
 .section-head .ja {
-    font-size: 0.9rem;
-    color: var(--ink-sub);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+}
+
+/* 視点ドット：KVの円を小さく写したもの */
+.dot {
+    display: inline-block;
+    width: 0.62em; height: 0.62em;
+    border-radius: 50%;
+    background: var(--dot);
+    margin-right: 0.55em;
+    vertical-align: 0.04em;
 }
 
 /* ------------------------------------------------------------
    イントロ
    ------------------------------------------------------------ */
 .intro {
-    max-width: 760px;
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 72px 24px 24px;
-    text-align: center;
+    padding: 96px 32px 0;
 }
 .intro .lead {
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 2;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.7;
+    letter-spacing: 0.1em;
+    margin: 0 0 64px;
+}
+.intro p:not(.lead) {
+    font-size: 0.98rem;
+    line-height: 2.1;
     letter-spacing: 0.04em;
-    margin: 0 0 28px;
-}
-.intro p {
-    font-size: 1rem;
-    color: #333;
     margin: 0 0 1.2em;
-    text-align: left;
 }
+.intro strong { font-weight: 700; }
 .intro .viewpoints {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: 36px 0 0;
+    gap: 6px 28px;
+    margin: 20px 0 0;
     padding: 0;
     list-style: none;
 }
 .intro .viewpoints li {
     font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 8px 22px;
-    border-radius: 999px;
-    color: var(--ink);          /* KVの色は明度が高いので黒文字（コントラスト6:1以上） */
-    background: var(--vp-color);
+    letter-spacing: 0.2em;
+}
+.intro .viewpoints li::before {
+    content: "";
+    display: inline-block;
+    width: 0.62em; height: 0.62em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--vp-color) 62%, #fff);
+    margin-right: 0.6em;
 }
 
 /* ------------------------------------------------------------
    プロジェクト
+   カードをやめ、罫線で区切った行にする。
+   左：番号・視点・タイトル　右：説明と詳細
    ------------------------------------------------------------ */
-.projects { display: grid; gap: 28px; }
+.projects { display: block; }
 
 .project {
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 32px 30px;
-    position: relative;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    padding: 32px 0 56px;
+    border-top: 1px solid var(--rule-ink);
 }
-/* 同心円モチーフ（KVのドット）を右上に配置 */
-.project::before {
-    content: "";
-    position: absolute;
-    top: -70px; right: -70px;
-    width: 190px; height: 190px;
-    border-radius: 50%;
-    /* KVと同じ絵の具のテクスチャを、同心円グラデーションに multiply で重ねる */
-    background-image:
-        url(../image/kv/tex-circle.webp),
-        radial-gradient(
-            circle,
-            var(--p-color) 0 22%,
-            color-mix(in srgb, var(--p-color) 45%, #fff) 22% 52%,
-            color-mix(in srgb, var(--p-color) 18%, #fff) 52% 100%
-        );
-    background-size: cover, cover;
-    background-position: center, center;
-    background-blend-mode: hard-light, normal;
-    opacity: 0.62;
-    pointer-events: none;
-}
+.project:first-child { border-top: 0; padding-top: 0; }
 
 .project-head {
+    grid-column: 1;
+    grid-row: 1 / span 4;
     display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
 }
 .project-no {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: var(--ink-thin);
+    font-family: var(--font-latin);
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--ink);
     font-variant-numeric: tabular-nums;
 }
 .project-viewpoint {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
     color: var(--ink);
-    background: var(--p-color);
-    padding: 4px 14px;
-    border-radius: 999px;
 }
-.project-title {
-    font-size: 1.5rem;
+.project-viewpoint::before {
+    content: "";
+    display: inline-block;
+    width: 0.7em; height: 0.7em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--p-color) 62%, #fff);
+    margin-right: 0.6em;
+}
+/* 写真枠：チラシの「ピンクの輪で丸く切り抜いた写真」に合わせた円形。
+   輪の色は各プロジェクトの色を薄めたもの。左カラムの余白に置く */
+.project-photo {
+    --ring: color-mix(in srgb, var(--p-color) 62%, #fff);
+    width: 100%;
+    max-width: var(--col);
+    margin: 22px 0 0;
+}
+.project-photo-frame {
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 10px solid var(--ring);
+    overflow: hidden;
+    background: #fff;
+}
+.project-photo figcaption {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--ink-sub);
+}
+.project-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.project-photo-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; height: 100%;
+    font-family: var(--font-latin);
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    margin: 4px 0 0;
-    position: relative;
-}
-.project-subtitle {
-    font-size: 0.98rem;
-    font-weight: 500;
-    color: var(--p-ink);
-    margin: 8px 0 18px;
-    position: relative;
-}
-.project-body {
-    font-size: 0.97rem;
-    color: #333;
-    margin: 0 0 22px;
-    position: relative;
+    letter-spacing: 0.2em;
+    color: var(--ink-thin);
 }
 
-/* 詳細情報（定義リスト） */
-.project-facts {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 10px 20px;
+.project-title {
+    grid-column: 2;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
     margin: 0;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--rule);
+}
+.project-subtitle {
+    grid-column: 2;
     font-size: 0.9rem;
-    position: relative;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-sub);
+    margin: 6px 0 24px;
+}
+.project-body {
+    grid-column: 2;
+    font-size: 0.95rem;
+    line-height: 2.05;
+    letter-spacing: 0.03em;
+    margin: 0 0 28px;
+}
+
+.project-facts {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.8;
+}
+.project-facts dt,
+.project-facts dd {
+    padding: 9px 0;
+    border-top: 1px solid var(--rule);
+    margin: 0;
 }
 .project-facts dt {
     color: var(--ink-sub);
     font-weight: 500;
-    white-space: nowrap;
+    letter-spacing: 0.06em;
 }
-.project-facts dd { margin: 0; }
-.project-facts a { color: var(--p-ink); }
+.project-facts a { color: var(--ink); text-underline-offset: 3px; }
 
-/* 未確定フィールド：担当者に情報をもらう箇所 */
+/* 複数項目の値（参加者・会場など）は1行ずつ */
+.project-facts .fact-item { display: block; }
+
+/* 未確定フィールド：枠や黄色をやめ、目立たない注記に */
 .tbd {
-    display: inline-block;
     font-size: 0.82rem;
-    font-weight: 500;
-    color: #8a6d1a;
-    background: #fff8e1;
-    border: 1px dashed #e0b93a;
-    border-radius: 5px;
-    padding: 2px 10px;
+    color: var(--ink-thin);
 }
 
 /* ------------------------------------------------------------
@@ -379,43 +432,44 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--rule);
 }
 .schedule li {
     display: grid;
-    grid-template-columns: 108px 1fr;
-    gap: 20px;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
     align-items: baseline;
-    padding: 16px 4px;
-    border-bottom: 1px solid var(--rule);
-    font-size: 0.95rem;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    font-size: 0.93rem;
 }
+.schedule li:last-child { border-bottom: 1px solid var(--rule); }
 .schedule .when {
     font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--ink);
+    letter-spacing: 0.1em;
 }
-.schedule .what { color: #333; }
+.schedule .what { letter-spacing: 0.03em; }
 
 /* ------------------------------------------------------------
    開催概要
    ------------------------------------------------------------ */
 .overview {
     display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 14px 28px;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
     margin: 0;
-    font-size: 0.95rem;
-    border-top: 1px solid var(--rule);
-    padding-top: 24px;
+    font-size: 0.93rem;
+}
+.overview dt,
+.overview dd {
+    padding: 14px 0;
+    margin: 0;
 }
 .overview dt {
     color: var(--ink-sub);
     font-weight: 500;
-    white-space: nowrap;
+    letter-spacing: 0.1em;
 }
-.overview dd { margin: 0; }
-.overview a { color: var(--kv-blue); }
+.overview a { color: var(--ink); }
 
 /* ------------------------------------------------------------
    お知らせ（news.css の .news-wrap を上書き）
@@ -429,44 +483,172 @@ body {
    フッター
    ------------------------------------------------------------ */
 .site-footer {
-    border-top: 1px solid var(--rule);
-    margin-top: 40px;
-    padding: 48px 24px 64px;
-    text-align: center;
-    font-size: 0.88rem;
+    max-width: var(--max);
+    margin: 120px auto 0;
+    padding: 20px 32px 56px;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    font-size: 0.8rem;
     color: var(--ink-sub);
 }
 .site-footer .sns {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 0 0 20px;
+    gap: 28px;
+    margin: 0;
     padding: 0;
     list-style: none;
 }
 .site-footer .sns a {
     color: var(--ink);
     text-decoration: none;
-    font-weight: 500;
-    border-bottom: 2px solid var(--kv-blue);
-    padding-bottom: 2px;
+    font-family: var(--font-latin);
+    font-weight: 700;
+    letter-spacing: 0.1em;
 }
-.site-footer .sns a:hover { color: var(--kv-blue); }
-.site-footer .copy { margin: 0; font-size: 0.8rem; color: var(--ink-thin); }
+.site-footer .sns { order: 1; }
+.site-footer .credits {
+    order: 2;
+    flex: 1 0 100%;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.75rem;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+}
+.site-footer .credits p { margin: 0; }
+.site-footer .copy { order: 3; }
+.site-footer .sns a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.site-footer .copy { margin: 0; font-size: 0.75rem; color: var(--ink-thin); }
 
 /* ------------------------------------------------------------
    レスポンシブ
    ------------------------------------------------------------ */
 @media (max-width: 700px) {
-    .section { padding: 64px 18px; }
-    .intro { padding: 52px 18px 16px; }
-    .intro .lead { font-size: 1.1rem; }
-    .section-head .en { font-size: 1.3rem; }
-    .project { padding: 26px 20px; }
-    .project-title { font-size: 1.25rem; }
-    .project-facts { grid-template-columns: 1fr; gap: 4px 0; }
-    .project-facts dt { margin-top: 10px; font-size: 0.85rem; }
-    .schedule li { grid-template-columns: 1fr; gap: 4px; }
-    .overview { grid-template-columns: 1fr; gap: 4px 0; }
-    .overview dt { margin-top: 12px; font-size: 0.85rem; }
+    .section { padding: 160px 20px 0; }
+    .intro { padding: 64px 20px 0; }
+    .intro .lead { margin-bottom: 36px; letter-spacing: 0.06em; }
+    .section-head { display: block; margin-bottom: 72px; padding-top: 28px; }
+    .section-head .ja { display: block; margin-top: 6px; font-size: 1.3rem; }
+    .project { display: block; padding-bottom: 44px; }
+    .project-head { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+    .project-photo { flex-basis: 100%; max-width: 220px; margin: 8px 0 0; }
+    .project-no { font-size: 1.8rem; }
+    .project-facts { grid-template-columns: 1fr; }
+    .project-facts dt { border-top: 1px solid var(--rule); padding-bottom: 0; font-size: 0.8rem; }
+    .project-facts dd { border-top: 0; padding-top: 2px; }
+    .schedule li { display: block; }
+    .schedule .what { display: block; margin-top: 2px; }
+    .overview { display: block; }
+    .overview dt { border-bottom: 0; padding-bottom: 0; font-size: 0.8rem; }
+    .overview dd { border-top: 0; padding-top: 2px; }
+    .site-footer { margin-top: 80px; padding: 20px 20px 44px; }
+}
+
+/* ============================================================
+   MEET関内外 概要（プロジェクト03の枠内）
+   チラシの構成：大きな日付 → スタジオツアーのコース
+   ============================================================ */
+.meet-detail { grid-column: 2; margin-top: 36px; }
+
+.meet-date {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 0.18em;
+    font-family: var(--font-latin);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.4vw, 2.8rem);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    margin: 0 0 32px;
+}
+.meet-date .time { margin-left: 0.5em; }
+/* 「火・祝」は丸囲み（チラシの ㊋・㊗）。KVの円と同じ形で揃える */
+.maru {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.05em; height: 1.05em;
+    border: 0.07em solid var(--ink);
+    border-radius: 50%;
+    font-family: var(--font-ja);
+    font-size: 0.62em;
+    font-weight: 900;
+    line-height: 1;
+}
+.dot-sep { font-family: var(--font-ja); }
+
+.meet-sub {
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+}
+.meet-lead { font-size: 0.93rem; line-height: 2; letter-spacing: 0.03em; margin: 0 0 8px; }
+
+.courses { margin: 20px 0 28px; }
+.course {
+    display: grid;
+    grid-template-columns: 8.5em 1fr;
+    column-gap: 20px;
+    padding: 20px 0 24px;
+    border-top: 1px solid var(--rule-ink);
+}
+.course-time { display: flex; flex-direction: column; gap: 4px; }
+.course-label {
+    font-family: var(--font-latin);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+}
+.course-hours {
+    font-family: var(--font-latin);
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.course-place { font-size: 1.05rem; font-weight: 900; letter-spacing: 0.05em; margin: 0 0 12px; }
+.course-visits { margin: 0 0 14px; padding: 0; list-style: none; font-size: 0.9rem; }
+.course-visits li { padding: 6px 0; border-top: 1px solid var(--rule); }
+.course-visits li:last-child { border-bottom: 1px solid var(--rule); }
+.course-visits a { color: var(--ink); text-underline-offset: 3px; }
+.course-conductor { margin: 0; font-size: 0.84rem; line-height: 1.9; }
+.course-conductor span {
+    display: inline-block;
+    margin-right: 1.2em;
+    color: var(--ink-sub);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.meet-cta { margin: 28px 0 0; }
+.cta {
+    display: inline-block;
+    padding: 14px 28px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+}
+.cta::after { content: " →"; }
+.cta:hover { background: var(--ink); color: var(--kv-bg); }
+
+.notes-box { margin-top: 28px; font-size: 0.85rem; }
+.notes-box summary { cursor: pointer; font-weight: 700; letter-spacing: 0.1em; }
+.notes { margin: 12px 0 0; padding: 0; list-style: none; line-height: 1.95; color: var(--ink-sub); }
+.notes li { padding-left: 1.2em; text-indent: -1.2em; }
+.notes li::before { content: "※"; margin-right: 0.2em; }
+
+@media (max-width: 700px) {
+    .meet-detail { margin-top: 28px; }
+    .course { display: block; }
+    .course-time { flex-direction: row; align-items: baseline; gap: 14px; margin-bottom: 10px; }
 }
