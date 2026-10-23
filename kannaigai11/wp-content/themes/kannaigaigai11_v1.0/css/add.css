@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+.pc-none {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .pc-none {
+        display: inline-block;
+    }
+}
+
+#topSec .inner .btnBox {
+    text-align: center;
+}
+
+
+#topSec .inner .btnBox a{
+    font-size: 20px;
+}
+
+.news-list {
+background: #6f6f6f;
+padding: 40px;
+text-align: center;
+}
+
+.news-list h2 {
+color: #fff;
+text-align: center;
+font-size: 21px;
+margin: 21px 0 42px;
+}
+
+.news-list ul {
+max-width: 55%;
+margin: 0 auto 21px;
+text-align: left;
+}
+
+.news-list ul li a {
+padding: 20px 0;
+border-bottom: 2px dotted #fff;
+color: #fff;
+display: block;
+
+}
+.news-list ul li a span{
+margin-right: 1.2em;
+}
+
+@media screen and (max-width: 767px) {
+    .news-list ul {
+        max-width: 100%;
+    }
+
+    .news-list ul li a {
+        padding: 10px 0;
+        font-size: 0.714rem;
+    }
+    .news-list ul li a span{
+        margin-right: 0;
+        margin-bottom: .2em;
+        display: block;
+    }
+}
+
+
+.mainSubTitle {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: .8rem;
+}
+
+@media screen and (max-width: 767px) {
+.mainSubTitle {
+    font-size: .9rem;
+}
+
+}
+
+.topEventTitle {
+    margin-bottom :20px;
+}
+
+.topEventTitle h4 {
+    font-size: 1.6rem;
+    margin-bottom: .2em;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 767px) {
+    .topEventTitle h4 {
+        font-size: 1.3rem;
+    }
+    .topEventTitle p {
+        font-size: 0.714rem;
+    }
+}
+
+#topHead .inner{
+  background : -moz-linear-gradient(0% 50% 0deg,rgba(255, 181, 154, 1) 0%,rgba(251, 168, 170, 1) 16.47%,rgba(248, 156, 185, 1) 36.62%,rgba(188, 137, 181, 1) 72.45%,rgba(193, 126, 173, 1) 81.12%,rgba(206, 102, 154, 1) 94.38%);
+  background : -webkit-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  background : -webkit-gradient(linear,0% 50% ,100% 50% ,color-stop(0,rgba(255, 181, 154, 1) ),color-stop(0.1647,rgba(251, 168, 170, 1) ),color-stop(0.3662,rgba(248, 156, 185, 1) ),color-stop(0.7245,rgba(188, 137, 181, 1) ),color-stop(0.8112,rgba(193, 126, 173, 1) ),color-stop(0.9438,rgba(206, 102, 154, 1) ));
+  background : -o-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  background : -ms-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFB59A', endColorstr='#CE669A' ,GradientType=0)";
+  background : linear-gradient(90deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFB59A',endColorstr='#CE669A' , GradientType=1);
+}
+
+/* 追加_cc_修正 */
+@media (min-width: 768px){
+/************************************************
+    header
+*********** */
+
+#header .inner .logo {
+	padding-top: 28px;
+    max-width: 207px;
+}
+#topHead .inner{
+  margin: 0 0 80px;
+  background-color: #000;
+}
+
+
+
+
+
+/* 追加_cc_修正 END */
+
+
+
+
+/* 追加修正スタイル */
+
+/************************************************
+    container
+*********** */
+#container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+
+#container {
+    width: 100%;
+    max-width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+}
+
+
+@media (min-width: 768px){
+/************************************************
+    header
+*********** */
+#header .inner {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+#header .inner .utility,
+#header .inner #gNavi {
+    right: 0px;
+}
+
+
+
+/************************************************
+    pageTitle
+*********** */
+#pageTitle {
+    /*padding: 80px 0 20px;*/
+}
+
+/************************************************
+    mvSub
+*********** */
+#mvSub .inner h1 {
+    padding: 0;
+}
+
+/************************************************
+    wrap width
+*********** */
+.w1170 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+}

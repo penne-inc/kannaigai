@@ -37,3 +37,9 @@
 *個人情報*
 *機密*
 
+
+# 旧サイト（kannaigai11〜16）移行分の公開済みPDF（チラシ・プログラム）は例外として管理する
+!/kannaigai11/pdf/*.pdf
+!/kannaigai11/wp-content/themes/kannaigaigai11_v1.0/pdf/*.pdf
+!/kannaigai14/images/kannaigai14_pamphlet.pdf
+!/kannaigai16/images/kannaiga16-program-a3.pdf

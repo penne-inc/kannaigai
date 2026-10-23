@@ -1,0 +1,461 @@
+@charset "utf-8";
+
+/*reset css*/
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+p,
+div,
+span,
+img,
+a,
+table,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-size: 100%;
+    vertical-align: baseline;
+    list-style: none;
+}
+div {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background: #fffffe;
+    color: #333;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 4rem;
+    /*72px*/
+    text-align: center;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 3.111rem;
+    text-align: center;
+    font-weight: 900;
+    padding-bottom: 50px;
+    /*56px*/
+}
+
+h3 {
+    font-size: 2.333rem;
+    text-align: center;
+    font-weight: 900;
+    /*42px*/
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+.bg_skyblue {
+    background-color: #e1f4fa;
+}
+
+.bg_blue {
+    background-color: #0080c8;
+}
+
+.inner {
+    width: 100%;
+    max-width: 884px;
+    margin: 0 auto;
+}
+
+/*共通 css*/
+section {
+    margin-bottom: 70px;
+}
+
+.c_blue {
+    color: #0080c8;
+}
+
+.c_green {
+    color: #9cc813;
+}
+
+.f-48 {
+    font-size: 3.999rem;
+    font-weight: 500;
+}
+
+.f-42 {
+    font-size: 2.666rem;
+    font-weight: 900;
+    /*42px*/
+}
+
+.fw_900 {
+    font-weight: 900;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.mainvisual {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/*concept*/
+.concept h1 {
+    padding: 70px 0;
+}
+
+.concept p {
+    padding-bottom: 70px;
+}
+
+/*sns*/
+.sns {
+    padding: 70px 0;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sns img.icon {
+    width: 100%;
+    max-width: 45px;
+    display: block;
+    padding-right: 30px;
+}
+
+.text p,
+.text a {
+    font-size: 2.2rem;
+    font-weight: 900;
+    word-break: break-all;
+}
+
+.text p span {
+    padding-right: 30px;
+    font-size: 2.2rem;
+    font-weight: 900;
+}
+
+
+
+/*venue*/
+.bg_skyblue {
+    margin-bottom: 70px;
+}
+
+img.v_img {
+    width: 100%;
+    max-width: 1125px;
+    margin: 0 auto;
+    display: block;
+}
+
+.v_content h3 {
+    text-align: left;
+}
+
+.v_content {
+    padding-bottom: 70px;
+}
+
+/*access*/
+.text_address {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1em;
+}
+
+/*creator*/
+.c_content h3 {
+    text-align: left;
+}
+
+.c_content p {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.c_content p a {
+    color: white;
+    font-weight: 500;
+}
+
+.c_content {
+    padding-bottom: 45px;
+}
+
+/*footer*/
+footer {
+    padding: 40px 0;
+    color: #fff;
+}
+
+ul li a {
+    font-size: 1.833rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.f_sns {
+    text-align: end;
+}
+
+.f_sns ul li {
+    display: inline-block;
+}
+
+.f_sns ul li a img {
+    width: 100%;
+    max-width: 28px;
+}
+
+
+.f_sns ul li:nth-child(1) {
+    padding-right: 20px;
+}
+
+p.copyright {
+    font-size: 1.333rem;
+    font-weight: 500;
+}
+
+@media screen and (max-width:768px) {
+
+    section {
+        margin-bottom: 35px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        /*36px*/
+        text-align: center;
+        font-weight: 900;
+    }
+
+    h2 {
+        font-size: 1.555rem;
+        text-align: center;
+        font-weight: 900;
+        padding-bottom: 25px;
+        /*28px*/
+    }
+
+    h3 {
+        font-size: 1.166rem;
+        text-align: center;
+        font-weight: 900;
+        /*21px*/
+    }
+
+    .f-48 {
+        font-size: 1.333rem;
+        font-weight: 500;
+        /*24px*/
+    }
+
+    .fw-900 {
+        font-weight: 900;
+    }
+
+    .f-42 {
+        font-size: 1.166rem;
+        font-weight: 900;
+        /*21px*/
+    }
+
+    .inner {
+        width: 100%;
+        padding: 0 1.5rem;
+        margin: 0 auto;
+    }
+
+    /*concept*/
+    .concept h1 {
+        padding: 35px 0;
+    }
+
+    .concept p {
+        padding-bottom: 35px;
+    }
+
+    /*sns*/
+    .sns {
+        padding: 35px 0;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sns img.icon {
+        width: 100%;
+        max-width: 45px;
+        display: block;
+        padding-top: 10px;
+        padding-right: 30px;
+    }
+
+    .text p,
+    .text a {
+        font-size: .8rem;
+        font-weight: 900;
+    }
+
+    .text p span {
+        padding-right: 30px;
+        font-size: .8rem;
+        font-weight: 900;
+    }
+
+    /*venue*/
+    .bg_skyblue {
+        margin-bottom: 35px;
+    }
+
+    img.v_img {
+        width: 100%;
+        max-width: 1125px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .v_content h3 {
+        text-align: left;
+    }
+
+    .v_content {
+        padding-bottom: 35px;
+    }
+
+    /*access*/
+    .text_address {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    /*creator*/
+    .c_content h3 {
+        text-align: left;
+    }
+
+    .c_content p {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .c_content {
+        padding-bottom: 45px;
+    }
+
+    /*footer*/
+    footer {
+        padding: 40px 0;
+        color: #fff;
+    }
+
+    ul li a {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .f_sns {
+        text-align: end;
+    }
+
+    .f_sns ul li {
+        display: inline-block;
+    }
+
+    .f_sns ul li:nth-child(1) {
+        padding-right: 10px;
+    }
+
+    p.copyright {
+        font-size: 0.666rem;
+        font-weight: 500;
+    }
+}
+
+.agenda p {
+    font-size: 1.333rem;
+}
+
+@media screen and (max-width:767px) {
+    html {
+        font-size: 18px !important;
+    }
+
+
+    h1 {
+        font-size: 1.5rem;
+        /*36px*/
+        text-align: center;
+        font-weight: 900;
+    }
+
+    /*sns*/
+    .sns img.icon {
+        width: 100%;
+        max-width: 25px;
+        display: block;
+        padding-top: 0;
+        padding-right: 10px;
+    }
+
+    .text p span {
+        padding-right: 10px;
+    }
+    .agenda p {
+        font-size: 0.666rem;
+    }
+
+}

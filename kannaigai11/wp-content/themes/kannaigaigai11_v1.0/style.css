@@ -1,0 +1,150 @@
+@charset "UTF-8";
+/*
+ * Theme Name: Kannaigai11 v1.0
+ * Description: Kannaigai11 CMS theme.
+ * Author: CCDN & takaaki.sukegawa
+ * Version: 1.0
+ * */
+
+/*ALL*/
+
+#mvTop .inner .head {
+	background-color:#fff100;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#footer {
+	background : -moz-linear-gradient(0% 50% 0deg,rgba(255, 181, 154, 1) 0%,rgba(251, 168, 170, 1) 16.47%,rgba(248, 156, 185, 1) 36.62%,rgba(188, 137, 181, 1) 72.45%,rgba(193, 126, 173, 1) 81.12%,rgba(206, 102, 154, 1) 94.38%);
+  background : -webkit-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  background : -webkit-gradient(linear,0% 50% ,100% 50% ,color-stop(0,rgba(255, 181, 154, 1) ),color-stop(0.1647,rgba(251, 168, 170, 1) ),color-stop(0.3662,rgba(248, 156, 185, 1) ),color-stop(0.7245,rgba(188, 137, 181, 1) ),color-stop(0.8112,rgba(193, 126, 173, 1) ),color-stop(0.9438,rgba(206, 102, 154, 1) ));
+  background : -o-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  background : -ms-linear-gradient(0deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFB59A', endColorstr='#CE669A' ,GradientType=0)";
+  background : linear-gradient(90deg, rgba(255, 181, 154, 1) 0%, rgba(251, 168, 170, 1) 16.47%, rgba(248, 156, 185, 1) 36.62%, rgba(188, 137, 181, 1) 72.45%, rgba(193, 126, 173, 1) 81.12%, rgba(206, 102, 154, 1) 94.38%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFB59A',endColorstr='#CE669A' , GradientType=1);
+}
+
+
+
+
+#parkFes .aboutSec .inner .imgClm {
+	width: 40%;
+	padding:0px;
+}
+
+#parkFes .aboutSec .inner .imgClm img {
+	width: 100%;
+	height:auto;
+}
+
+#parkFes .aboutSec .inner .head {
+	width: 60%;
+	padding: 0 0 0 0;
+}
+
+#parkFes .aboutSec .inner .head .txtClm .subTitle,
+#parkFes #parklink .subTitle {
+	font-size: 1.4em;
+	padding: 0 0 4% 0;
+}
+
+#parkFes .aboutSec .inner .head .txtClm {
+	width: 100%;
+	padding: 0 10px;
+}
+
+#mv .txtClm{
+	padding: 3% 10px;
+}
+
+#parkFes #parklink {
+	padding: 0 0 10% 0;
+}
+
+#parkFes #parklink .btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #000;
+    font-weight: bold;
+    line-height: 1;
+    width:100%;
+    text-align: center;
+    font-size:130%;
+    height:40px;
+}
+
+
+#parkFes #parklink .pc{
+	display: inline-block;
+}
+
+#parkFes #parklink .sp{
+	display: none;
+}
+
+
+/*tablet*/
+@media screen and (min-width: 768px) {
+
+	.fa-instagram:before {
+	    content: "\f16d";
+	}
+
+
+	#mvTop .inner .head .box{
+		padding-top:50px;
+		min-height:420px;
+		width:auto;
+		margin-top: 8px;
+		margin-left: 15px;
+	}
+
+	.pc-none{
+	display: none;
+}
+
+}
+
+/*smartPhone*/
+@media screen and (max-width: 767px) {
+	.iframe-content{
+	    position: relative;
+	    width: 100%;
+	    padding: 0 0 0 0;
+	}
+
+	#parkFes .aboutSec .inner .imgClm {
+		width: 100%;
+		padding:0px;
+	}
+
+	#parkFes .aboutSec .inner .head {
+		width: 100%;
+	}
+
+	#parkFes .aboutSec .inner .head .txtClm {
+		width: 100%;
+		padding: 8% 5% 15% 5%;
+	}
+
+	#mv .txtClm{
+	padding: 3% 5%;
+	}
+
+	#parkFes #parklink .pc{
+		display: none;
+	}
+
+	#parkFes #parklink .sp{
+		display: inline-block;
+	}
+
+	#parkFes #parklink .btn {
+		width:95%;
+		margin:20px auto;
+	}
+
+
+}
