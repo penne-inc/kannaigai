@@ -29,14 +29,14 @@
       "status": "needs_review",
       "statusLabel": "確認中",
       "sourceUrls": [
-        "http://kannaigai.yafjp.org/kannaigai16/",
+        "https://kannaigai.com/kannaigai16/",
         "https://acy.yafjp.org/projects/2024/123711/"
       ],
       "images": [
         {
           "localPath": "../kannaigai17/image/archive16.jpg",
           "credit": null,
-          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai16/",
+          "sourceUrl": "https://kannaigai.com/kannaigai16/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
@@ -53,14 +53,14 @@
       "status": "needs_review",
       "statusLabel": "確認中",
       "sourceUrls": [
-        "http://kannaigai.yafjp.org/kannaigai15/",
+        "https://kannaigai.com/kannaigai15/",
         "https://acy.yafjp.org/projects/2023/67024/"
       ],
       "images": [
         {
           "localPath": "../kannaigai17/image/archive15.jpg",
           "credit": null,
-          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai15/",
+          "sourceUrl": "https://kannaigai.com/kannaigai15/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
@@ -77,14 +77,14 @@
       "status": "needs_review",
       "statusLabel": "確認中",
       "sourceUrls": [
-        "http://kannaigai.yafjp.org/kannaigai14/",
+        "https://kannaigai.com/kannaigai14/",
         "https://acy.yafjp.org/projects/2022/90444/"
       ],
       "images": [
         {
           "localPath": "../kannaigai17/image/archive14.jpg",
           "credit": null,
-          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai14/",
+          "sourceUrl": "https://kannaigai.com/kannaigai14/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
@@ -101,14 +101,14 @@
       "status": "needs_review",
       "statusLabel": "確認中",
       "sourceUrls": [
-        "http://kannaigai.yafjp.org/kannaigai13/",
+        "https://kannaigai.com/kannaigai13/",
         "https://acy.yafjp.org/projects/2022/73693/"
       ],
       "images": [
         {
           "localPath": "../kannaigai17/image/archive13.jpg",
           "credit": null,
-          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai13/",
+          "sourceUrl": "https://kannaigai.com/kannaigai13/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
@@ -148,13 +148,13 @@
       "status": "needs_review",
       "statusLabel": "確認中",
       "sourceUrls": [
-        "http://kannaigai.yafjp.org/kannaigai11/"
+        "https://kannaigai.com/kannaigai11/"
       ],
       "images": [
         {
           "localPath": "../kannaigai17/image/archive11.jpg",
           "credit": null,
-          "sourceUrl": "http://kannaigai.yafjp.org/kannaigai11/",
+          "sourceUrl": "https://kannaigai.com/kannaigai11/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
