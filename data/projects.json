@@ -15,7 +15,15 @@
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2026/134793/"
       ],
-      "images": [],
+      "images": [
+        {
+          "credit": null,
+          "licenseStatus": "existing_repo_asset",
+          "localPath": "kannaigai17/image/ogp.png",
+          "sourceUrl": "https://kannaigai.com/kannaigai17/",
+          "usagePermission": "existing_repo_asset"
+        }
+      ],
       "pageUrl": "/kannaigai17/"
     },
     {
