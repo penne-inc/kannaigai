@@ -1,0 +1,150 @@
+@charset "UTF-8";
+/*
+ * Theme Name: Kannaigai8 v3.0
+ * Description: Kannaigai8 CMS theme.
+ * Author: CCDN
+ * Version: 3.0
+ * */
+
+/*ALL*/
+
+#mvTop .inner .head {
+	background-color:#fff100;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#footer {
+	background-color:#fff100;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#footer .inner .fNavi li a,#footer .inner .fNavi li a:link,#footer .inner .fNavi,#footer .inner .copy{
+	color:#727171;
+}
+
+#topSec .inner .head .box h2 img {
+    height: auto;
+    max-height: 98px;
+    width: 100%;
+} 
+
+#parkFes [id^="aboutSec"] .inner .imgClm {
+	width: 40%;
+	padding:0px;
+}
+
+#parkFes [id^="aboutSec"] .inner .imgClm img {
+	width: 100%;
+	height:auto;
+}
+
+#parkFes [id^="aboutSec"] .inner .head {
+	width: 60%;
+	padding: 0 0 0 0;
+}
+
+#parkFes [id^="aboutSec"] .inner .head .txtClm .subTitle,#parkFes #parklink .subTitle {
+	padding: 0 0 4% 0;
+}
+
+#parkFes [id^="aboutSec"] .inner .head .txtClm {
+	width: 100%;
+	padding: 0 10px;
+}
+
+#mv .txtClm{
+	padding: 3% 10px;
+}
+
+#parkFes #parklink {
+	padding:0 0 10% 0;
+}
+
+#parkFes #parklink .btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #000;
+    font-weight: bold;
+    line-height: 1;
+    width:100%;
+    text-align: center;
+    font-size:130%;
+    height:40px;
+}
+
+
+#parkFes #parklink .pc{
+	display: inline-block;
+}
+
+#parkFes #parklink .sp{
+	display: none;
+}
+
+
+/*tablet*/
+@media screen and (min-width: 768px) {
+
+	.fa-instagram:before {
+	    content: "\f16d";
+	}
+
+
+	#mvTop .inner .head .box{
+		padding-top:50px;
+		min-height:420px;
+		width:auto;
+		margin-top: 8px;
+		margin-left: 15px;
+	}
+
+	.pc-none{
+	display: none;
+}
+
+}
+
+/*smartPhone*/
+@media screen and (max-width: 767px) {
+	.iframe-content{
+	    position: relative;
+	    width: 100%;
+	    padding: 0 0 0 0;
+	}
+
+	#parkFes [id^="aboutSec"] .inner .imgClm {
+		width: 100%;
+		padding:0px;
+	}
+
+	#parkFes [id^="aboutSec"] .inner .head {
+		width: 100%;
+	}
+
+	#parkFes [id^="aboutSec"] .inner .head .txtClm {
+		width: 100%;
+		padding: 8% 5% 15% 5%;
+	}
+
+	#mv .txtClm{
+	padding: 3% 5%;
+	}
+
+	#parkFes #parklink .pc{
+		display: none;
+	}
+
+	#parkFes #parklink .sp{
+		display: inline-block;
+	}
+
+	#parkFes #parklink .btn {
+		width:95%;
+		margin:20px auto;
+	}
+
+
+}

@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+
+/* 追加_cc_修正 */
+@media (min-width: 768px){
+/************************************************
+    header
+*********** */
+
+
+#header .inner .logo {
+	padding-top: 28px;
+}
+
+/************************************************
+    top
+*********** */
+
+#topSec .inner .head .box {
+  width: 580px;
+
+}
+#topSec .inner .head .box h2 img {
+  height: 11vw;
+  max-height: 98px;
+  width: auto;
+}
+
+/************************************************
+    about
+*********** */
+
+
+#mvSub .inner .wrap .head h2 {
+  margin: 0 0 40px;
+}
+#mvSub .inner .wrap .head .txtClm p {
+  /*font-size: 1rem;*/
+}
+
+}
+/* pc end */
+
+
+/* 追加_cc_修正 END */
+
+
+
+
+/* 追加修正スタイル */
+
+/************************************************
+    container
+*********** */
+#container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+
+#container {
+    width: 100%;
+    max-width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+}
+
+
+@media (min-width: 768px){
+/************************************************
+    header
+*********** */
+#header .inner {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+#header .inner .utility,
+#header .inner #gNavi {
+    right: 0px;
+}
+
+
+
+/************************************************
+    pageTitle
+*********** */
+#pageTitle {
+    /*padding: 80px 0 20px;*/
+}
+
+/************************************************
+    mvSub
+*********** */
+#mvSub .inner h1 {
+    padding: 0;
+}
+
+/************************************************
+    wrap width
+*********** */
+.w1170 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+}
