@@ -43,3 +43,6 @@
 !/kannaigai11/wp-content/themes/kannaigaigai11_v1.0/pdf/*.pdf
 !/kannaigai14/images/kannaigai14_pamphlet.pdf
 !/kannaigai16/images/kannaiga16-program-a3.pdf
+# 第10回（旧サイト移行分）の公開済みPDF（会場マップ・タイムテーブル）
+!/kannaigai10/pdf/*.pdf
+!/kannaigai10/wp-content/themes/kannaigaigai8_v3/pdf/*.pdf
