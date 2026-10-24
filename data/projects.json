@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-07-02",
-  "sourcePolicy": "初期MVPでは外部本文・画像・PDFを転載せず、確認済みメタデータ、短い独自要約、出典リンク、既存または許諾確認済み画像のみを掲載する。",
+  "updatedAt": "2026-10-24",
+  "sourcePolicy": "第8・10・11・13〜16回のページは、旧サーバー(kannaigai.yafjp.org)から静的ページとして移行したもの。内容は当時のまま。",
   "items": [
     {
       "id": 17,
@@ -10,13 +10,13 @@
       "venue": "象の鼻テラス",
       "theme": "見慣れたまちの、視点を変える。",
       "summary": "発見・共創・交流・発酵の4つの実験的プロジェクトを展示とトークで紹介した回。",
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
-        "https://kannaigai.com/kannaigai17/",
         "https://acy.yafjp.org/projects/2026/134793/"
       ],
-      "images": []
+      "images": [],
+      "pageUrl": "/kannaigai17/"
     },
     {
       "id": 16,
@@ -26,21 +26,21 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
-        "https://kannaigai.com/kannaigai16/",
         "https://acy.yafjp.org/projects/2024/123711/"
       ],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive16.jpg",
+          "localPath": "kannaigai17/image/archive16.jpg",
           "credit": null,
           "sourceUrl": "https://kannaigai.com/kannaigai16/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
-      ]
+      ],
+      "pageUrl": "/kannaigai16/"
     },
     {
       "id": 15,
@@ -50,21 +50,21 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
-        "https://kannaigai.com/kannaigai15/",
         "https://acy.yafjp.org/projects/2023/67024/"
       ],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive15.jpg",
+          "localPath": "kannaigai17/image/archive15.jpg",
           "credit": null,
           "sourceUrl": "https://kannaigai.com/kannaigai15/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
-      ]
+      ],
+      "pageUrl": "/kannaigai15/"
     },
     {
       "id": 14,
@@ -74,21 +74,21 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
-        "https://kannaigai.com/kannaigai14/",
         "https://acy.yafjp.org/projects/2022/90444/"
       ],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive14.jpg",
+          "localPath": "kannaigai17/image/archive14.jpg",
           "credit": null,
           "sourceUrl": "https://kannaigai.com/kannaigai14/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
-      ]
+      ],
+      "pageUrl": "/kannaigai14/"
     },
     {
       "id": 13,
@@ -98,21 +98,21 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
-        "https://kannaigai.com/kannaigai13/",
         "https://acy.yafjp.org/projects/2022/73693/"
       ],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive13.jpg",
+          "localPath": "kannaigai17/image/archive13.jpg",
           "credit": null,
           "sourceUrl": "https://kannaigai.com/kannaigai13/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
-      ]
+      ],
+      "pageUrl": "/kannaigai13/"
     },
     {
       "id": 12,
@@ -122,14 +122,14 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "no_page",
+      "statusLabel": "ページなし",
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2020/18288/"
       ],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive12.jpg",
+          "localPath": "kannaigai17/image/archive12.jpg",
           "credit": null,
           "sourceUrl": "https://acy.yafjp.org/projects/2020/18288/",
           "licenseStatus": "needs_review",
@@ -145,20 +145,19 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
-      "sourceUrls": [
-        "https://kannaigai.com/kannaigai11/"
-      ],
+      "status": "published",
+      "statusLabel": "公開中",
+      "sourceUrls": [],
       "images": [
         {
-          "localPath": "../kannaigai17/image/archive11.jpg",
+          "localPath": "kannaigai17/image/archive11.jpg",
           "credit": null,
           "sourceUrl": "https://kannaigai.com/kannaigai11/",
           "licenseStatus": "needs_review",
           "usagePermission": "existing_repo_asset"
         }
-      ]
+      ],
+      "pageUrl": "/kannaigai11/"
     },
     {
       "id": 10,
@@ -168,12 +167,13 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2018/60666/"
       ],
-      "images": []
+      "images": [],
+      "pageUrl": "/kannaigai10/"
     },
     {
       "id": 9,
@@ -183,8 +183,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "no_page",
+      "statusLabel": "ページなし",
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2017/60756/"
       ],
@@ -198,12 +198,13 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "published",
+      "statusLabel": "公開中",
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2016/60831/"
       ],
-      "images": []
+      "images": [],
+      "pageUrl": "/kannaigai8/"
     },
     {
       "id": 7,
@@ -213,8 +214,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://www.hamakei.com/headline/9630/"
       ],
@@ -228,8 +229,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://acy.yafjp.org/news/2014/96495/"
       ],
@@ -243,8 +244,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://acy.yafjp.org/news/2013/95418/"
       ],
@@ -258,8 +259,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://acy.yafjp.org/projects/2012/61058/"
       ],
@@ -273,8 +274,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://www.hamakei.com/headline/6364/"
       ],
@@ -288,8 +289,8 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://www.hamakei.com/headline/5439/"
       ],
@@ -303,12 +304,35 @@
       "venue": null,
       "theme": null,
       "summary": null,
-      "status": "needs_review",
-      "statusLabel": "確認中",
+      "status": "record_only",
+      "statusLabel": "記録のみ",
       "sourceUrls": [
         "https://www.hamakei.com/headline/4299/"
       ],
       "images": []
+    },
+    {
+      "id": 18,
+      "title": "関内外OPEN!18",
+      "year": 2026,
+      "date": "2026年7月〜2027年2月",
+      "venue": "関内さくら通りほか",
+      "theme": "みなれたまちの、視点を変える。",
+      "summary": "オフィスや制作拠点を巡る「スタジオツアー」と、道路空間に集う交流プログラムを開催。",
+      "status": "published",
+      "statusLabel": "開催中",
+      "featured": true,
+      "pageUrl": "/kannaigai18/",
+      "sourceUrls": [],
+      "images": [
+        {
+          "credit": null,
+          "licenseStatus": "existing_repo_asset",
+          "localPath": "kannaigai18/image/kv-pc.webp",
+          "sourceUrl": "https://kannaigai.com/kannaigai18/",
+          "usagePermission": "existing_repo_asset"
+        }
+      ]
     }
   ]
 }

@@ -11,15 +11,20 @@ const filterButtons = document.querySelectorAll(".filter-button");
 const template = document.getElementById("archiveCardTemplate");
 
 function getPrimarySource(item) {
-    return item.sourceUrls && item.sourceUrls.length > 0 ? item.sourceUrls[0] : "#";
+    if (item.pageUrl) return item.pageUrl;
+    return item.sourceUrls && item.sourceUrls.length > 0 ? item.sourceUrls[0] : null;
 }
 
 function getPrimaryImage(item) {
     return item.images && item.images.length > 0 ? item.images[0] : null;
 }
 
-function getFallbackText(value) {
-    return value || "整理中";
+function setFact(row, element, value) {
+    if (value) {
+        element.textContent = value;
+    } else {
+        row.hidden = true;
+    }
 }
 
 function matchesQuery(item) {
@@ -39,15 +44,13 @@ function matchesQuery(item) {
 }
 
 function matchesFilter(item) {
-    if (state.filter === "with-image") return Boolean(getPrimaryImage(item));
-    if (state.filter === "needs-review") return item.status === "needs_review";
+    if (state.filter === "published") return Boolean(item.pageUrl);
     return true;
 }
 
 function renderSummary(items) {
-    const imageCount = items.filter(item => getPrimaryImage(item)).length;
-    const needsReviewCount = items.filter(item => item.status === "needs_review").length;
-    summary.textContent = `${items.length}件を収録中。代表画像あり ${imageCount}件、確認中 ${needsReviewCount}件。`;
+    const pageCount = items.filter(item => item.pageUrl).length;
+    summary.textContent = `第1回〜第${items.length}回のうち、${pageCount}回分のページを公開しています。`;
 }
 
 function createCard(item) {
@@ -66,14 +69,32 @@ function createCard(item) {
     const image = getPrimaryImage(item);
 
     card.dataset.status = item.status;
-    mediaLink.href = getPrimarySource(item);
+    if (item.featured) card.classList.add("archive-card--featured");
+    const primary = getPrimarySource(item);
+    if (primary) {
+        mediaLink.href = primary;
+        if (!item.pageUrl) {
+            mediaLink.target = "_blank";
+            mediaLink.rel = "noopener noreferrer";
+        }
+    } else {
+        mediaLink.removeAttribute("href");
+    }
     id.textContent = item.id === 1 ? "第1回" : `第${item.id}回`;
-    status.textContent = item.statusLabel || "確認中";
+    status.textContent = item.statusLabel || "";
     title.textContent = item.title;
-    date.textContent = getFallbackText(item.date);
-    venue.textContent = getFallbackText(item.venue);
-    theme.textContent = getFallbackText(item.theme);
-    itemSummary.textContent = item.summary || "概要、会場、参加クリエイターなどの情報を整理中です。";
+    setFact(date.parentElement, date, item.date);
+    setFact(venue.parentElement, venue, item.venue);
+    setFact(theme.parentElement, theme, item.theme);
+    if (item.summary) {
+        itemSummary.textContent = item.summary;
+    } else if (item.status === "no_page") {
+        itemSummary.textContent = "この回の公開ページはありません。";
+    } else if (!item.pageUrl) {
+        itemSummary.hidden = true;
+    } else {
+        itemSummary.hidden = true;
+    }
 
     if (image && image.localPath) {
         const img = document.createElement("img");
@@ -83,8 +104,15 @@ function createCard(item) {
     } else {
         const placeholder = document.createElement("span");
         placeholder.className = "archive-card__media-placeholder";
-        placeholder.textContent = "代表画像 整理中";
+        placeholder.textContent = `第${item.id}回`;
         media.appendChild(placeholder);
+    }
+
+    if (item.pageUrl) {
+        const pageLink = document.createElement("a");
+        pageLink.href = item.pageUrl;
+        pageLink.textContent = "ページを見る";
+        links.appendChild(pageLink);
     }
 
     item.sourceUrls.forEach((url, index) => {
@@ -92,7 +120,7 @@ function createCard(item) {
         link.href = url;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
-        link.textContent = index === 0 ? "出典" : `出典${index + 1}`;
+        link.textContent = item.sourceUrls.length > 1 ? `関連リンク${index + 1}` : "関連リンク";
         links.appendChild(link);
     });
 
