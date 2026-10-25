@@ -80,7 +80,7 @@ body {
 
 /* --- 円 ---
    PSDの円をそのまま1枚絵として使う（切り抜き・ブレンド一切なし）。
-   8種類の配色バリエーションを重ね、順に1枚ずつ表に出して巡回させる。 */
+   8種類の配色バリエーションを重ね、順にゆっくり切り替えて巡回させる。 */
 .kv-circle {
     position: absolute;
     will-change: transform;
@@ -100,7 +100,7 @@ body {
     width: 100%;
     height: 100%;
     opacity: 0;
-    animation: kvFaceSwap 32s linear infinite;
+    animation: kvFaceSwap 48s linear infinite;
 }
 
 /* --- 登場アニメーション --- */
@@ -126,12 +126,18 @@ body {
 @keyframes kvSpinCW  { from { rotate: 0deg; } to { rotate: 360deg; } }
 @keyframes kvSpinCCW { from { rotate: 0deg; } to { rotate: -360deg; } }
 
-/* --- 配色バリエーションの巡回（32秒で8種類＝1枚4秒） ---
-   8枚のうち1枚だけを表に出す。切替は周期の0.5%（約0.16秒）で溶かす。 */
+/* --- 配色バリエーションの巡回（48秒で8種類＝1枚6秒） ---
+   混ぜずに「パッと切り替える」。クロスフェードは途中で2色が混ざって濁るので使わない。
+   次の円を前の円の真上に不透明のまま出し、その直後に前の円を消す。
+   どの瞬間も不透明な円が1枚以上あるので、半透明で背景が透けることはない。
+   z-index は、最後→最初の折り返しでも新しい円が必ず上に来るよう、
+   自分の出番（最初の12.5%）の間だけ上げる。 */
 @keyframes kvFaceSwap {
-    0%,   12%   { opacity: 1; }
-    12.5%, 99.5% { opacity: 0; }
-    100%        { opacity: 1; }
+    0%      { opacity: 1; z-index: 2; }
+    12.49%  { opacity: 1; z-index: 2; }
+    12.5%   { opacity: 1; z-index: 1; }   /* ここで次の円が真上に出る */
+    12.6%   { opacity: 0; z-index: 1; }   /* 次の円が出た直後に消す */
+    100%    { opacity: 0; z-index: 1; }
 }
 
 .kv-pop,
@@ -651,4 +657,131 @@ body {
     .meet-detail { margin-top: 28px; }
     .course { display: block; }
     .course-time { flex-direction: row; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+}
+
+/* ============================================================
+   お知らせ 個別ページ（/news/{slug}/ と下書きプレビュー）
+   トップと同じ「左ラベル列＋右本文」の構成に揃える
+   ============================================================ */
+.page-nav {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+.page-nav a { color: var(--ink); text-decoration: none; }
+.page-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.page-news .news-page,
+.page-news .news-preview-wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 120px 32px 0;
+}
+.page-news .news-preview-banner {
+    margin: 0 0 40px;
+    padding: 12px 0;
+    border: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    border-radius: 0;
+    background: none;
+    color: var(--ink);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+}
+
+.page-news .news-detail {
+    display: grid;
+    grid-template-columns: var(--col) 1fr;
+    column-gap: 40px;
+    padding: 0;
+}
+.page-news .news-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--ink);
+}
+.page-news .news-date {
+    font-family: var(--font-latin);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+}
+.page-news .news-category { font-size: 0.8rem; }
+.page-news .news-draft-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    padding: 2px 8px;
+}
+
+.page-news .news-main {
+    padding-top: 14px;
+    border-top: 1px solid var(--ink);
+    min-width: 0;
+}
+.page-news .news-title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    margin: 28px 0 56px;
+    padding: 0;
+    border: 0;
+}
+.page-news .news-body {
+    font-size: 0.98rem;
+    line-height: 2.1;
+    letter-spacing: 0.03em;
+}
+.page-news .news-body p { margin: 0 0 1.4em; }
+.page-news .news-body a { color: var(--ink); text-underline-offset: 3px; }
+.page-news .news-body h2,
+.page-news .news-body h3 {
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    margin: 2.4em 0 0.8em;
+}
+.page-news .news-body h2 { font-size: 1.3rem; }
+.page-news .news-body h3 { font-size: 1.1rem; }
+.page-news .news-body img { display: block; max-width: 100%; height: auto; margin: 2em 0; }
+.page-news .news-body ul,
+.page-news .news-body ol { padding-left: 1.4em; }
+
+.page-news .news-back-wrap {
+    margin: 96px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+}
+.page-news .news-back {
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+}
+.page-news .news-back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.page-news .news-loading,
+.page-news .news-error { grid-column: 1 / -1; }
+
+@media (max-width: 700px) {
+    .page-nav { padding: 16px 20px 0; }
+    .page-news .news-page,
+    .page-news .news-preview-wrap { padding: 72px 20px 0; }
+    .page-news .news-detail { display: block; }
+    .page-news .news-meta { flex-direction: row; align-items: center; gap: 14px; padding-bottom: 14px; }
+    .page-news .news-main { border-top: 0; padding-top: 0; }
+    .page-news .news-title { margin: 8px 0 36px; }
 }
